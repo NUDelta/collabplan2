@@ -16,12 +16,10 @@ fastclick
 zimme:iron-router-active
 manuelschoebel:ms-seo
 browser-policy
-useraccounts:semantic-ui
 natestrauser:animate-css
 dburles:collection-helpers
 meteorhacks:fast-render
 
-semantic:ui-css
 standard-minifiers
 meteor-base
 mobile-experience
@@ -35,3 +33,4 @@ random
 ejson
 spacebars
 check
+twbs:bootstrap
