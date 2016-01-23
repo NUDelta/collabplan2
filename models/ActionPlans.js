@@ -1,5 +1,5 @@
 ActionPlans = new Mongo.Collection('ActionPlans');
-
+Schema = {};
 Schema.ActionPlansSchema = new SimpleSchema({
   name: {
     type: String
@@ -15,10 +15,19 @@ Schema.ActionPlansSchema = new SimpleSchema({
   },
   milstones: {
     type: [String]
-  }
+  },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    },
   }
 });
 

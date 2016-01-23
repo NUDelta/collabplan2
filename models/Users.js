@@ -31,10 +31,7 @@ Schema.UsersSchema = new SimpleSchema({
     type: Boolean
   },
   createdAt: {
-    type: Date,
-    autoform: {
-      omit: true
-    }
+    type: Date
   },
   profile: {
     type: Schema.UserProfileSchema,
@@ -44,9 +41,6 @@ Schema.UsersSchema = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true,
-    autoform: {
-      omit: true
-    }
   }
 });
 
