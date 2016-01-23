@@ -16,6 +16,10 @@ Schema.ActionPlansSchema = new SimpleSchema({
   milstones: {
     type: [String]
   },
+  isComplete: {
+    type: Boolean,
+    defaultValue: false
+  },
   createdAt: {
     type: Date,
     denyUpdate: true,

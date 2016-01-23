@@ -6,5 +6,6 @@ Fixtures.actionPlansFixture = [
     name: "Test Action Plan",
     description: "An action plan for testing",
     milstones: [],
+    isComplete: false
   }
 ];
