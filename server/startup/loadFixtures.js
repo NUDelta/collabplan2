@@ -10,7 +10,7 @@ function loadActionPlans(fixtures) {
   var i;
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Meteor.ActionPlans.findOne({ name : fixtures[i].name }) === 'object';
+    var fixtureAlreadyExists = typeof ActionPlans.findOne({ name : fixtures[i].name }) === 'object';
 
     if (!fixtureAlreadyExists) {
       fixtures[i].author_id = Meteor.users.findOne({username: 'admin'})._id;
