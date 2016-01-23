@@ -16,6 +16,7 @@ Schema.UserProfileSchema = new SimpleSchema({
 Schema.UsersSchema = new SimpleSchema({
   username: {
     type: String,
+    optional: true,
   },
   emails: {
     type: [Object],
@@ -31,7 +32,16 @@ Schema.UsersSchema = new SimpleSchema({
     type: Boolean
   },
   createdAt: {
-    type: Date
+    type: Date,
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    },
   },
   profile: {
     type: Schema.UserProfileSchema,
