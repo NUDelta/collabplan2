@@ -21,7 +21,7 @@
                 <h1>Action Plans You can help with</h1>
                 <ul>
                     {{#each other_pending_action_plans}}
-                        <li>{{name}}</li>
+                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
                     {{/each}}
                 </ul>
             </div>

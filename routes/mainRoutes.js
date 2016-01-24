@@ -25,7 +25,7 @@ Router.route('/action_plans/new', {
 Router.route('/action_plans/:_id', {
   name: 'action_plans.show',
   waitOn: function(){
-    return [Meteor.subscribe('ActionPlansById', this.params._id)];
+    return [Meteor.subscribe('ActionPlans')];
   },
   action: function () {
     var ap = ActionPlans.findOne({_id: this.params._id});
