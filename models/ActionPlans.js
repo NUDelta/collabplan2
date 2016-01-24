@@ -8,12 +8,13 @@ Schema.ActionPlansSchema = new SimpleSchema({
     type: String
   },
   author_id: {
-    type: String
+    type: String,
+    optional: true
   },
   requester_id: {
     type: String
   },
-  milstones: {
+  milestone_ids: {
     type: [String]
   },
   isComplete: {
