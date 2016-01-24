@@ -21,3 +21,23 @@ Router.route('/action_plans/new', {
     SEO.set({ title: 'New action_plans - ' + Meteor.App.NAME });
   }
 });
+
+Router.route('/action_plans/:_id', {
+  name: 'action_plans.show',
+  waitOn: function(){
+    return [Meteor.subscribe('ActionPlansById', this.params._id)];
+  },
+  action: function () {
+    var ap = ActionPlans.findOne({_id: this.params._id});
+    if (!ap.isComplete && ap.requester_id === Meteor.userId()) {
+      this.render('actionPlanRequestView');
+      SEO.set({ title: 'ActionPlanRequest - ' + Meteor.App.NAME });
+    } else if (ap.isComplete) { 
+      this.render('actionPlanView');
+      SEO.set({ title: 'ActionPlanView- ' + Meteor.App.NAME });
+    } else if (!ap.isComplete && ap.requester_id !== Meteor.userId()) {
+      this.render('actionPlanCompose');
+      SEO.set({ title: 'actionPlanCompose- ' + Meteor.App.NAME });
+    }
+  }
+});

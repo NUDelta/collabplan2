@@ -5,7 +5,7 @@
                 <h1>Your Pending Action Plans <a href="{{pathFor route='action_plans.new'}}" class="btn btn-primary">Request Action Plan</a></h1>
                 <ul>
                     {{#each user_pending_action_plans}}
-                        <li>{{name}}</li>
+                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
                     {{/each}}
                 </ul>
             </div>
