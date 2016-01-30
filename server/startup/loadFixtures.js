@@ -20,6 +20,18 @@ function loadActionPlans(fixtures) {
   }
 }
 
+function loadMilestones(fixtures) {
+  var i;
+
+  for (i = 0; i < fixtures.length; i+= 1) {
+    var fixtureAlreadyExists = typeof Milestones.findOne({ name : fixtures[i].name }) === 'object';
+
+    if (!fixtureAlreadyExists) {
+      var ms1_id = Milestones.insert(fixtures[i]);
+    }
+  }
+}
+
 Meteor.startup(function () {
   var users = YAML.eval(Assets.getText('users.yml'));
 
@@ -28,4 +40,5 @@ Meteor.startup(function () {
   }
 
   loadActionPlans(Fixtures['actionPlansFixture']);
+  loadMilestones(Fixtures['milestonesFixture']);
 });
