@@ -7,5 +7,11 @@ Meteor.methods({
             isComplete: false,
             milestone_ids: []
         })        
+    },
+    action_plan_add_milestone: function(ap_id,ms_id) {
+        ActionPlans.update(
+            {_id: ap_id},
+            {$push: {milestone_ids: ms_id}}
+        );
     }
 });

@@ -24,7 +24,7 @@ function loadMilestones(fixtures) {
   var i;
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Milestones.findOne({ name : fixtures[i].name }) === 'object';
+    var fixtureAlreadyExists = typeof Milestones.findOne({ title : fixtures[i].title }) === 'object';
 
     if (!fixtureAlreadyExists) {
       var ms1_id = Milestones.insert(fixtures[i]);
