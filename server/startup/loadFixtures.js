@@ -32,6 +32,30 @@ function loadMilestones(fixtures) {
   }
 }
 
+function loadSubtasks(fixtures) {
+  var i;
+
+  for (i = 0; i < fixtures.length; i+= 1) {
+    var fixtureAlreadyExists = typeof Subtasks.findOne({ name : fixtures[i].name }) === 'object';
+
+    if (!fixtureAlreadyExists) {
+      var ms1_id = Subtasks.insert(fixtures[i]);
+    }
+  }
+}
+
+function loadLinks(fixtures) {
+  var i;
+
+  for (i = 0; i < fixtures.length; i+= 1) {
+    var fixtureAlreadyExists = typeof Links.findOne({ name : fixtures[i].name }) === 'object';
+
+    if (!fixtureAlreadyExists) {
+      var ms1_id = Links.insert(fixtures[i]);
+    }
+  }
+}
+
 Meteor.startup(function () {
   var users = YAML.eval(Assets.getText('users.yml'));
 
@@ -41,4 +65,6 @@ Meteor.startup(function () {
 
   loadActionPlans(Fixtures['actionPlansFixture']);
   loadMilestones(Fixtures['milestonesFixture']);
+  loadSubtasks(Fixtures['subtasksFixture']);
+  loadLinks(Fixtures['linksFixture']);
 });

@@ -16,5 +16,53 @@ Fixtures.milestonesFixture = [
     motivation: "Get shit started",
     subtask_ids: [],
     tags: ['boilerplate', 'python']
+  },
+  {
+    title: "Another Test",
+    motivation: "Figure out some html",
+    subtask_ids: [],
+    tags: ['boilerplate', 'python']
+  },
+  {
+    title: "Moar Tests",
+    motivation: "How bout some Javascript",
+    subtask_ids: [],
+    tags: ['boilerplate', 'python']
+  }
+];
+
+Fixtures.subtasksFixture = [
+  {
+    description: "Set up site",
+    link_ids: [],
+    milestone_ids: [],
+  },
+  {
+    description: "More set up stuff",
+    link_ids: [],
+    milestone_ids: [],
+  },
+  {
+    description: "Last subtask- you're done!",
+    link_ids: [],
+    milestone_ids: [],
+  }
+];
+
+Fixtures.linksFixture = [
+  {
+    url: "www.google.com",
+    subtask_ids: [],
+    milestone_ids: [],
+  },
+  {
+    url: "nikhilpi.com",
+    subtask_ids: [],
+    milestone_ids: [],
+  },
+  {
+    url: "www.northwestern.edu",
+    subtask_ids: [],
+    milestone_ids: [],
   }
 ];
