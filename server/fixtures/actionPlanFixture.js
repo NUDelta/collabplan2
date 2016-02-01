@@ -9,3 +9,12 @@ Fixtures.actionPlansFixture = [
     isComplete: false
   }
 ];
+
+Fixtures.milestonesFixture = [
+  {
+    title: "Test Boilerplate",
+    motivation: "Get shit started",
+    subtask_ids: [],
+    tags: ['boilerplate', 'python']
+  }
+];

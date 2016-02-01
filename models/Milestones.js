@@ -2,17 +2,32 @@ Milestones = new Mongo.Collection('Milestones');
 
 Schema.MilestonesSchema = new SimpleSchema({
   title: {
-    type: String
+    type: String,
+    optional: true
   },
   motivation: {
-    type: String
+    type: String,
+    optional: true
   },
   subtask_ids: {
     type: [String]
   },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    },
+  },
+  tags: {
+    type: [String],
+    optional: true
   }
 });
 
