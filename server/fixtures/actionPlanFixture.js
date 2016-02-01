@@ -7,6 +7,12 @@ Fixtures.actionPlansFixture = [
     description: "An action plan for testing",
     milestone_ids: [],
     isComplete: false
+  },
+  {
+    name: "Test Completed Action Plan",
+    description: "A completed action plan for testing",
+    milestone_ids: [],
+    isComplete: true
   }
 ];
 
