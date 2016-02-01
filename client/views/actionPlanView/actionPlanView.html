@@ -11,9 +11,9 @@
 								{{#each this.subtask_ids}}
 				    				{{#with get_subtasks this}}
 				    					<dd style="padding: 0 0 0.5em 0; font-size:120%">- {{this.description}}</dd>
-				    					{{#each this.link_ids}}
+				    					Links: {{#each this.link_ids}}
 				    					{{#with get_links this}}
-				    					<dd style="padding: 0 0 0.5em 0">Links: {{this.url}}</dd>
+				    					<dd style="padding: 0 0 0.5em 0">{{this.url}}</dd>
 				    					{{/with}}
 				    					{{/each}}
 				    				{{/with}}

@@ -31,7 +31,7 @@ Template['actionPlanView'].helpers({
     	var ms = {
     		'def': {
 			    description: "Set up site",
-		    	link_ids: ['ghi'],
+		    	link_ids: ['ghi', 'ghi1'],
 		    	milestone_ids: ['abc'],
 			  },
 			'def1': {
