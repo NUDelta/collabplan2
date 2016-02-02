@@ -4,6 +4,10 @@ Template['actionPlanCompose'].helpers({
     var ap = ActionPlans.findOne({_id: id});
     Session.set("ap", ap);
     return ap;
+  },
+  getMilestones: function () {
+    var ap = Session.get("ap");
+    return Milestones.find({ _id: { $in: ap.milestone_ids } });
   }
 });
 
