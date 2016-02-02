@@ -69,4 +69,5 @@ Meteor.startup(function () {
   }
 
   var actionplan_ids = loadActionPlans(Fixtures['actionPlansFixture']);
+  var actionplan_ids = loadMilestones(Fixtures['milestonesFixture']);
 });

@@ -8,10 +8,20 @@ Meteor.methods({
             milestone_ids: []
         })        
     },
-    action_plan_add_milestone: function(ap_id,ms_id) {
+    action_plan_set_boilerplate: function(ap_id,ms_id) {
         ActionPlans.update(
             {_id: ap_id},
-            {$push: {milestone_ids: ms_id}}
+            {
+                $push: {
+                    milestone_ids: {
+                        $each: [ms_id],
+                        $position: 0
+                    }
+                },
+                $set: {
+                    author_id: this.userId
+                }
+            }
         );
     },
     milestone_new: function(data, actionPlanId) {

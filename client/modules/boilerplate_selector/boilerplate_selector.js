@@ -7,7 +7,7 @@ Template['boilerplate_selector'].helpers({
 Template['boilerplate_selector'].events({
     'click #select_ap': function(e){
         var ap = Session.get('current_ap')
-        Meteor.call('action_plan_add_milestone', ap._id, this._id);
+        Meteor.call('action_plan_set_boilerplate', ap._id, this._id);
     }
 });
 
