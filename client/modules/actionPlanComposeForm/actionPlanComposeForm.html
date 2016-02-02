@@ -1,0 +1,50 @@
+<template name="actionPlanComposeForm">
+    <form id="ap_request">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="isComplete" checked="{{this.isComplete}}"> Finished?
+			</label>
+		</div>
+		<h5>Milestones:</h5>
+        {{#each getMilestones}}
+            <div class="milestone panel panel-default">
+                <div class="panel-body">
+                	<input id="_id" value="{{_id}}" hidden>
+                	<div class="form-group">	
+                    	<button type="button" class="btn btn-danger delete-milestone" style="float:right; margin-bottom: 0.5em;">X</button>
+                	</div>
+					<div class="form-group">
+                        <label for="title">title</label>
+                        <input type="text" class="form-control" id="title" value="{{title}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="motivation">motivation</label>
+                        <textarea class="form-control" id="motivation">{{motivation}}</textarea>
+                    </div>
+                    <h5>Subtasks:</h5>
+                    {{#each getSubtasks}}
+                    <div class="subtask panel panel-default">
+                    	<div class="panel-body">
+                    		<input id="_id" value="{{_id}}" hidden>
+                    		<div class="form-group">
+                    			<button type="button" class="btn btn-danger delete-subtask" style="float:right; margin-bottom: 0.5em;">X</button>
+                    		</div>
+                    		<div class="form-group">
+		                        <label for="description">description</label>
+		                        <input type="text" class="form-control" id="description" value="{{description}}">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="links">links</label>
+		                        <input type="text" class="form-control" id="links" value="{{links}}">
+		                    </div>
+                    	</div>
+                    </div>
+                    {{/each}}
+                    <button class="btn btn-default add-subtask">Add Subtask</button>
+                </div>
+            </div>
+        {{/each}}
+        <button class="btn btn-default add-milestone">Add Milestone</button>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</template>

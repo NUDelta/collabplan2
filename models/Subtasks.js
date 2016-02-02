@@ -1,8 +1,8 @@
 Subtasks = new Mongo.Collection('Subtasks');
-
 Schema.SubtasksSchema = new SimpleSchema({
   description: {
-    type: String
+    type: String,
+    optional: true
   },
   links: {
     type: [String]
@@ -12,7 +12,16 @@ Schema.SubtasksSchema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    },
   }
 });
 

@@ -13,7 +13,7 @@
                 <h1>Your Ready Action Plans</h1>
                 <ul>
                     {{#each user_complete_action_plans}}
-                        <li>{{name}}</li>
+                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
                     {{/each}}
                 </ul>
             </div>

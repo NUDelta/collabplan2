@@ -6,30 +6,59 @@ function loadUser(user) {
   }
 }
 
-function loadActionPlans(fixtures) {
+function loadActionPlans(fixtures, milestone_ids) {
   var i;
+
+  var output = [];
 
   for (i = 0; i < fixtures.length; i+= 1) {
     var fixtureAlreadyExists = typeof ActionPlans.findOne({ name : fixtures[i].name }) === 'object';
 
     if (!fixtureAlreadyExists) {
-      fixtures[i].author_id = Meteor.users.findOne({username: 'admin'})._id;
-      fixtures[i].requester_id = Meteor.users.findOne({username: 'test'})._id;
+      var ap = fixtures[i];
+      ap.author_id = Meteor.users.findOne({username: ap.author_id})._id;
+      ap.requester_id = Meteor.users.findOne({username: ap.requester_id})._id;
+      ap.milestone_ids = loadMilestones(ap.milestone_ids);
+      
       var ap1_id = ActionPlans.insert(fixtures[i]);
+      console.log(ap);
+      output.push(ap1_id);
     }
   }
+  return output;
 }
-
+ 
 function loadMilestones(fixtures) {
   var i;
+  var output = [];
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Milestones.findOne({ title : fixtures[i].title }) === 'object';
+    var fixtureAlreadyExists = typeof Milestones.findOne({title : fixtures[i].title}) === 'object';
 
     if (!fixtureAlreadyExists) {
-      var ms1_id = Milestones.insert(fixtures[i]);
+      var ms = fixtures[i];
+      ms.subtask_ids = loadSubtasks(ms.subtask_ids);
+      var ms1_id = Milestones.insert(ms);
+      output.push(ms1_id);
     }
   }
+  return output;
+}
+
+function loadSubtasks(fixtures) {
+  var i;
+  var output = [];
+
+  for (i = 0; i < fixtures.length; i+= 1) {
+    var fixtureAlreadyExists = typeof Subtasks.findOne({description : fixtures[i].description}) === 'object';
+
+    if (!fixtureAlreadyExists) {
+      var st = fixtures[i]
+      var ms1_id = Subtasks.insert(st);
+      output.push(ms1_id);
+    }
+  }
+  return output;
 }
 
 Meteor.startup(function () {
@@ -39,6 +68,5 @@ Meteor.startup(function () {
     loadUser(users[key]);
   }
 
-  loadActionPlans(Fixtures['actionPlansFixture']);
-  loadMilestones(Fixtures['milestonesFixture']);
+  var actionplan_ids = loadActionPlans(Fixtures['actionPlansFixture']);
 });
