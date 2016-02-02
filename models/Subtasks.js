@@ -4,7 +4,7 @@ Schema.SubtasksSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  link_ids: {
+  links: {
     type: [String]
   },
   milestone_ids: {
