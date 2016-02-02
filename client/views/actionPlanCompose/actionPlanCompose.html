@@ -1,16 +1,19 @@
 <template name="actionPlanCompose">
     <div class="container">
-        {{#if action_plan.author_id}}
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Compose {{action_plan.name}}</h1>
-                    <h3>{{action_plan.name}}</h3>
-                    <p>{{action_plan.description}}</p>
-                    {{> actionPlanComposeForm action_plan}}
-                </div>
+        <div class="row">
+            <div class="col-md-4" style="position: fixed;">
+                <h1>Compose {{action_plan.name}}</h1>
+                <h5>Description: {{action_plan.description}}</h5>
+                <h5>Milestones:</h5>
+                <ol>
+                {{#each getMilestones}}
+                    <li>{{title}}</li>
+                {{/each}}
+                </ol>
             </div>
-        {{else}}
-            {{> boilerplate_selector action_plan}}
-        {{/if}}
+            <div class="col-md-8 col-md-offset-4">
+                {{> actionPlanComposeForm action_plan}}
+            </div>
+        </div>
     </div>
 </template>
