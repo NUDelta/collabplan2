@@ -15,76 +15,49 @@ function loadActionPlans(fixtures, milestone_ids) {
     var fixtureAlreadyExists = typeof ActionPlans.findOne({ name : fixtures[i].name }) === 'object';
 
     if (!fixtureAlreadyExists) {
-      fixtures[i].author_id = Meteor.users.findOne({username: 'admin'})._id;
-      fixtures[i].requester_id = Meteor.users.findOne({username: 'test'})._id;
-      fixtures[i].milestone_ids.push(milestone_ids[0]);
+      var ap = fixtures[i];
+      ap.author_id = Meteor.users.findOne({username: ap.author_id})._id;
+      ap.requester_id = Meteor.users.findOne({username: ap.requester_id})._id;
+      ap.milestone_ids = loadMilestones(ap.milestone_ids);
+      
       var ap1_id = ActionPlans.insert(fixtures[i]);
-
+      console.log(ap);
       output.push(ap1_id);
     }
   }
   return output;
 }
-
-function loadMilestones(fixtures, subtask_ids) {
+ 
+function loadMilestones(fixtures) {
   var i;
-
   var output = [];
 
-  //console.log(subtask_ids)
-
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Milestones.findOne({ name : fixtures[i].name }) === 'object';
+    var fixtureAlreadyExists = typeof Milestones.findOne({title : fixtures[i].title}) === 'object';
 
     if (!fixtureAlreadyExists) {
-      fixtures[i].subtask_ids.push(subtask_ids[0]);
-      var ms1_id = Milestones.insert(fixtures[i]);
-
+      var ms = fixtures[i];
+      ms.subtask_ids = loadSubtasks(ms.subtask_ids);
+      var ms1_id = Milestones.insert(ms);
       output.push(ms1_id);
     }
   }
   return output;
 }
 
-function loadSubtasks(fixtures, link_ids) {
-  var i;
-
-  var output = []
-
-  // console.log(link_ids)
-
-  for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Subtasks.findOne({ name : fixtures[i].name }) === 'object';
-
-    if (!fixtureAlreadyExists) {
-      fixtures[i].link_ids.push(link_ids[0]);
-      var ms1_id = Subtasks.insert(fixtures[i]);
-
-      output.push(ms1_id);
-    }
-  }
-
-  return output;
-}
-
-function loadLinks(fixtures) {
+function loadSubtasks(fixtures) {
   var i;
   var output = [];
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Links.findOne({ name : fixtures[i].name }) === 'object';
+    var fixtureAlreadyExists = typeof Subtasks.findOne({description : fixtures[i].description}) === 'object';
 
     if (!fixtureAlreadyExists) {
-      var ms1_id = Links.insert(fixtures[i]);
-
+      var st = fixtures[i]
+      var ms1_id = Subtasks.insert(st);
       output.push(ms1_id);
-
-      //console.log(output);
     }
   }
-
-  console.log(output);
-
   return output;
 }
 
@@ -94,8 +67,6 @@ Meteor.startup(function () {
   for (key in users) if (users.hasOwnProperty(key)) {
     loadUser(users[key]);
   }
-  var link_ids = loadLinks(Fixtures['linksFixture']) ;
-  var subtask_ids = loadSubtasks(Fixtures['subtasksFixture'], link_ids);
-  var milestone_ids = loadMilestones(Fixtures['milestonesFixture'], subtask_ids);
-  var actionplan_ids = loadActionPlans(Fixtures['actionPlansFixture'], milestone_ids);
+
+  var actionplan_ids = loadActionPlans(Fixtures['actionPlansFixture']);
 });
