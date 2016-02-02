@@ -25,7 +25,7 @@ Router.route('/action_plans/new', {
 Router.route('/action_plans/:_id', {
   name: 'action_plans.show',
   waitOn: function(){
-    return [Meteor.subscribe('ActionPlans')];
+    return [Meteor.subscribe('ActionPlans'), Meteor.subscribe('Milestones'), Meteor.subscribe('Subtasks')];
   },
   action: function () {
     var ap = ActionPlans.findOne({_id: this.params._id});

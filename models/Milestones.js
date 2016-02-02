@@ -2,10 +2,12 @@ Milestones = new Mongo.Collection('Milestones');
 
 Schema.MilestonesSchema = new SimpleSchema({
   title: {
-    type: String
+    type: String,
+    optional: true
   },
   motivation: {
-    type: String
+    type: String,
+    optional: true
   },
   subtask_ids: {
     type: [String]
