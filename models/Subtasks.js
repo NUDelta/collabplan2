@@ -1,5 +1,4 @@
 Subtasks = new Mongo.Collection('Subtasks');
-
 Schema.SubtasksSchema = new SimpleSchema({
   description: {
     type: String,
