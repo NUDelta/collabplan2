@@ -23,7 +23,7 @@ Template['actionPlanComposeForm'].events({
     });
 
     milestonesAndSubtasks.milestones.forEach(function(e, i, a) {
-      Meteor.call('milestone_edit', e, actionPlanId, function (err) {
+      Meteor.call('milestone_edit', e, function (err) {
         if (!err) {
           console.log('milestone updated');
         }
