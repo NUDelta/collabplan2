@@ -46,14 +46,10 @@ Meteor.methods({
         	isComplete: data.isComplete
         }});
     },
-    milestone_edit: function(data, actionPlanId) {
+    milestone_edit: function(data) {
     	Milestones.update(data._id, { $set: {
     		title: data.title,
     		motivation: data.motivation
-    	}});
-
-    	ActionPlans.update(actionPlanId, { $push: {
-    		milestone_ids: data._id
     	}});
     },
     subtask_edit: function(data) {
@@ -61,10 +57,6 @@ Meteor.methods({
     		description: data.description,
     		links: data.links,
     		milestone_ids: []
-    	}});
-
-    	Milestones.update(data.milestone_id, { $push: {
-    		subtask_ids: data._id
     	}});
     },
     milestone_delete: function(id) {
