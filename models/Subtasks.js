@@ -1,7 +1,8 @@
 Subtasks = new Mongo.Collection('Subtasks');
 Schema.SubtasksSchema = new SimpleSchema({
   description: {
-    type: String
+    type: String,
+    optional: true
   },
   link_ids: {
     type: [String]
@@ -20,7 +21,7 @@ Schema.SubtasksSchema = new SimpleSchema({
       } else {
         this.unset();
       }
-    }
+    },
   }
 });
 

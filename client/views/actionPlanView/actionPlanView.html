@@ -2,49 +2,26 @@
 	<div class="container" >
 		<div class="row">
 			<div class="col-md-6">
-				<h1>{{action_plan_test.name}}</h1>
-				    <dl style="padding: 10px">
-						{{#each action_plan_test.milestone_ids}}
-				    		{{#with get_milestones this}}
-				    			<dt style="font-size:140%">
-				    				{{this.title}} : {{this.motivation}}</dt>
-								{{#each this.subtask_ids}}
-				    				{{#with get_subtasks this}}
-				    					<dd style="padding: 0 0 0.5em 0; font-size:120%">- {{this.description}}</dd>
-				    					Links: {{#each this.link_ids}}
+				<h1>{{action_plan.name}}</h1>
+			    <dl style="padding: 10px">
+					{{#each action_plan.milestone_ids}}
+			    		{{#with get_milestones this}}
+			    			<dt style="font-size:140%">{{this.title}} : {{this.motivation}}</dt>
+							{{#each this.subtask_ids}}
+			    				{{#with get_subtasks this}}
+			    					<dd style="padding: 0 0 0.5em 0; font-size:120%">- {{this.description}}</dd>
+			    					Links: 
+			    					{{#each this.link_ids}}
 				    					{{#with get_links this}}
-				    					<dd style="padding: 0 0 0.5em 0">{{this.url}}</dd>
+				    						<dd style="padding: 0 0 0.5em 0"><a href="{{this.url}}">{{this.url}}</a></dd>
 				    					{{/with}}
-				    					{{/each}}
-				    				{{/with}}
-				    			{{/each}}
-				    		{{/with}}
-				    	{{/each}}
-					</dl>
-
+			    					{{/each}}
+			    				{{/with}}
+		    				{{/each}}
+			    		{{/with}}
+			    	{{/each}}
+				</dl>
 			</div>
 		</div>
 	</div>
-
-
-<!-- 	<table>
-		<tr>
-			<th>Milestone</th>
-			<th>Motivation</th>
-			<th>Subtasks</th>
-		</tr>
-
-		<tr>
-			<td>
-				{{#each action_plan_test.milestone_ids}}
-				    {{#with get_milestones this}}
-				    	{{this.title}}
-				    {{/with}}
-				{{/each}}
-			</td>
-		</tr>
-
-
-
-	</table>   -->
 </template>
