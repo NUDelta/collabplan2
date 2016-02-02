@@ -6,7 +6,23 @@ Meteor.methods({
             requester_id: this.userId,
             isComplete: false,
             milestone_ids: []
-        });
+        })        
+    },
+    action_plan_set_boilerplate: function(ap_id,ms_id) {
+        ActionPlans.update(
+            {_id: ap_id},
+            {
+                $push: {
+                    milestone_ids: {
+                        $each: [ms_id],
+                        $position: 0
+                    }
+                },
+                $set: {
+                    author_id: this.userId
+                }
+            }
+        );
     },
     milestone_new: function(data, actionPlanId) {
     	var id = Milestones.insert({

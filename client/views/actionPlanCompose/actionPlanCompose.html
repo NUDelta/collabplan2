@@ -1,12 +1,16 @@
 <template name="actionPlanCompose">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>Compose {{action_plan.name}}</h1>
-                <h3>{{action_plan.name}}</h3>
-                <p>{{action_plan.description}}</p>
-                {{> actionPlanComposeForm action_plan}}
+        {{#if action_plan.author_id}}
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Compose {{action_plan.name}}</h1>
+                    <h3>{{action_plan.name}}</h3>
+                    <p>{{action_plan.description}}</p>
+                    {{> actionPlanComposeForm action_plan}}
+                </div>
             </div>
-        </div>
+        {{else}}
+            {{> boilerplate_selector action_plan}}
+        {{/if}}
     </div>
 </template>

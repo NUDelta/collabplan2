@@ -29,3 +29,19 @@ Fixtures.actionPlansFixture = [
     ],
   }
 ];
+
+
+Fixtures.milestonesFixture = [
+  {
+    title: "Python Test Boilerplate",
+    motivation: "Get shit started",
+    subtask_ids: [],
+    tags: ['boilerplate', 'python']
+  },
+  {
+    title: "Ruby Test Boilerplate",
+    motivation: "Get shit started",
+    subtask_ids: [],
+    tags: ['boilerplate', 'ruby']
+  }
+];
