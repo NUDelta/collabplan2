@@ -5,10 +5,17 @@
                 <div class="col-md-4" style="position: fixed;">
                     <h1>Compose {{action_plan.name}}</h1>
                     <h5>Description: {{action_plan.description}}</h5>
-                    <h5>Milestones:</h5>
+                    <h5>Outline:</h5>
                     <ol>
                     {{#each getMilestones}}
-                        <li>{{title}}</li>
+                        <li>
+                            {{title}}
+                            <ul>
+                                {{#each getSubtasks}}
+                                <li>{{description}}</li>
+                                {{/each}}
+                            </ul>
+                        </li>
                     {{/each}}
                     </ol>
                 </div>

@@ -10,29 +10,16 @@ Template['actionPlanComposeForm'].helpers({
 Template['actionPlanComposeForm'].events({
   'submit #ap_request': function (event) {
     event.preventDefault();
+    if (!confirm('Are you sure you want to submit? You cannot edit the action plan after submission.'))
+      return;
 
     var actionPlanId = Router.current().params._id;
-    var milestonesAndSubtasks = getMilestonesAndSubtasks();
 
-    milestonesAndSubtasks.subtasks.forEach(function(e, i, a) {
-      Meteor.call('subtask_edit', e, function (err) {
-        if (!err) {
-          console.log('subtask updated');
-        }
-      });
-    });
-
-    milestonesAndSubtasks.milestones.forEach(function(e, i, a) {
-      Meteor.call('milestone_edit', e, function (err) {
-        if (!err) {
-          console.log('milestone updated');
-        }
-      });
-    });
+    saveMilestonesAndSubtasks();
 
     var actionPlan = {
       _id: actionPlanId,
-      isComplete: event.target.isComplete.checked
+      isComplete: true
     };
 
     Meteor.call('action_plan_edit', actionPlan, function (err) {
@@ -40,6 +27,18 @@ Template['actionPlanComposeForm'].events({
         Router.go('action_plans')
       }
     });
+  },
+  'input input#title': function (event) {
+    updateMilestone(event);
+  },
+  'input textarea#motivation': function (event) {
+    updateMilestone(event);
+  },
+  'input input#description': function (event) {
+    updateSubtask(event);
+  },
+  'input input#links': function (event) {
+    updateSubtask(event);
   },
   'click .add-subtask': function (event) {
     event.preventDefault();
@@ -55,6 +54,7 @@ Template['actionPlanComposeForm'].events({
         }
       });
     } else {
+      alert("Add a milestone title and motivation first.");
       return;
     }
   },
@@ -91,6 +91,30 @@ Template['actionPlanComposeForm'].events({
     });
   }
 });
+
+var handle = null; // used for timeout
+
+function saveMilestonesAndSubtasks() {
+  var milestonesAndSubtasks = getMilestonesAndSubtasks();
+
+  milestonesAndSubtasks.subtasks.forEach(function(e, i, a) {
+    Meteor.call('subtask_edit', e, function (err) {
+      if (!err) {
+        console.log('subtask updated');
+      }
+    });
+  });
+
+  milestonesAndSubtasks.milestones.forEach(function(e, i, a) {
+    Meteor.call('milestone_edit', e, function (err) {
+      if (!err) {
+        console.log('milestone updated');
+      }
+    });
+  });
+
+  return;
+}
 
 function getMilestonesAndSubtasks() {
   var milestones = [];
@@ -131,4 +155,45 @@ function getCorrespondingSubtasks(milestone) {
   });
 
   return correspondingSubtasks;
+}
+
+
+function updateMilestone(event) {
+  if (handle)
+    clearTimeout(handle);
+
+  handle = setTimeout(function() {
+    var milestoneSelector = $(event.target).parent().parent();
+    var milestone = {
+      _id: $('#_id', milestoneSelector).val(),
+      title: $('#title', milestoneSelector).val(),
+      motivation: $('#motivation', milestoneSelector).val()
+    }
+
+    Meteor.call('milestone_edit', milestone, function (err) {
+      if (!err) {
+        console.log('milestone updated');
+      }
+    });
+  }, 500);
+}
+
+function updateSubtask(event) {
+  if (handle)
+    clearTimeout(handle);
+
+  handle = setTimeout(function() {
+    var subtaskSelector = $(event.target).parent().parent();
+    var subtask = {
+      _id: $('#_id', subtaskSelector).val(),
+      description: $('#description', subtaskSelector).val(),
+      links: [$('#links', subtaskSelector).val()]
+    }
+
+    Meteor.call('subtask_edit', subtask, function (err) {
+      if (!err) {
+        console.log('subtask updated');
+      }
+    });
+  }, 500);
 }

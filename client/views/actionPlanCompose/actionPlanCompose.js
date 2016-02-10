@@ -8,6 +8,9 @@ Template['actionPlanCompose'].helpers({
   getMilestones: function () {
     var ap = Session.get("ap");
     return Milestones.find({ _id: { $in: ap.milestone_ids } });
+  },
+  getSubtasks: function () {
+    return Subtasks.find({ _id: { $in: this.subtask_ids } });
   }
 });
 

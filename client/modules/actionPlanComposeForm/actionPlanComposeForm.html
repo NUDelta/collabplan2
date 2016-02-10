@@ -1,10 +1,5 @@
 <template name="actionPlanComposeForm">
     <form id="ap_request">
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" id="isComplete" checked="{{this.isComplete}}"> Finished?
-			</label>
-		</div>
 		<h5>Milestones:</h5>
         {{#each getMilestones}}
             <div class="milestone panel panel-default">
@@ -14,11 +9,11 @@
                     	<button type="button" class="btn btn-danger delete-milestone" style="float:right; margin-bottom: 0.5em;">X</button>
                 	</div>
 					<div class="form-group">
-                        <label for="title">title</label>
+                        <label for="title">milestone title</label>
                         <input type="text" class="form-control" id="title" value="{{title}}">
                     </div>
                     <div class="form-group">
-                        <label for="motivation">motivation</label>
+                        <label for="motivation">milestone motivation</label>
                         <textarea class="form-control" id="motivation">{{motivation}}</textarea>
                     </div>
                     <h5>Subtasks:</h5>
@@ -30,12 +25,12 @@
                     			<button type="button" class="btn btn-danger delete-subtask" style="float:right; margin-bottom: 0.5em;">X</button>
                     		</div>
                     		<div class="form-group">
-		                        <label for="description">description</label>
-		                        <input type="text" class="form-control" id="description" value="{{description}}">
+		                        <label for="description">subtask description</label>
+		                        <input type="text" class="form-control" id="description" value="{{description}}" placeholder="foo">
 		                    </div>
 		                    <div class="form-group">
-		                        <label for="links">links</label>
-		                        <input type="text" class="form-control" id="links" value="{{links}}">
+		                        <label for="links">subtask links</label>
+		                        <input type="text" class="form-control" id="links" value="{{links}}" placeholder="bar">
 		                    </div>
                     	</div>
                     </div>
@@ -45,6 +40,6 @@
             </div>
         {{/each}}
         <button class="btn btn-default add-milestone">Add Milestone</button>
-        <button type="submit" class="btn btn-default">Save</button>
+        <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </template>
