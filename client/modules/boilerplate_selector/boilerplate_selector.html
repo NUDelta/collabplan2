@@ -1,5 +1,9 @@
 <template name="boilerplate_selector">
     <div class="row">
+        <h3>Request: {{name}}</h3>
+        <p>Request Description: {{description}}</p>
+    </div>
+    <div class="row">
         <h3>Choose a starting boiler plate</h3>
         <p>It is important to give learners a clear starting point. Feel free to choose one of our boilerplate starting milestones that will guide learner through setting up the dev env and scaffolding the app. You can also write your own.</p>
     </div>
@@ -13,7 +17,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
-                        <p>{{motivation}}</p>
+                        <p>{{truncate motivation 100}}</p>
                         {{#each tags}}
                             <span class="label label-primary">{{this}}</span>
                         {{/each}}
