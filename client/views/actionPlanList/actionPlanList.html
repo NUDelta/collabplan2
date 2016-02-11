@@ -1,29 +1,47 @@
 <template name="actionPlanList">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h1>Your Pending Action Plans <a href="{{pathFor route='action_plans.new'}}" class="btn btn-primary">Request Action Plan</a></h1>
-                <ul>
-                    {{#each user_pending_action_plans}}
-                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
-                    {{/each}}
-                </ul>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pending Action Plans</div>
+                    <div class="panel-body">
+                        <p>These are action plans you have requested. Once they are ready, we will notify you!</p>
+                        <a href="{{pathFor route='action_plans.new'}}" class="btn btn-primary">Request an Action Plan</a>
+                    </div>
+                    <div class="list-group" >
+                        {{#each user_pending_action_plans}}
+                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h1>Your Ready Action Plans</h1>
-                <ul>
-                    {{#each user_complete_action_plans}}
-                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
-                    {{/each}}
-                </ul>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ready Action Plans</div>
+                    <div class="panel-body">
+                        <p>These action plans are ready to go! Get started on your project and let us know how it went.</p>
+                    </div>
+                    <div class="list-group" >
+                        {{#each user_complete_action_plans}}
+                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h1>Action Plans You can help with</h1>
-                <ul>
-                    {{#each other_pending_action_plans}}
-                        <li><a href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a></li>
-                    {{/each}}
-                </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Action Plan Plans You Can Help With</div>
+                    <div class="panel-body">
+                        <p>These are action plans other users are requesting. If you feel like you can help out, go ahead and select one to write.</p>
+                    </div>
+                    <div class="list-group" >
+                        {{#each other_pending_action_plans}}
+                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
