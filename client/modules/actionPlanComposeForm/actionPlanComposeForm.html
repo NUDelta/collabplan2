@@ -10,11 +10,11 @@
                 	</div>
 					<div class="form-group">
                         <label for="title">milestone title</label>
-                        <input type="text" class="form-control" id="title" value="{{title}}">
+                        <input type="text" class="form-control" id="title" value="{{title}}" placeholder="Write a general high-level goal that the learner is trying to achieve.">
                     </div>
                     <div class="form-group">
                         <label for="motivation">milestone motivation</label>
-                        <textarea class="form-control" id="motivation">{{motivation}}</textarea>
+                        <textarea class="form-control" id="motivation" placeholder="Explain why this step must be done and what success looks like.">{{motivation}}</textarea>
                     </div>
                     <h5>Subtasks:</h5>
                     {{#each getSubtasks}}
@@ -26,11 +26,11 @@
                     		</div>
                     		<div class="form-group">
 		                        <label for="description">subtask description</label>
-		                        <input type="text" class="form-control" id="description" value="{{description}}" placeholder="foo">
+		                        <input type="text" class="form-control" id="description" value="{{description}}" placeholder="Clearly state a task that must be done.">
 		                    </div>
 		                    <div class="form-group">
 		                        <label for="links">subtask links</label>
-		                        <input type="text" class="form-control" id="links" value="{{links}}" placeholder="bar">
+		                        <input type="text" class="form-control" id="links" value="{{links}}" placeholder="(optional): Place links to resources that will be useful references in completing the subtasks.">
 		                    </div>
                     	</div>
                     </div>
