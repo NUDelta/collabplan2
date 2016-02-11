@@ -1,15 +1,19 @@
 Schema.UserProfileSchema = new SimpleSchema({
   first_name: {
-    type: String
+    type: String,
+    optional: true,
   },
   last_name: {
-    type: String
+    type: String,
+    optional: true,
   },
   skills: {
-    type: [String]
+    type: [String],
+    optional: true,
   },
   action_plan_ids: {
-    type: [String]
+    type: [String],
+    optional: true,
   }
 });
 
@@ -26,10 +30,12 @@ Schema.UsersSchema = new SimpleSchema({
   },
   "emails.$.address": {
     type: String,
-    regEx: SimpleSchema.RegEx.Email
+    regEx: SimpleSchema.RegEx.Email,
+    optional: true,
   },
   "emails.$.verified": {
-    type: Boolean
+    type: Boolean,
+    optional: true,
   },
   createdAt: {
     type: Date,
