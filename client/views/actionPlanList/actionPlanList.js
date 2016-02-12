@@ -6,7 +6,10 @@ Template['actionPlanList'].helpers({
         return ActionPlans.find({isComplete: true, requester_id: Meteor.userId()})
     },
     other_pending_action_plans: function () {
-        return ActionPlans.find({isComplete: false, requester_id: {$not: Meteor.userId()}})
+        return ActionPlans.find({isComplete: false, requester_id: {$not: Meteor.userId()}, author_id: {$not: Meteor.userId()}})
+    },
+    user_working_on_action_plans: function () {
+        return ActionPlans.find({isComplete: false, requester_id: {$not: Meteor.userId()}, author_id: Meteor.userId()})
     }
 });
 
