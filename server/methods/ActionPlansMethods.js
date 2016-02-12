@@ -75,8 +75,8 @@ Meteor.methods({
     	});
 
     	// only remove if no other action plans use this milestone
-    	if (ActionPlans.find({ milestone_ids: id }).count() < 1)
-    		Milestones.remove({ _id: id });
+    	// if (ActionPlans.find({ milestone_ids: id }).count() < 1)
+    	// 	Milestones.remove({ _id: id });
     },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });
