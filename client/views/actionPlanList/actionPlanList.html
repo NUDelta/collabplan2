@@ -1,5 +1,6 @@
 <template name="actionPlanList">
     <div class="container">
+        {{#if currentUser}}
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
@@ -30,7 +31,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Action Plan Plans You Can Help With</div>
                     <div class="panel-body">
@@ -43,6 +44,23 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Action Plan Plans You Are working on</div>
+                    <div class="panel-body">
+                        <p>These are action plans other users are requesting and you are working. Be sure to mark it as finished when you are done.</p>
+                    </div>
+                    <div class="list-group" >
+                    <div class="panel-heading">Action Plan Plans You Are working on</div>
+                        {{#each user_working_on_action_plans}}
+                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
         </div>
+        {{else}}
+        <h1>Please log in</h1>
+        {{/if}}
     </div>
 </template>
