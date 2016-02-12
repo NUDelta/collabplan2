@@ -69,8 +69,14 @@ Meteor.methods({
     		milestone_ids: []
     	}});
     },
-    milestone_delete: function(id) {
-    	Milestones.remove({ _id: id });
+    milestone_delete: function(id, actionPlanId) {
+    	ActionPlans.update({ _id: actionPlanId }, {
+    		$pull: { milestone_ids: id }
+    	});
+
+    	// only remove if no other action plans use this milestone
+    	if (ActionPlans.find({ milestone_ids: id }).count() < 1)
+    		Milestones.remove({ _id: id });
     },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });

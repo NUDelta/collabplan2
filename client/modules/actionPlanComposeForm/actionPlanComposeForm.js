@@ -83,10 +83,11 @@ Template['actionPlanComposeForm'].events({
     event.preventDefault();
     var milestone = $(event.target).parent().parent();
     var id = $('#_id', milestone).val();
+    var actionPlanId = Session.get("ap")._id;
 
-    Meteor.call('milestone_delete', id, function (err, res) {
+    Meteor.call('milestone_delete', id, actionPlanId, function (err, res) {
       if (!err) {
-        console.log('subtask deleted');
+        console.log('milestone deleted');
       }
     });
   }
