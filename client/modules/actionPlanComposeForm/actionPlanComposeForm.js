@@ -28,16 +28,16 @@ Template['actionPlanComposeForm'].events({
       }
     });
   },
-  'input input#title': function (event) {
+  'blur input#title': function (event) {
     updateMilestone(event);
   },
-  'input textarea#motivation': function (event) {
+  'blur textarea#motivation': function (event) {
     updateMilestone(event);
   },
-  'input input#description': function (event) {
+  'blur input#description': function (event) {
     updateSubtask(event);
   },
-  'input input#links': function (event) {
+  'blur input#links': function (event) {
     updateSubtask(event);
   },
   'click .add-subtask': function (event) {
@@ -92,8 +92,6 @@ Template['actionPlanComposeForm'].events({
     });
   }
 });
-
-var handle = null; // used for timeout
 
 function saveMilestonesAndSubtasks() {
   var milestonesAndSubtasks = getMilestonesAndSubtasks();
@@ -160,41 +158,31 @@ function getCorrespondingSubtasks(milestone) {
 
 
 function updateMilestone(event) {
-  if (handle)
-    clearTimeout(handle);
+  var milestoneSelector = $(event.target).parent().parent();
+  var milestone = {
+    _id: $('#_id', milestoneSelector).val(),
+    title: $('#title', milestoneSelector).val(),
+    motivation: $('#motivation', milestoneSelector).val()
+  }
 
-  handle = setTimeout(function() {
-    var milestoneSelector = $(event.target).parent().parent();
-    var milestone = {
-      _id: $('#_id', milestoneSelector).val(),
-      title: $('#title', milestoneSelector).val(),
-      motivation: $('#motivation', milestoneSelector).val()
+  Meteor.call('milestone_edit', milestone, function (err) {
+    if (!err) {
+      console.log('milestone updated');
     }
-
-    Meteor.call('milestone_edit', milestone, function (err) {
-      if (!err) {
-        console.log('milestone updated');
-      }
-    });
-  }, 500);
+  });
 }
 
 function updateSubtask(event) {
-  if (handle)
-    clearTimeout(handle);
+  var subtaskSelector = $(event.target).parent().parent();
+  var subtask = {
+    _id: $('#_id', subtaskSelector).val(),
+    description: $('#description', subtaskSelector).val(),
+    links: [$('#links', subtaskSelector).val()]
+  }
 
-  handle = setTimeout(function() {
-    var subtaskSelector = $(event.target).parent().parent();
-    var subtask = {
-      _id: $('#_id', subtaskSelector).val(),
-      description: $('#description', subtaskSelector).val(),
-      links: [$('#links', subtaskSelector).val()]
+  Meteor.call('subtask_edit', subtask, function (err) {
+    if (!err) {
+      console.log('subtask updated');
     }
-
-    Meteor.call('subtask_edit', subtask, function (err) {
-      if (!err) {
-        console.log('subtask updated');
-      }
-    });
-  }, 500);
+  });
 }
