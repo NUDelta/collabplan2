@@ -51,7 +51,6 @@
                         <p>These are action plans other users are requesting and you are working. Be sure to mark it as finished when you are done.</p>
                     </div>
                     <div class="list-group" >
-                    <div class="panel-heading">Action Plan Plans You Are working on</div>
                         {{#each user_working_on_action_plans}}
                             <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
                         {{/each}}

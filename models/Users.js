@@ -14,7 +14,13 @@ Schema.UserProfileSchema = new SimpleSchema({
   action_plan_ids: {
     type: [String],
     optional: true,
+  },
+  progress: {
+    type: Object,
+    optional: true,
+    blackbox: true
   }
+
 });
 
 Schema.UsersSchema = new SimpleSchema({
