@@ -19,7 +19,13 @@
 							    <ul class="list-group">
 							    	{{#each this.subtask_ids}}
 							    		{{#with get_subtasks this}}
-							    		<li class="list-group-item">{{this.description}}
+							    		<li class="list-group-item">
+							    			<input class="complete_cb" type="checkbox" checked="{{is_complete_subtask this._id}}"> 
+							    			{{#if is_complete_subtask this._id}}
+							    				<s>{{this.description}}</s>
+							    			{{else}}
+							    				{{this.description}}
+							    			{{/if}}
 											{{#if this.links.length}}
 												{{#each this.links}}
 

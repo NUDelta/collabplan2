@@ -15,13 +15,10 @@ Schema.UserProfileSchema = new SimpleSchema({
     type: [String],
     optional: true,
   },
-  'progress.action_plan_id': {
-    type: String,
-    optional: true
-  },
-  'progress.complete_subtasks': {
-    type: [String],
-    optional: true
+  progress: {
+    type: Object,
+    optional: true,
+    blackbox: true
   }
 
 });
