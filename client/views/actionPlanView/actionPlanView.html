@@ -41,31 +41,17 @@
 					{{/with}}
 				{{/each}}
 			</div>
-			<!-- <div class=></div> -->
+			<div class="col-md-6">
+				<h3>How to use your action plan:</h3>
+
+				<p>Your action plan is divided into 3 parts: milestones, subtasks, and links.</p>
+
+				<p><strong>Milestones</strong> are general, overarching steps that will help you complete your project. Every milestone begins with a motivation to help you understand why this step is important.</p>
+
+				<p><strong>Subtasks</strong> are what milestones are divided into. These are smaller, tangible tasks that help you complete each milestone.</p>
+
+				<p><strong>Links</strong> are included with some subtasks to provide added guidance. These links take you to online tutorials, documentation, or other helpful sites. Sometimes only part of the link is relevant to the task; only use the link to help you complete its corresponding subtask.</p>
+			</div>
 		</div>
 	</div>
 </template>
-
-<!-- Links: 
-{{#each this.links}}
-	<dd style="padding: 0 0 0.5em 0"><a href="{{this}}">{{this}}</a></dd>
-{{/each}} -->
-
-
-
-<!-- <dl style="padding: 10px">
-								{{#each action_plan.milestone_ids}}
-						    		{{#with get_milestones this}}
-						    			<dt style="font-size:140%">{{this.title}} : {{this.motivation}}</dt>
-										{{#each this.subtask_ids}}
-						    				{{#with get_subtasks this}}
-						    					<dd style="padding: 0 0 0.5em 0; font-size:120%">- {{this.description}}</dd>
-						    					Links: 
-						    					{{#each this.links}}
-						    						<dd style="padding: 0 0 0.5em 0"><a href="{{this}}">{{this}}</a></dd>
-						    					{{/each}}
-						    				{{/with}}
-					    				{{/each}}
-						    		{{/with}}
-						    	{{/each}}
-							</dl> -->
