@@ -3,27 +3,54 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h1>{{action_plan.name}}</h1>
-			    <dl style="padding: 10px">
-					{{#each action_plan.milestone_ids}}
-			    		{{#with get_milestones this}}
-			    			<dt style="font-size:140%">{{this.title}} : {{this.motivation}}</dt>
-							{{#each this.subtask_ids}}
-			    				{{#with get_subtasks this}}
-			    					<dd style="padding: 0 0 0.5em 0; font-size:120%">- {{this.description}}</dd>
-			    					Links: 
-			    					{{#each this.links}}
-			    						<dd style="padding: 0 0 0.5em 0"><a href="{{this}}">{{this}}</a></dd>
-			    					{{/each}}
-			    					<!-- {{#each this.link_ids}}
-				    					{{#with get_links this}}
-				    						<dd style="padding: 0 0 0.5em 0"><a href="{{this.url}}">{{this.url}}</a></dd>
-				    					{{/with}}
-			    					{{/each}} -->
-			    				{{/with}}
-		    				{{/each}}
-			    		{{/with}}
-			    	{{/each}}
-				</dl>
+				<p>{{action_plan.description}}</p>
+				{{#each action_plan.milestone_ids}}
+					{{#with get_milestones this}}
+					<div class="panel panel-default">
+  						<div class="panel-heading">
+							<h1 class="panel-title">
+								<a data-toggle="collapse" href="#collapse_{{this._id}}">{{this.title}}</a>
+							</h1>
+						</div>
+						<div id="collapse_{{this._id}}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>{{this.motivation}}</p>
+
+							    <ul class="list-group">
+							    	{{#each this.subtask_ids}}
+							    		{{#with get_subtasks this}}
+							    		<li class="list-group-item">{{this.description}}
+											{{#if this.links.length}}
+												{{#each this.links}}
+
+													<a class="pull-right" target="_blank" href="{{this}}">
+														<span class="badge">
+															<span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+														</span>
+													</a>
+												{{/each}}
+											{{/if}}	
+							    		</li>	
+
+							    		{{/with}}
+						    		{{/each}}
+							    </ul>
+							</div>
+						</div>		
+					</div>
+					{{/with}}
+				{{/each}}
+			</div>
+			<div class="col-md-6">
+				<h3>How to use your action plan:</h3>
+
+				<p>Your action plan is divided into 3 parts: milestones, subtasks, and links.</p>
+
+				<p><strong>Milestones</strong> are general, overarching steps that will help you complete your project. Every milestone begins with a motivation to help you understand why this step is important.</p>
+
+				<p><strong>Subtasks</strong> are what milestones are divided into. These are smaller, tangible tasks that help you complete each milestone.</p>
+
+				<p><strong>Links</strong> are included with some subtasks to provide added guidance. These links take you to online tutorials, documentation, or other helpful sites. Sometimes only part of the link is relevant to the task; only use the link to help you complete its corresponding subtask.</p>
 			</div>
 		</div>
 	</div>
