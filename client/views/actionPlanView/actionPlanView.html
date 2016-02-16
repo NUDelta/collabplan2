@@ -1,7 +1,7 @@
 <template name="actionPlanView">
 	<div class="container" >
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<h1>{{action_plan.name}}</h1>
 				<p>{{action_plan.description}}</p>
 				{{#each action_plan.milestone_ids}}
@@ -16,7 +16,7 @@
 							<div class="panel-body">
 								<p>{{this.motivation}}</p>
 
-							    <ul class="list-group">
+							    <ol class="list-group">
 							    	{{#each this.subtask_ids}}
 							    		{{#with get_subtasks this}}
 							    		<li class="list-group-item">
@@ -40,23 +40,29 @@
 
 							    		{{/with}}
 						    		{{/each}}
-							    </ul>
+							    </ol>
 							</div>
 						</div>		
 					</div>
 					{{/with}}
 				{{/each}}
 			</div>
-			<div class="col-md-6">
-				<h3>How to use your action plan:</h3>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h1 class="panel-title">How to use your action plan</h1>
+					</div>
+					<div class="panel-body">
 
-				<p>Your action plan is divided into 3 parts: milestones, subtasks, and links.</p>
+						<p>Your action plan is divided into 3 parts: milestones, subtasks, and links.</p>
 
-				<p><strong>Milestones</strong> are general, overarching steps that will help you complete your project. Every milestone begins with a motivation to help you understand why this step is important.</p>
+						<p><strong>Milestones</strong> are general, overarching steps that will help you complete your project. Every milestone begins with a motivation to help you understand why this step is important. Click on the milestones to expand them!</p>
 
-				<p><strong>Subtasks</strong> are what milestones are divided into. These are smaller, tangible tasks that help you complete each milestone.</p>
+						<p><strong>Subtasks</strong> are what milestones are divided into. These are smaller, tangible tasks that help you complete each milestone.</p>
 
-				<p><strong>Links</strong> are included with some subtasks to provide added guidance. These links take you to online tutorials, documentation, or other helpful sites. Sometimes only part of the link is relevant to the task; only use the link to help you complete its corresponding subtask.</p>
+						<p><strong>Links</strong> are included with some subtasks to provide added guidance. These are the clickable link icons located at the right of some subtasks. These links take you to online tutorials, documentation, or other helpful sites. Sometimes only part of the link is relevant to the task; only use the link to help you complete its corresponding subtask.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
