@@ -3,17 +3,27 @@
         {{#if action_plan.author_id}}
             <div class="row">
                 <div class="col-md-3 composer-outline">
-                    <h1>{{action_plan.name}}</h1>
-                    <h5>Description: {{action_plan.description}}</h5>
-                    <p><strong>Milestones:</strong> A milestone is a major step in a project, such as creating a view or form. The milestones have some sort of clear goal that the learner can validate once completed.<br><br><strong>Subtasks:</strong> A subtask is a small task that must be completed to reach the goal of the milestone. They do not have to be extremely specific but it should be clear what needs to be done, such as create a html form with a name and password, put fields and a submit button.</p>
-                    <h5>Outline:</h5>
-                    <ol>
-                    {{#each getMilestones}}
-                        <li>
-                            <a href="#{{_id}}">{{title}}</a> 
-                        </li>
-                    {{/each}}
-                    </ol>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">{{action_plan.name}}</a>
+                            </h1>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <h5>Description: {{action_plan.description}}</h5>
+                                <p><strong>Milestones:</strong> A milestone is a major step in a project, such as creating a view or form. The milestones have some sort of clear goal that the learner can validate once completed.<br><br><strong>Subtasks:</strong> A subtask is a small task that must be completed to reach the goal of the milestone. They do not have to be extremely specific but it should be clear what needs to be done, such as create a html form with a name and password, put fields and a submit button.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 >Outline:</h3>
+                        <ol>
+                        {{#each getMilestones}}
+                            <li>
+                                <a href="#{{_id}}">{{title}}</a> 
+                            </li>
+                        {{/each}}
+                        </ol>
                 </div>
                 <div class="col-md-8 col-md-offset-4">
                     {{> actionPlanComposeForm action_plan}}
