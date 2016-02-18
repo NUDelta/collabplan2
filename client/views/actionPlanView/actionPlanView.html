@@ -19,7 +19,7 @@
 							    <ol class="list-group">
 							    	{{#each this.subtask_ids}}
 							    		{{#with get_subtasks this}}
-							    		<li class="list-group-item">
+							    		<li class="list-group-item" style="margin-right:10px">
 							    			<input class="complete_cb" type="checkbox" checked="{{is_complete_subtask this._id}}"> 
 							    			{{#if is_complete_subtask this._id}}
 							    				<s>{{this.description}}</s>
