@@ -17,13 +17,14 @@
                         </div>
                     </div>
                     <h3 >Outline:</h3>
-                        <ol>
+                        <div id="milestoneList" class="list-group">
                         {{#each getMilestones}}
-                            <li>
-                                <a href="#{{_id}}">{{title}}</a> 
-                            </li>
+                            <div class="list-group-item">
+                                <a href="#{{_id}}">{{title}}</a>
+                                <span class="_id hidden">{{_id}}</span>
+                            </div>
                         {{/each}}
-                        </ol>
+                        </div>
                 </div>
                 <div class="col-md-9 col-md-offset-3">
                     {{> actionPlanComposeForm action_plan}}

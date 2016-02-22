@@ -1,6 +1,14 @@
 Template['actionPlanComposeForm'].helpers({
   getMilestones: function () {
-    return Milestones.find({ _id: { $in: this.milestone_ids } });
+    var milestones = this.milestone_ids;
+    var db = Milestones.find({ _id: { $in: this.milestone_ids } }).fetch();
+
+    for (var i = 0; i < milestones.length; ++i) {
+      var c = db.filter(function(o) { return o._id == milestones[i] })[0];
+      milestones[i] = c;
+    }
+    
+    return milestones;
   },
   getSubtasks: function () {
     return Subtasks.find({ _id: { $in: this.subtask_ids } });
