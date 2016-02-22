@@ -2,15 +2,23 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1>{{action_plan.name}}</h1>
-                <p>{{action_plan.description}}</p>
-                <p>
-                    {{#if action_plan.author_id}}
-                        Action plan being written by: {{author_name action_plan.author_id}}
-                    {{else}}
-                        Action Plan Pending Author
-                    {{/if}}
-                </p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">{{action_plan.name}}</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>Description: {{action_plan.description}}</p>
+                        <p>Prior knowledge: {{action_plan.prior_knowledge}}</p>
+                        <p>Requested frameworks: {{action_plan.requested_frameworks}}</p>
+                        <p>
+                            {{#if action_plan.author_id}}
+                                Action plan being written by: {{author_name action_plan.author_id}}
+                            {{else}}
+                                Action Plan Pending Author
+                            {{/if}}
+                        </p>
+                    </div>
+                </div>
             </div>
       </div>
     </div>

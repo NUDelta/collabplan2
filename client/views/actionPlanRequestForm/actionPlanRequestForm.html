@@ -4,12 +4,23 @@
             <div class="col-md-6">
                 <form id="ap_request">
                     <div class="form-group">
-                        <label for="name">name</label>
-                        <input type="text" class="form-control" id="name" placeholder="name">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name of your Action Plan">
                     </div>
                     <div class="form-group">
-                        <label for="description">description</label>
-                        <textarea class="form-control" id="description" placeholder="description"></textarea>
+                        <label for="description">Description</label>
+                        <p>Please be as descriptive as possible so we can personalize your plan as best we can.</p>
+                        <textarea class="form-control" id="description" placeholder="Description of your Action Plan"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="prior_knowledge">Prior Knowledge</label>
+                        <p>Please list any languages/ frameworks that you are familiar with and rate yourself in comfort from 1 (seen this language before, coded a few lines in)to 5 (created a project in, very familiar with). Example: HTML 4, AngularJS 3, NodeJS 1</p>
+                        <textarea class="form-control" id="prior_knowledge" placeholder="Prior Knowledge"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="requested_frameworks">Requested Frameworks</label>
+                        <p>Please list any frameworks/ languages you want to work in, if any. Note that we will try to accomodate these but it is not guaranteed if we believe it would be significantly easier in a different framework/ language.</p>
+                        <textarea class="form-control" id="requested_frameworks" placeholder="Frameworks/Languages"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-default">Submit</button>
