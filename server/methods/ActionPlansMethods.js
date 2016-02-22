@@ -24,6 +24,11 @@ Meteor.methods({
             }
         );
     },
+    action_plan_reorder_milestones: function(actionPlanId, milestoneIds) {
+    	ActionPlans.update({ _id: actionPlanId }, { $set: {
+        	milestone_ids: milestoneIds
+        }});
+    },
     milestone_new: function(data, actionPlanId) {
     	var id = Milestones.insert({
     		title: data.title,
