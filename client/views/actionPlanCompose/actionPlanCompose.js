@@ -5,13 +5,13 @@ Template['actionPlanCompose'].helpers({
     Session.set("ap", ap);
     return ap;
   },
-  getMilestones: function () {
+  getMilestones: function () {    
     var ap = Session.get("ap");
     var milestones = ap.milestone_ids;
     var db = Milestones.find({ _id: { $in: milestones } }).fetch();
 
     for (var i = 0; i < milestones.length; ++i) {
-      var c = db.filter(function(o) { return o._id == milestones[i] })[0];
+      var c = db.filter(function(o) { return o._id === milestones[i] })[0];
       milestones[i] = c;
     }
     
