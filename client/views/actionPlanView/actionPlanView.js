@@ -16,6 +16,9 @@ Template['actionPlanView'].helpers({
         var ap_id = Router.current().params._id;
         var progress = Meteor.user().profile.progress[ap_id] || [];
         return progress.indexOf(id) !== -1;
+    },
+    precent_complete: function(){
+        return Session.get('progress');
     }
 
 });
@@ -24,5 +27,18 @@ Template['actionPlanView'].events({
     'click .complete_cb': function() {
         var ap_id = Router.current().params._id;
         Meteor.call('user_toggle_subtasks_completion', ap_id, this._id);
+
+        Meteor.call('user_progress_on_action_plan', ap_id, function(err,result){
+            Session.set('progress',result)
+        }); 
     }
 });
+
+Template['actionPlanView'].onRendered(function(){
+    Session.set('progress', 0);
+    Meteor.call('user_progress_on_action_plan', ap_id, function(err,result){
+        Session.set('progress',result)
+    });
+})
+
+
