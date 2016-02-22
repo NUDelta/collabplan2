@@ -14,5 +14,21 @@ Meteor.methods({
             Meteor.users.update({_id: this.userId}, update)
         }
 
+    },
+    user_progress_on_action_plan: function(ap_id) {
+        var user = Meteor.users.findOne(this.userId);
+        var all_progress = user.profile.progress || {}
+        var ap_progress = all_progress[ap_id] || [];
+
+        var action_plan = ActionPlans.findOne(ap_id);
+        var mile_stones = Milestones.find({ _id: { $in: action_plan.milestone_ids } }).fetch();
+
+        var sb_count = 0;
+        for (var i = mile_stones.length - 1; i >= 0; i--) {
+            var ms = mile_stones[i];
+            sb_count += ms.subtask_ids.length;
+        };
+
+        return Math.floor(ap_progress.length/sb_count * 100);
     }
 });
