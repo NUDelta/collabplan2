@@ -44,7 +44,16 @@ function updateMilestoneIds() {
   Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
+      changesSaved();
     }
   });
 }
 
+var timeout;
+function changesSaved() {
+  window.clearTimeout(timeout);
+  $('#changes-saved').show();
+  timeout = window.setTimeout(function (){
+    $('#changes-saved').fadeOut(500);
+  }, 5000)
+}
