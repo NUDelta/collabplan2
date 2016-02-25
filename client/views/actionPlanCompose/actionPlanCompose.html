@@ -2,35 +2,39 @@
     <div class="container">
         {{#if action_plan.author_id}}
             <div class="row">
-                <div class="col-md-3 composer-outline">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h1 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse1">{{action_plan.name}}</a>
-                            </h1>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <h5>Description: {{action_plan.description}}</h5>
-                                <h5>Prior Knowledge: {{action_plan.prior_knowledge}}</h5>
-                                <h5>Requested frameworks: {{action_plan.requested_frameworks}}</h5>
+                <div class="col-md-8">
+                    {{> actionPlanComposeForm action_plan}}
+                </div>
+                <div class="col-md-3 col-md-offset-1 composer-outline-outer">
+                    <div class="col-md-3 composer-outline">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse1">{{action_plan.name}}</a>
+                                </h1>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <h5>Description: {{action_plan.description}}</h5>
+                                    <h5>Prior Knowledge: {{action_plan.prior_knowledge}}</h5>
+                                    <h5>Requested frameworks: {{action_plan.requested_frameworks}}</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h1 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse2">How to compose an action plan</a>
-                            </h1>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <p><strong>Milestones:</strong> Write high-level goals here. A milestone is a major step in a project, such as creating a view or form. The milestones have some sort of clear goal that the learner can validate once completed.<br><br><strong>Subtasks:</strong> A subtask is a small task that must be completed to reach the goal of the milestone. They do not have to be extremely specific but it should be clear what needs to be done, such as to create a html form with a name and password, put in fields or create a submit button.</p><br><p><strong>Links: </strong>Links are optional resources for you to include with every subtask that can help guide the learner.</p><br>Click on the title to collapse this panel.
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse2">How to compose an action plan</a>
+                                </h1>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p><strong>Milestones:</strong> Write high-level goals here. A milestone is a major step in a project, such as creating a view or form. The milestones have some sort of clear goal that the learner can validate once completed.<br><br><strong>Subtasks:</strong> A subtask is a small task that must be completed to reach the goal of the milestone. They do not have to be extremely specific but it should be clear what needs to be done, such as to create a html form with a name and password, put in fields or create a submit button.</p><br><p><strong>Links: </strong>Links are optional resources for you to include with every subtask that can help guide the learner.</p><br>Click on the title to collapse this panel.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <h3 >Outline:</h3>
+                        <h3 >Outline:</h3>
                         <div id="milestoneList" class="list-group">
                         {{#each getMilestones}}
                             <div class="list-group-item">
@@ -39,9 +43,7 @@
                             </div>
                         {{/each}}
                         </div>
-                </div>
-                <div class="col-md-9 col-md-offset-3">
-                    {{> actionPlanComposeForm action_plan}}
+                    </div>
                 </div>
             </div>
         {{else}}
