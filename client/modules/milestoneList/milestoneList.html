@@ -1,11 +1,27 @@
 <template name="milestoneList">
-    <h3 >Outline:</h3>
-        <div id="milestoneList" class="list-group">
-        {{#each getMilestones}}
-            <div class="list-group-item">
-                <a href="#{{_id}}">{{title}}</a>
-                <span class="_id hidden">{{_id}}</span>
-            </div>
-        {{/each}}
-        </div>
+	<div class="well milestone-thumb">
+	    <h3 class="outline">Outline:</h3>
+	        <div id="milestoneList" class="milestone-col">
+	        {{#each getMilestones}}
+	            <div class="panel panel-default">
+				  <div class="panel-body">
+				    <div class="col-md-12">
+					    
+					      <h4><a href="#{{_id}}">{{title}}</a></h4>
+					      <span class="_id hidden">{{_id}}</span>
+					      <ol>
+							{{#each getSubtasks}}
+					      	<li>{{description}}</li>
+					    	{{/each}}
+
+					      </ol>
+			  		</div>
+				  </div>
+				</div>
+	        {{/each}}
+	        </div>
+	</div>
+
+		  	
+
 </template>

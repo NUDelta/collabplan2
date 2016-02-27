@@ -11,6 +11,9 @@ Template['milestoneList'].helpers({
     
     return milestones;
   },
+  getSubtasks: function () {
+    return Subtasks.find({ _id: { $in: this.subtask_ids } });
+  }
 });
 
 Template['milestoneList'].events({
