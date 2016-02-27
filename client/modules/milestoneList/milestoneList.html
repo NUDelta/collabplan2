@@ -1,0 +1,11 @@
+<template name="milestoneList">
+    <h3 >Outline:</h3>
+        <div id="milestoneList" class="list-group">
+        {{#each getMilestones}}
+            <div class="list-group-item">
+                <a href="#{{_id}}">{{title}}</a>
+                <span class="_id hidden">{{_id}}</span>
+            </div>
+        {{/each}}
+        </div>
+</template>
