@@ -3,7 +3,8 @@ Template['actionPlanCompose'].helpers({
     var id = Router.current().params._id;
     var ap = ActionPlans.findOne({_id: id});
     Session.set("ap", ap);
-    return ap;
+    console.log(ap)
+    return ActionPlans.findOne({_id: id});
   },
   getMilestones: function () {    
     var ap = Session.get("ap");
@@ -44,7 +45,16 @@ function updateMilestoneIds() {
   Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
+      changesSaved();
     }
   });
 }
 
+var timeout;
+function changesSaved() {
+  window.clearTimeout(timeout);
+  $('#changes-saved').show();
+  timeout = window.setTimeout(function (){
+    $('#changes-saved').fadeOut(500);
+  }, 5000)
+}

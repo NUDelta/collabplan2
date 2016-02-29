@@ -1,7 +1,9 @@
 Template['milestoneList'].helpers({
 	getMilestones: function () {    
     var ap = this;
+    console.log(this)
     var milestones = ap.milestone_ids;
+    console.log(milestones)
     var db = Milestones.find({ _id: { $in: milestones } }).fetch();
 
     for (var i = 0; i < milestones.length; ++i) {
