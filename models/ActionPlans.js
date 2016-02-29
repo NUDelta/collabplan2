@@ -7,11 +7,8 @@ Schema.ActionPlansSchema = new SimpleSchema({
   description: {
     type: String
   },
-  prior_knowledge: {
-    type: String
-  },
-  requested_frameworks: {
-    type: String
+  requested_skills: {
+    type: [String]
   },
   author_id: {
     type: String,
