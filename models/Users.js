@@ -10,12 +10,13 @@ Schema.UserProfileSchema = new SimpleSchema({
   skills: {
     type: [Object],
     optional: true,
+    defaultValue: [{name: 'html',level: 0},{name: 'css',level: 0},{name: 'js',level: 0}]
   },
   'skills.$.name': {
-    type: String
+    type: String,
   },
   'skills.$.level': {
-    type: number
+    type: Number,
   },
   action_plan_ids: {
     type: [String],

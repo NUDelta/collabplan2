@@ -42,3 +42,11 @@ Router.route('/action_plans/:_id', {
     }
   }
 });
+
+Router.route('/user/edit', {
+  name: 'user.edit',
+  action: function () {
+    this.render('userProfile');
+    SEO.set({ title: 'New action_plans - ' + Meteor.App.NAME });
+  }
+});
