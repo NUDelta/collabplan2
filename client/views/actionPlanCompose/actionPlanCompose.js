@@ -5,6 +5,11 @@ Template['actionPlanCompose'].helpers({
     Session.set("ap", ap);
     return ap;
   },
+  request_user: function () {
+    var ap = Session.get("ap");
+    var requester_id = ap.requester_id;
+    return Meteor.users.findOne({_id: requester_id});
+  },
   getMilestones: function () {    
     var ap = Session.get("ap");
     var milestones = ap.milestone_ids;
