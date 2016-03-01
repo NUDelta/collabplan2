@@ -1,6 +1,6 @@
 Template['milestoneList'].helpers({
 	getMilestones: function () {    
-    var ap = this;
+    var ap = Session.get('ap');
     console.log(this)
     var milestones = ap.milestone_ids;
     console.log(milestones)
