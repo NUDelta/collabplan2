@@ -30,5 +30,25 @@ Meteor.methods({
         };
 
         return Math.floor(ap_progress.length/sb_count * 100);
+    },
+    user_add_skill: function(skill) {
+        Meteor.users.update({_id: this.userId}, {
+            $addToSet: {
+                'profile.skills': {
+                    name: skill.name, 
+                    level: 1
+                }
+            }
+        });
+    },
+    user_update_profile: function(profile) {
+        Meteor.users.update({_id: this.userId}, {
+            $set: {profile: profile}
+        });
+    },
+    user_update_skills: function(skills) {
+        Meteor.users.update({_id: this.userId}, {
+            $set: {'profile.skills': skills}
+        });
     }
 });

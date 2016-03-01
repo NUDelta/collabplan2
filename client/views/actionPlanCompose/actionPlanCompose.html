@@ -16,11 +16,24 @@
                         <div id="collapse1" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <h5>Description: {{action_plan.description}}</h5>
-                                <h5>Prior Knowledge: {{action_plan.prior_knowledge}}</h5>
-                                <h5>Requested frameworks: {{action_plan.requested_frameworks}}</h5>
+                                <p>Learner's Prior Knowledge: 
+                                    <ul>
+                                        {{#each request_user.profile.skills}}
+                                            <li>{{this.name}} (level {{this.level}})</li>
+                                        {{/each}}
+                                    </ul>
+                                </p>
+                                <p>Learner's Requested Frameworks: 
+                                    <ul>
+                                        {{#each action_plan.requested_skills}}
+                                            <li>{{this}}</li>
+                                        {{/each}}
+                                    </ul>
+                                </p>
                             </div>
                         </div>
                     </div>
+                
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h1 class="panel-title">

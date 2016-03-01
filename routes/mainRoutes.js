@@ -26,7 +26,7 @@ Router.route('/action_plans/new', {
 Router.route('/action_plans/:_id', {
   name: 'action_plans.show',
   waitOn: function(){
-    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks')];
+    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users')];
   },
   action: function () {
     var ap = ActionPlans.findOne({_id: this.params._id});
@@ -40,5 +40,13 @@ Router.route('/action_plans/:_id', {
       this.render('actionPlanCompose');
       SEO.set({ title: 'actionPlanCompose- ' + Meteor.App.NAME });
     }
+  }
+});
+
+Router.route('/user/edit', {
+  name: 'user.edit',
+  action: function () {
+    this.render('userProfile');
+    SEO.set({ title: 'New action_plans - ' + Meteor.App.NAME });
   }
 });

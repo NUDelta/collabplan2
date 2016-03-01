@@ -8,8 +8,15 @@ Schema.UserProfileSchema = new SimpleSchema({
     optional: true,
   },
   skills: {
-    type: [String],
+    type: [Object],
     optional: true,
+    defaultValue: [{name: 'html',level: 0},{name: 'css',level: 0},{name: 'js',level: 0}]
+  },
+  'skills.$.name': {
+    type: String,
+  },
+  'skills.$.level': {
+    type: Number,
   },
   action_plan_ids: {
     type: [String],
@@ -19,7 +26,7 @@ Schema.UserProfileSchema = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
-  }
+  },
 
 });
 

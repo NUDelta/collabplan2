@@ -8,8 +8,13 @@
                     </div>
                     <div class="panel-body">
                         <p>Description: {{action_plan.description}}</p>
-                        <p>Prior knowledge: {{action_plan.prior_knowledge}}</p>
-                        <p>Requested frameworks: {{action_plan.requested_frameworks}}</p>
+                        <p>Requested Skills:
+                            <ul>
+                                {{#each action_plan.requested_skills}}
+                                    <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </p>
                         <p>
                             {{#if action_plan.author_id}}
                                 Action plan being written by: {{author_name action_plan.author_id}}

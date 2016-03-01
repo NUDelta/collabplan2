@@ -6,6 +6,11 @@ Template['actionPlanCompose'].helpers({
     console.log(ap)
     return ActionPlans.findOne({_id: id});
   },
+  request_user: function () {
+    var ap = Session.get("ap");
+    var requester_id = ap.requester_id;
+    return Meteor.users.findOne({_id: requester_id});
+  },
   getMilestones: function () {    
     var ap = Session.get("ap");
     var milestones = ap.milestone_ids;
