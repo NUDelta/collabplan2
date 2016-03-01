@@ -1,19 +1,9 @@
-Template['actionPlanCompose'].helpers({
-  action_plan: function () {
-    var id = Router.current().params._id;
-    var ap = ActionPlans.findOne({_id: id});
-    Session.set("ap", ap);
-    console.log(ap)
-    return ActionPlans.findOne({_id: id});
-  },
-  request_user: function () {
-    var ap = Session.get("ap");
-    var requester_id = ap.requester_id;
-    return Meteor.users.findOne({_id: requester_id});
-  },
-  getMilestones: function () {    
-    var ap = Session.get("ap");
+Template['milestoneList'].helpers({
+	getMilestones: function () {    
+    var ap = Session.get('ap');
+    console.log(this)
     var milestones = ap.milestone_ids;
+    console.log(milestones)
     var db = Milestones.find({ _id: { $in: milestones } }).fetch();
 
     for (var i = 0; i < milestones.length; ++i) {
@@ -28,10 +18,10 @@ Template['actionPlanCompose'].helpers({
   }
 });
 
-Template['actionPlanCompose'].events({
+Template['milestoneList'].events({
 });
 
-Template['actionPlanCompose'].onRendered(function () {
+Template['milestoneList'].onRendered(function () {
   Sortable.create(milestoneList, { 
     onUpdate: function (event) {
       updateMilestoneIds();
@@ -50,16 +40,6 @@ function updateMilestoneIds() {
   Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
-      changesSaved();
     }
   });
-}
-
-var timeout;
-function changesSaved() {
-  window.clearTimeout(timeout);
-  $('#changes-saved').show();
-  timeout = window.setTimeout(function (){
-    $('#changes-saved').fadeOut(500);
-  }, 5000)
 }

@@ -57,18 +57,21 @@ Meteor.methods({
     	return id;
     },
     action_plan_edit: function(data) {
+        console.log('Ap edit');
         ActionPlans.update(data._id, { $set: {
         	author_id: this.userId,
         	isComplete: data.isComplete
         }});
     },
     milestone_edit: function(data) {
+        console.log('Milestone edit');
     	Milestones.update(data._id, { $set: {
     		title: data.title,
     		motivation: data.motivation
     	}});
     },
     subtask_edit: function(data) {
+        console.log('Subtasks edit');
     	Subtasks.update(data._id, { $set: {
     		description: data.description,
     		links: data.links,

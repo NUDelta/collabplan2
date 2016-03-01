@@ -1,0 +1,24 @@
+<template name="milestoneList">
+	<div class="well milestone-thumb">
+	    <h3 class="outline">Outline:</h3>
+	        <div id="milestoneList" class="milestone-col">
+	        {{#each getMilestones}}
+	            <div class="panel panel-default">
+				  <div class="panel-body">
+				    <div class="col-md-12">
+					    
+					      <h4><a href="#{{_id}}">{{title}}</a></h4>
+					      <span class="_id hidden">{{_id}}</span>
+					      <ol>
+							{{#each getSubtasks}}
+					      	<li>{{description}}</li>
+					    	{{/each}}
+
+					      </ol>
+			  		</div>
+				  </div>
+				</div>
+	        {{/each}}
+	        </div>
+	</div>
+</template>
