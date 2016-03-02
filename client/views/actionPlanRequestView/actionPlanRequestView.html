@@ -6,20 +6,23 @@
                     <div class="panel-heading">
                         <h1 class="panel-title">{{action_plan.name}}</h1>
                     </div>
-                    <div class="panel-body">
-                        <p>Description: {{action_plan.description}}</p>
+                    <div class="panel-body" style="padding-bottom: 20px">
+                        <p><strong>Description:</strong> {{action_plan.description}}</p>
+                        <br>
+                        <br>
+                        <br>
 
-                        <p>Milestones: {{action_plan.build_milestones}}</p>
+                        <p><strong>Milestones:</strong> {{action_plan.build_milestones}}</p>
 
-                        <p>Steps: {{action_plan.steps}}</p>
+                        <p><strong>Steps:</strong> {{action_plan.steps}}</p>
 
-                        <p>Affordances: {{action_plan.affordances}}</p>
+                        <p><strong>Affordances:</strong> {{action_plan.affordances}}</p>
 
-                        <p>Min and max functionality: {{action_plan.min_functionality}}</p>
+                        <p><strong>Min and max functionality:</strong> {{action_plan.min_functionality}}</p>
 
-                        <p>Reference work: {{action_plan.reference_work}}</p>
+                        <p><strong>Reference work:</strong> {{action_plan.reference_work}}</p>
 
-                        <p>Requested Skills:
+                        <p><strong>Requested Skills:</strong>
                             <ul>
                                 {{#each action_plan.requested_skills}}
                                     <li>{{this}}</li>

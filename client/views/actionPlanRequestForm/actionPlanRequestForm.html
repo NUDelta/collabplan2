@@ -3,43 +3,45 @@
         <div class="row">
             <div class="col-md-6">
                 <form id="ap_request">
-                    <div class="form-group">
-                        <label for="name">Name</label>
+                    <div class="form-group request-label">
+                        <label for="name" style="font-size: 20px;">Name</label>
                         <input type="text" class="form-control" id="name" placeholder="Name of your Action Plan">
                     </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <p>Please give a short description of your project (3-5 sentences).</p>
+                    <br>
+                    <div class="form-group request-label">
+                        <label for="description" style="font-size: 20px;">Description</label>
+                        <p>1. Please give a short description of your project (3-5 sentences).</p>
                         <textarea class="form-control" id="description" placeholder="Description of your Action Plan"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>How are you thinking of building this? What are some milestones you foresee?</p>
+                        <p>2. How are you thinking of building this? What are some milestones you foresee?</p>
                         <textarea class="form-control" id="build_milestones" placeholder="Make static pages, link pages together, create a database"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>Give a step by step flow of how you want users to go through your app.</p>
+                        <p>3. Give a step by step flow of how you want users to go through your app.</p>
                         <textarea class="form-control" id="steps" placeholder="User logs in, writes tweet, sees tweet on newsfeed, searches for friends"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>What affordances does your app have? What should users be able to do with it?</p>
+                        <p>4. What affordances does your app have? What should users be able to do with it?</p>
                         <textarea class="form-control" id="affordances" placeholder="Ability to search for friends and trending topics, view images in an imageviewer, change profile picture"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>What is the bare minimum functionality you want out of your app? What is your reach goal?</p>
+                        <p>5. What is the bare minimum functionality you want out of your app? What is your reach goal?</p>
                         <textarea class="form-control" id="min_functionality" placeholder="A user can recieve and send tweets vs. a user can send tweets globally"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>List some reference work/ sites that have a similar look and feel to how you want your app to be.</p>
+                        <p>6. List some reference work/ sites that have a similar look and feel to how you want your app to be.</p>
                         <textarea class="form-control" id="reference_work" placeholder="Twitter"></textarea>
                     </div>
+                    <br>
 
-                    <div class="form-group">
-                        <label for="requested_frameworks">Your Skills</label>
+                    <div class="form-group request-label">
+                        <label for="requested_frameworks" style="font-size: 20px;">Your Skills</label>
                         <p>Which of the following skills would you like to utilize in building your app (if any)? You can edit your skills in <a href="/user/edit">your profile</a></p>
                         {{#each user.profile.skills}}
                             <div class="checkbox">
@@ -49,8 +51,9 @@
                             </div>
                         {{/each}}
                     </div>
+                    <br>
 
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default" style="margin-bottom: 20px">Submit</button>
               </form>
           </div>
       </div>
