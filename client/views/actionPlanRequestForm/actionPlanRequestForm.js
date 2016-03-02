@@ -11,6 +11,11 @@ Template['actionPlanRequestForm'].events({
         var request =  {
             name: event.target.name.value,
             description: event.target.description.value,
+            build_milestones: event.target.build_milestones.value,
+            steps: event.target.steps.value,
+            affordances: event.target.affordances.value,
+            min_functionality: event.target.min_functionality.value,
+            reference_work: event.target.reference_work.value,
             requested_skills: []
         };
 

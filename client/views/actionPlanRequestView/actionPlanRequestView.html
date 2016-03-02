@@ -8,6 +8,17 @@
                     </div>
                     <div class="panel-body">
                         <p>Description: {{action_plan.description}}</p>
+
+                        <p>Milestones: {{action_plan.build_milestones}}</p>
+
+                        <p>Steps: {{action_plan.steps}}</p>
+
+                        <p>Affordances: {{action_plan.affordances}}</p>
+
+                        <p>Min and max functionality: {{action_plan.min_functionality}}</p>
+
+                        <p>Reference work: {{action_plan.reference_work}}</p>
+
                         <p>Requested Skills:
                             <ul>
                                 {{#each action_plan.requested_skills}}
