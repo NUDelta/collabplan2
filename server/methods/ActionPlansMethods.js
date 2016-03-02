@@ -3,6 +3,11 @@ Meteor.methods({
         var id = ActionPlans.insert({
             name: data.name,
             description: data.description,
+            build_milestones: data.build_milestones,
+            steps: data.steps,
+            affordances: data.affordances,
+            min_functionality: data.min_functionality,
+            reference_work: data.reference_work,
             requested_skills: data.requested_skills,
             requester_id: this.userId,
             isComplete: false,

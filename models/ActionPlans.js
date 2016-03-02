@@ -7,6 +7,21 @@ Schema.ActionPlansSchema = new SimpleSchema({
   description: {
     type: String
   },
+  build_milestones: {
+    type: String
+  },
+  steps: {
+    type: String
+  },
+  affordances: {
+    type: String
+  },
+  min_functionality: {
+    type: String
+  },
+  reference_work: {
+    type: String
+  },
   requested_skills: {
     type: [String]
   },
