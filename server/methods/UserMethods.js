@@ -43,7 +43,11 @@ Meteor.methods({
     },
     user_update_profile: function(profile) {
         Meteor.users.update({_id: this.userId}, {
-            $set: {profile: profile}
+            $set: {
+                'profile.first_name': profile.first_name
+                'profile.last_name': profile.last_name,
+                'emails.0.address': profile['emails.0.address']
+            }
         });
     },
     user_update_skills: function(skills) {
