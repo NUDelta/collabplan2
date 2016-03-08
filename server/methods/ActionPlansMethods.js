@@ -36,6 +36,7 @@ Meteor.methods({
         }});
     },
     action_plan_reset: function(actionPlanId) {
+        // TODO: corresponding milestones and subtasks should be deleted as well
         ActionPlans.update({ _id: actionPlanId }, { $set: {
             milestone_ids: []
         }});
@@ -67,21 +68,18 @@ Meteor.methods({
     	return id;
     },
     action_plan_edit: function(data) {
-        console.log('Ap edit');
         ActionPlans.update(data._id, { $set: {
         	author_id: this.userId,
         	isComplete: data.isComplete
         }});
     },
     milestone_edit: function(data) {
-        console.log('Milestone edit');
     	Milestones.update(data._id, { $set: {
     		title: data.title,
     		motivation: data.motivation
     	}});
     },
     subtask_edit: function(data) {
-        console.log('Subtasks edit');
     	Subtasks.update(data._id, { $set: {
     		description: data.description,
     		links: data.links,
@@ -89,13 +87,10 @@ Meteor.methods({
     	}});
     },
     milestone_delete: function(id, actionPlanId) {
+        // TODO: corresponding milestones and subtasks should be deleted as well
     	ActionPlans.update({ _id: actionPlanId }, {
     		$pull: { milestone_ids: id }
     	});
-
-    	// only remove if no other action plans use this milestone
-    	// if (ActionPlans.find({ milestone_ids: id }).count() < 1)
-    	// 	Milestones.remove({ _id: id });
     },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });

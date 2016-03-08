@@ -4,6 +4,9 @@ Template['actionPlanComposeForm'].helpers({
     var milestones = ap.milestone_ids;
     var db = Milestones.find({ _id: { $in: ap.milestone_ids } }).fetch();
 
+    // milestones need to be in the order of the milestone_ids array
+    // as of 3/7/16, there is no way to do this with a Mongo query
+    // http://stackoverflow.com/questions/3142260/order-of-responses-to-mongodb-in-query
     for (var i = 0; i < milestones.length; ++i) {
       var c = db.filter(function(o) { return o._id === milestones[i] })[0];
       milestones[i] = c;
@@ -23,8 +26,6 @@ Template['actionPlanComposeForm'].events({
       return;
 
     var actionPlanId = Router.current().params._id;
-
-    saveMilestonesAndSubtasks();
 
     var actionPlan = {
       _id: actionPlanId,
@@ -120,70 +121,6 @@ Template['actionPlanComposeForm'].events({
     });
   }
 });
-
-function saveMilestonesAndSubtasks() {
-  var milestonesAndSubtasks = getMilestonesAndSubtasks();
-
-  milestonesAndSubtasks.subtasks.forEach(function(e, i, a) {
-    Meteor.call('subtask_edit', e, function (err) {
-      if (!err) {
-        console.log('subtask updated');
-      }
-    });
-  });
-
-  milestonesAndSubtasks.milestones.forEach(function(e, i, a) {
-    Meteor.call('milestone_edit', e, function (err) {
-      if (!err) {
-        console.log('milestone updated');
-      }
-    });
-  });
-
-  return;
-}
-
-function getMilestonesAndSubtasks() {
-  var milestones = [];
-  var subtasks = [];
-  var milestone = {};
-
-  $('.milestone').each(function() {
-    milestone = {
-      _id: $('#_id', this).val(),
-      title: $('#title', this).val(),
-      motivation: $('#motivation', this).val()
-    }
-    milestones.push(milestone);
-    var newSubtasks = getCorrespondingSubtasks(this);
-    subtasks = subtasks.concat(newSubtasks);
-  });
-
-  var milestonesAndSubtasks = {
-    milestones: milestones,
-    subtasks: subtasks
-  }
-
-  return milestonesAndSubtasks;
-}
-
-function getCorrespondingSubtasks(milestone) {
-  var correspondingSubtasks = [];
-  var subtask = {};
-
-  $('.subtask', milestone).each(function() {
-    subtask = {
-      _id: $('#_id', this).val(),
-      description: $('#description', this).val(),
-      links: [$('#links', this).val()],
-      milestone_id: $('#_id', milestone).val()
-    }
-    correspondingSubtasks.push(subtask);
-  });
-
-  return correspondingSubtasks;
-}
-
 
 function updateMilestone(event) {
   var milestoneSelector = $(event.target).parent().parent();
