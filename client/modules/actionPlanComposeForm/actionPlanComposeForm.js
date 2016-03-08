@@ -37,6 +37,21 @@ Template['actionPlanComposeForm'].events({
       }
     });
   },
+  'click .reset': function (event) {
+    event.preventDefault();
+
+    if (!confirm('Are you sure you want to reset? All milestones and subtasks will be deleted.'))
+      return;
+
+    var actionPlanId = Router.current().params._id;
+
+    Meteor.call('action_plan_reset', actionPlanId, function (err) {
+      if (!err) {
+        console.log('action plan reset');
+        changesSaved();
+      }
+    });
+  },
   'blur input#title': function (event) {
     updateMilestone(event);
   },
