@@ -1,4 +1,9 @@
 {
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": "mongodb://admin:actionplans1@ds011840.mlab.com:11840/collabplan"
+        }
+    },
     "orion-cli": {
         "profile": "default",
         "config": "private/orion-config.json"
