@@ -2,7 +2,8 @@
 	<div class="well milestone-thumb">
 	    <h3 class="outline">Outline:</h3>
 	        <div id="milestoneList" class="milestone-col">
-	        {{#each getMilestones}}
+	        {{#each milestone_ids}}
+	        	{{#with get_milestone this}}
 	            <div class="panel panel-default">
 				  <div class="panel-body">
 				    <div class="col-md-12">
@@ -18,6 +19,7 @@
 			  		</div>
 				  </div>
 				</div>
+				{{/with}}
 	        {{/each}}
 	        </div>
 	</div>

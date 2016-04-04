@@ -1,8 +1,9 @@
 <template name="actionPlanCompose">
+    {{#with action_plan}}
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                {{> actionPlanComposeForm action_plan}}
+                {{> milestoneEditor selected_milestone}}
             </div>
             <div class="col-md-4 composer-outline-outer">
                 <div class="col-md-3 composer-outline">
@@ -58,9 +59,10 @@
                             </div>
                         </div>
                     </div>
-                    {{> milestoneList action_plan}}
+                    {{> milestoneList this}}
                 </div>
             </div>
         </div>
     </div>
+    {{/with}}
 </template>

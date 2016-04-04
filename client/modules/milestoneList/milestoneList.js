@@ -1,18 +1,6 @@
 Template['milestoneList'].helpers({
-	getMilestones: function () {    
-    var ap = Session.get('ap');
-    var milestones = ap.milestone_ids;
-    var db = Milestones.find({ _id: { $in: milestones } }).fetch();
-
-    // milestones need to be in the order of the milestone_ids array
-    // as of 3/7/16, there is no way to do this with a Mongo query
-    // http://stackoverflow.com/questions/3142260/order-of-responses-to-mongodb-in-query
-    for (var i = 0; i < milestones.length; ++i) {
-      var c = db.filter(function(o) { return o._id === milestones[i] })[0];
-      milestones[i] = c;
-    }
-    
-    return milestones;
+	get_milestone: function (id) {
+    return Milestones.findOne({_id: id});
   },
   getSubtasks: function () {
     return Subtasks.find({ _id: { $in: this.subtask_ids } });
@@ -23,22 +11,22 @@ Template['milestoneList'].events({
 });
 
 Template['milestoneList'].onRendered(function () {
+  var ap_id = this.data._id;
   Sortable.create(milestoneList, { 
     onUpdate: function (event) {
-      updateMilestoneIds();
+      updateMilestoneIds(ap_id);
     }
   });
 });
 
-function updateMilestoneIds() {
+function updateMilestoneIds(ap_id) {
   var milestoneIds = [];
-  var actionPlanId = Session.get("ap")._id;
 
   $('._id', '#milestoneList').each(function() {
     milestoneIds.push($(this).text());
   });
 
-  Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
+  Meteor.call('action_plan_reorder_milestones', ap_id, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
     }
