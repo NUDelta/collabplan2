@@ -2,8 +2,8 @@ Template['milestoneList'].helpers({
 	get_milestone: function (id) {
     return Milestones.findOne({_id: id});
   },
-  getSubtasks: function () {
-    return Subtasks.find({ _id: { $in: this.subtask_ids } });
+  get_subtasks: function (id) {
+    return Subtasks.findOne({_id: id});
   },
   is_selected_milestone: function(id) {
     return Session.get('selected_milestone_id') === id;

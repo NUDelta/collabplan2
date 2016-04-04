@@ -8,7 +8,7 @@ Template['milestoneEditor'].events({
     'blur .update_milestone': function (event) {
         updateMilestone(event);
     },
-    'blur update_substask': function (event) {
+    'blur .update_substask': function (event) {
         updateSubtask(event);
     },
     'click .add-subtask': function (event) {

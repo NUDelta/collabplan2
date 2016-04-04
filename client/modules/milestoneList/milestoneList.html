@@ -11,7 +11,9 @@
 					      	<span class="_id hidden">{{_id}}</span>
 					      	<ol>
 								{{#each subtask_ids}}
-					      			<li>{{description}}</li>
+									{{#with get_subtasks this}}
+					      				<li>{{description}}</li>
+					      			{{/with}}
 					    		{{/each}}
 					      	</ol>
 			  			</div>
