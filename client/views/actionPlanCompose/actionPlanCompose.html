@@ -1,10 +1,11 @@
 <template name="actionPlanCompose">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                {{> actionPlanComposeForm action_plan}}
-            </div>
-            <div class="col-md-4 composer-outline-outer">
+    {{#with action_plan}}
+    <div class="container-fluid full_height">
+        <div class="row full_height">
+            {{> milestoneList this}}
+            
+            {{> milestoneEditor selected_milestone}}
+            <!-- <div class="col-md-4 composer-outline-outer">
                 <div class="col-md-3 composer-outline">
                     <div id="changes-saved" class="alert alert-success" role="alert" style="display: none;">All changes have been saved.</div>
                     <div class="panel panel-default">
@@ -58,9 +59,10 @@
                             </div>
                         </div>
                     </div>
-                    {{> milestoneList action_plan}}
+                    
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
+    {{/with}}
 </template>

@@ -1,44 +1,53 @@
 Template['milestoneList'].helpers({
-	getMilestones: function () {    
-    var ap = Session.get('ap');
-    var milestones = ap.milestone_ids;
-    var db = Milestones.find({ _id: { $in: milestones } }).fetch();
-
-    // milestones need to be in the order of the milestone_ids array
-    // as of 3/7/16, there is no way to do this with a Mongo query
-    // http://stackoverflow.com/questions/3142260/order-of-responses-to-mongodb-in-query
-    for (var i = 0; i < milestones.length; ++i) {
-      var c = db.filter(function(o) { return o._id === milestones[i] })[0];
-      milestones[i] = c;
-    }
-    
-    return milestones;
+	get_milestone: function (id) {
+    return Milestones.findOne({_id: id});
   },
-  getSubtasks: function () {
-    return Subtasks.find({ _id: { $in: this.subtask_ids } });
+  get_subtasks: function (id) {
+    return Subtasks.findOne({_id: id});
+  },
+  is_selected_milestone: function(id) {
+    return Session.get('selected_milestone_id') === id;
+  },
+  plus_one: function(num) {
+    return num+1;
   }
 });
 
 Template['milestoneList'].events({
+  'click .milestone_tile': function() {
+    Session.set('selected_milestone_id', this._id)
+  },
+  'submit #add_milestone': function(event) {
+    event.preventDefault();
+
+    var milestone_title = event.target.milestone_title.value;
+    Meteor.call('milestone_new', {title: milestone_title, motivation: "", subtask_ids: []}, this._id, function (err, res) {
+      if (!err) {
+        Session.set('selected_milestone_id', res)
+        event.target.milestone_title.value = "";
+        console.log('milestone saved');
+      }
+    });
+  }
 });
 
 Template['milestoneList'].onRendered(function () {
-  Sortable.create(milestoneList, { 
+  var ap_id = this.data._id;
+  Sortable.create($('.milestone_list').get()[0], { 
     onUpdate: function (event) {
-      updateMilestoneIds();
+      updateMilestoneIds(ap_id);
     }
   });
 });
 
-function updateMilestoneIds() {
+function updateMilestoneIds(ap_id) {
   var milestoneIds = [];
-  var actionPlanId = Session.get("ap")._id;
 
-  $('._id', '#milestoneList').each(function() {
+  $('._id', '.milestone_list').each(function() {
     milestoneIds.push($(this).text());
   });
 
-  Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
+  Meteor.call('action_plan_reorder_milestones', ap_id, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
     }
