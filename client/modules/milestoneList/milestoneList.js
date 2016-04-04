@@ -8,6 +8,9 @@ Template['milestoneList'].helpers({
 });
 
 Template['milestoneList'].events({
+  'click .milestone_tile': function() {
+    Session.set('selected_milestone_id', this._id)
+  }
 });
 
 Template['milestoneList'].onRendered(function () {

@@ -4,7 +4,7 @@ Template['actionPlanCompose'].helpers({
     return ActionPlans.findOne({_id: id});
   },
   selected_milestone: function(){
-    return Milestones.findOne({_id: this.milestone_ids[0]});
+    return Milestones.findOne({_id: Session.get('selected_milestone_id') || this.milestone_ids[0]});
   },
   request_user: function () {
     return Meteor.users.findOne({_id: this.requester_id});
