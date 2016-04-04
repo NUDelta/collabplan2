@@ -1,36 +1,7 @@
-<!-- <template name="actionPlanList">
+<template name="ComposerHome">
     <div class="container">
         {{#if currentUser}}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Pending Action Plans</div>
-                    <div class="panel-body">
-                        <p>These are action plans you have requested. Once they are ready, we will notify you!</p>
-                        <a href="{{pathFor route='action_plans.new'}}" class="btn btn-primary">Request an Action Plan</a>
-                    </div>
-                    <div class="list-group" >
-                        {{#each user_pending_action_plans}}
-                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Ready Action Plans</div>
-                    <div class="panel-body">
-                        <p>These action plans are ready to go! Get started on your project and let us know how it went.</p>
-                    </div>
-                    <div class="list-group" >
-                        {{#each user_complete_action_plans}}
-                            <a type="button" class="list-group-item" href="{{pathFor route='action_plans.show' data=this}}">{{name}}</a>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+    	<div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Action Plan Plans You Can Help With</div>
@@ -63,4 +34,3 @@
         {{/if}}
     </div>
 </template>
- -->
