@@ -1,42 +1,44 @@
 <template name="milestoneEditor">
-    <div class="milestone panel panel-default" id="{{_id}}">
-        <div class="panel-heading">
-            <input id="_id" value="{{_id}}" hidden>
-            <div class="form-group">    
-                <button type="button" class="btn btn-danger delete-milestone" style="float:right; margin-bottom: 0.5em;">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-            </div>
-            <div class="form-group">
-                <label style="color: white" for="title">milestone title</label>
-                <input type="text" class="form-control update_milestone" id="title" value="{{title}}" placeholder="Write a general high-level goal that the learner is trying to achieve.">
-            </div>
-            <div class="form-group">
-                <label for="motivation">milestone motivation</label>
-                <textarea class="form-control update_milestone" id="motivation" placeholder="Explain why this step must be done and what success looks like.">{{motivation}}</textarea>
-            </div>
-            <h5>Subtasks:</h5>
-            {{#each subtask_ids}}
-                {{#with get_subtasks this}}
-                    <div class="subtask panel panel-default">
-                        <div class="panel-body">
-                            <input id="_id" value="{{_id}}" hidden>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-danger delete-subtask" style="float:right; margin-bottom: 0.5em;">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                            </div>
-                            <div class="form-group">
-                                <label style="color: black" for="description">subtask description</label>
-                                <input type="text" class="form-control update_substask" id="description" value="{{description}}" placeholder="Clearly state a task that must be done.">
-                            </div>
-                            <div class="form-group">
-                                <label style="color: black" for="links">subtask links</label>
-                                <input type="text" class="form-control update_substask" id="links" value="{{links}}" placeholder="(optional): Place links to resources that will be useful references in completing the subtasks.">
+    <div class="col-md-8 full_height milestone_editor">
+        <div class="panel panel-default" id="{{_id}}">
+            <div class="panel-heading">
+                <input id="_id" value="{{_id}}" hidden>
+                <div class="form-group">    
+                    <button type="button" class="btn btn-danger delete-milestone" style="float:right; margin-bottom: 0.5em;">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </div>
+                <div class="form-group">
+                    <label style="color: white" for="title">milestone title</label>
+                    <input type="text" class="form-control update_milestone" id="title" value="{{title}}" placeholder="Write a general high-level goal that the learner is trying to achieve.">
+                </div>
+                <div class="form-group">
+                    <label for="motivation">milestone motivation</label>
+                    <textarea class="form-control update_milestone" id="motivation" placeholder="Explain why this step must be done and what success looks like.">{{motivation}}</textarea>
+                </div>
+                <h5>Subtasks:</h5>
+                {{#each subtask_ids}}
+                    {{#with get_subtasks this}}
+                        <div class="subtask panel panel-default">
+                            <div class="panel-body">
+                                <input id="_id" value="{{_id}}" hidden>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger delete-subtask" style="float:right; margin-bottom: 0.5em;">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: black" for="description">subtask description</label>
+                                    <input type="text" class="form-control update_substask" id="description" value="{{description}}" placeholder="Clearly state a task that must be done.">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: black" for="links">subtask links</label>
+                                    <input type="text" class="form-control update_substask" id="links" value="{{links}}" placeholder="(optional): Place links to resources that will be useful references in completing the subtasks.">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {{/with}}
-            {{/each}}
-            <button class="btn btn-default add-subtask">Add Subtask</button>
+                    {{/with}}
+                {{/each}}
+                <button class="btn btn-default add-subtask">Add Subtask</button>
+            </div>
         </div>
     </div>
 </template>

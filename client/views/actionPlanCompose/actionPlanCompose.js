@@ -14,26 +14,17 @@ Template['actionPlanCompose'].helpers({
 Template['actionPlanCompose'].events({
 });
 
-Template['actionPlanCompose'].onRendered(function () {
-  Sortable.create(milestoneList, { 
-    onUpdate: function (event) {
-      updateMilestoneIds();
-    }
-  });
-});
 
-function updateMilestoneIds() {
+function updateMilestoneIds(ap_id) {
   var milestoneIds = [];
-  var actionPlanId = Session.get("current_ap")._id;
 
-  $('._id', '#milestoneList').each(function() {
+  $('._id', '.milestone_list').each(function() {
     milestoneIds.push($(this).text());
   });
 
-  Meteor.call('action_plan_reorder_milestones', actionPlanId, milestoneIds, function (err) {
+  Meteor.call('action_plan_reorder_milestones', ap_id, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
-      changesSaved();
     }
   });
 }

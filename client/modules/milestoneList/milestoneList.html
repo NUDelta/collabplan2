@@ -1,24 +1,32 @@
 <template name="milestoneList">
-	<div class="well milestone-thumb">
+	<div class="col-md-3 well milestone-col">
 	    <h3 class="outline">Outline:</h3>
-        <div id="milestoneList" class="milestone-col">
-        {{#each milestone_ids}}
-        	{{#with get_milestone this}}
-            <div class="panel panel-default milestone_tile">
-			  	<div class="panel-body">
-			    	<div class="col-md-12">
-				      	<h4>{{title}}</h4>
-				      	<span class="_id hidden">{{_id}}</span>
-				      	<ol>
-							{{#each getSubtasks}}
-				      			<li>{{description}}</li>
-				    		{{/each}}
-				      	</ol>
-		  			</div>
-			  	</div>
-			</div>
-			{{/with}}
-        {{/each}}
+        <div class="milestone_list">
+	        {{#each milestone_ids}}
+	        	{{#with get_milestone this}}
+	            <div class="panel panel-default milestone_tile {{#if is_selected_milestone _id}}selected{{/if}}">
+				  	<div class="panel-body">
+				    	<div class="col-md-12">
+					      	<h4>{{plus_one @index}}. {{title}}</h4>
+					      	<span class="_id hidden">{{_id}}</span>
+					      	<ol>
+								{{#each subtask_ids}}
+					      			<li>{{description}}</li>
+					    		{{/each}}
+					      	</ol>
+			  			</div>
+				  	</div>
+				</div>
+				{{/with}}
+	        {{/each}}
+       	</div>
+       	<div class="bottom_tool_bar">
+       		<form id="add_milestone" class="form-inline">
+		  		<div class="form-group">
+		    		<input type="text" class="form-control" id="milestone_title" placeholder="New Milestone Title">
+		  		</div>
+		  		<button type="submit" class="btn btn-default">Add</button>
+			</form>
        	</div>
 	</div>
 </template>
