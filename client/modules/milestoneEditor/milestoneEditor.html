@@ -34,6 +34,14 @@
                     {{/with}}
                 {{/each}}
                 <button class="btn btn-default add-subtask">Add Subtask</button>
+                <div class="milestone-tags">
+                    <h5>Tags: </h5>
+                    {{#each tags}}
+                        <span class="badge">{{this}}</span>
+                    {{else}}
+                        <span>None</span>
+                    {{/each}}
+                </div>
             </div>
         </div>
     </div>

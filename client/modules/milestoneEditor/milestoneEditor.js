@@ -62,7 +62,8 @@ function updateMilestone(event) {
   var milestone = {
     _id: $('#_id', milestoneSelector).val(),
     title: $('#title', milestoneSelector).val(),
-    motivation: $('#motivation', milestoneSelector).val()
+    motivation: $('#motivation', milestoneSelector).val(),
+    tags: getTags($('#title', milestoneSelector).val())
   }
 
   Meteor.call('milestone_edit', milestone, function (err) {
@@ -87,6 +88,16 @@ function updateSubtask(event) {
       changesSaved();
     }
   });
+}
+
+function getTags(str) {
+  var tags = [];
+  var words = str.toLowerCase().split(' ');
+  words.forEach(function(e) {
+    if (e in TAGS)
+      tags.push(e);
+  });
+  return tags;
 }
 
 var timeout;
