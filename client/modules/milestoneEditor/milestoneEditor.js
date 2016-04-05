@@ -21,8 +21,7 @@ Template['milestoneEditor'].events({
         if ($('input#title', milestone).val() && $('textarea#motivation', milestone).val()) {
           Meteor.call('subtask_new', {description: "", links: [], milestone_id: $('#_id', milestone).val()}, function (err) {
             if (!err) {
-              console.log('subtask saved');
-              changesSaved();
+              Session.set('last_save', Date.now())
             }
           });
         } else {
@@ -37,24 +36,10 @@ Template['milestoneEditor'].events({
 
         Meteor.call('subtask_delete', id, function (err, res) {
           if (!err) {
-            console.log('subtask deleted');
-            changesSaved();
+            Session.set('last_save', Date.now())
           }
         });
     },
-      'click .delete-milestone': function (event) {
-        event.preventDefault();
-        var milestone = $(event.target).parent().parent();
-        var id = $('#_id', milestone).val();
-        var actionPlanId = Session.get("ap")._id;
-
-        Meteor.call('milestone_delete', id, actionPlanId, function (err, res) {
-          if (!err) {
-            console.log('milestone deleted');
-            changesSaved();
-          }
-        });
-    }
 });
 
 function updateMilestone(event) {
@@ -67,8 +52,7 @@ function updateMilestone(event) {
 
   Meteor.call('milestone_edit', milestone, function (err) {
     if (!err) {
-      console.log('milestone updated');
-      changesSaved();
+      Session.set('last_save', Date.now())
     }
   });
 }
@@ -83,17 +67,7 @@ function updateSubtask(event) {
 
   Meteor.call('subtask_edit', subtask, function (err) {
     if (!err) {
-      console.log('subtask updated');
-      changesSaved();
+      Session.set('last_save', Date.now())
     }
   });
-}
-
-var timeout;
-function changesSaved() {
-  window.clearTimeout(timeout);
-  $('#changes-saved').show();
-  timeout = window.setTimeout(function (){
-    $('#changes-saved').fadeOut(500);
-  }, 5000)
 }
