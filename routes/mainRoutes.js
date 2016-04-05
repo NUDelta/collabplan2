@@ -4,13 +4,35 @@ Router.route('/', function () {
   SEO.set({ title: 'Home -' + Meteor.App.NAME });
 });
 
-Router.route('/action_plans', {
-  name: 'action_plans',
+// Router.route('/action_plans', {
+//   name: 'action_plans',
+//   waitOn: function(){
+//     return [Meteor.subscribe('ActionPlans')];
+//   },
+//   action: function () {
+//     this.render('actionPlanList');
+//     SEO.set({ title: 'action_plans - ' + Meteor.App.NAME });
+//   }
+// });
+
+Router.route('/composerhome', {
+  name: 'composer_home',
   waitOn: function(){
     return [Meteor.subscribe('ActionPlans')];
   },
   action: function () {
-    this.render('actionPlanList');
+    this.render('ComposerHome');
+    SEO.set({ title: 'action_plans - ' + Meteor.App.NAME });
+  }
+});
+
+Router.route('/learnerhome', {
+  name: 'learner_home',
+  waitOn: function(){
+    return [Meteor.subscribe('ActionPlans')];
+  },
+  action: function () {
+    this.render('LearnerHome');
     SEO.set({ title: 'action_plans - ' + Meteor.App.NAME });
   }
 });
