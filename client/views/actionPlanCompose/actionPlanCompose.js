@@ -16,6 +16,9 @@ Template['actionPlanCompose'].helpers({
 });
 
 Template['actionPlanCompose'].events({
+  'click #request_info_btn': function(){
+    Modal.show('requestInfoModal', this)
+  }
 });
 
 
