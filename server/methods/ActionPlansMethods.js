@@ -76,7 +76,8 @@ Meteor.methods({
     milestone_edit: function(data) {
     	Milestones.update(data._id, { $set: {
     		title: data.title,
-    		motivation: data.motivation
+    		motivation: data.motivation,
+            tags: data.tags
     	}});
     },
     subtask_edit: function(data) {
