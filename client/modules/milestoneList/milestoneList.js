@@ -25,7 +25,7 @@ Template['milestoneList'].events({
       if (!err) {
         Session.set('selected_milestone_id', res)
         event.target.milestone_title.value = "";
-        console.log('milestone saved');
+        Session.set('last_save', Date.now())
       }
     });
   }
@@ -50,6 +50,7 @@ function updateMilestoneIds(ap_id) {
   Meteor.call('action_plan_reorder_milestones', ap_id, milestoneIds, function (err) {
     if (!err) {
       console.log('action plan updated');
+      Session.set('last_save', Date.now())
     }
   });
 }

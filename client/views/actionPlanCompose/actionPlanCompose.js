@@ -9,9 +9,16 @@ Template['actionPlanCompose'].helpers({
   request_user: function () {
     return Meteor.users.findOne({_id: this.requester_id});
   },
+  last_save: function(){
+    var last_save = new Date(Session.get('last_save'));
+    return moment(last_save).format('MM/DD/YY, h:mm:ss a');
+  }
 });
 
 Template['actionPlanCompose'].events({
+  'click #request_info_btn': function(){
+    Modal.show('requestInfoModal', this)
+  }
 });
 
 
@@ -27,13 +34,4 @@ function updateMilestoneIds(ap_id) {
       console.log('action plan updated');
     }
   });
-}
-
-var timeout;
-function changesSaved() {
-  window.clearTimeout(timeout);
-  $('#changes-saved').show();
-  timeout = window.setTimeout(function (){
-    $('#changes-saved').fadeOut(500);
-  }, 5000)
 }
