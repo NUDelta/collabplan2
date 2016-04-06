@@ -31,12 +31,14 @@ Template['milestoneEditor'].events({
     },
     'click .delete-subtask': function (event) {
         event.preventDefault();
-        var subtask = $(event.target).parent().parent();
-        var id = $('#_id', subtask).val();
+        var milestone = Template.currentData();
+        console.log('deleting ' + this._id);
 
-        Meteor.call('subtask_delete', id, function (err, res) {
+        Meteor.call('subtasks_delete_from_milestone', this._id, milestone._id, function (err, res) {
           if (!err) {
             Session.set('last_save', Date.now())
+          } else {
+            console.log(err);
           }
         });
     },

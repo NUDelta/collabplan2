@@ -26,6 +26,10 @@ Template.registerHelper('constant', function (what) {
   return Meteor.App[what.toUpperCase()];
 });
 
+Template.registerHelper('plusOne', function (num) {
+  return num + 1;
+});
+
 
 Template.registerHelper('truncate', function (str, len) {
   if (str.length > len) {

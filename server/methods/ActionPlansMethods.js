@@ -95,5 +95,12 @@ Meteor.methods({
     },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });
+    },
+    subtasks_delete_from_milestone: function(st_id, ms_id) {
+        Subtasks.remove({ _id: st_id });
+        Milestones.update({ _id: ms_id }, {
+            $pull: { subtask_ids: st_id }
+        });
+        console.log('deleted ' + st_id);
     }
 });
