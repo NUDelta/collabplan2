@@ -12,26 +12,36 @@ Template['actionPlanCompose'].helpers({
   last_save: function(){
     var last_save = new Date(Session.get('last_save'));
     return moment(last_save).format('MM/DD/YY, h:mm:ss a');
+  },
+  composerTutorialEnabled: function(){
+    return Session.get('composerTutorialEnabled');
+  },
+  tutorial_options: function(){
+    return {
+      id: "composerTutorial",
+      steps: tutorialSteps,
+      emitter: new EventEmitter(),
+      onFinish: function() {  Session.set('composerTutorialEnabled',false); }
+    }
   }
 });
 
 Template['actionPlanCompose'].events({
   'click #request_info_btn': function(){
     Modal.show('requestInfoModal', this)
+  },
+  'click #tutorial_toggle': function(){
+    Session.set('composerTutorialEnabled',true);
   }
 });
 
-
-function updateMilestoneIds(ap_id) {
-  var milestoneIds = [];
-
-  $('._id', '.milestone_list').each(function() {
-    milestoneIds.push($(this).text());
-  });
-
-  Meteor.call('action_plan_reorder_milestones', ap_id, milestoneIds, function (err) {
-    if (!err) {
-      console.log('action plan updated');
-    }
-  });
-}
+var tutorialSteps = [
+  {
+    template: Template.composerTutorial_step1,
+    onLoad: function() { console.log("The tutorial has started!"); }
+  },
+  {
+    template: Template.composerTutorial_step2,
+    spot: ".milestone-col",
+  }
+];
