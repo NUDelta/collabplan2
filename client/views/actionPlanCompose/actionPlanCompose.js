@@ -38,10 +38,25 @@ Template['actionPlanCompose'].events({
 var tutorialSteps = [
   {
     template: Template.composerTutorial_step1,
-    onLoad: function() { console.log("The tutorial has started!"); }
+  },
+  {
+    template: Template.composerTutorial_step11,
+    spot: "#request_info_btn",
   },
   {
     template: Template.composerTutorial_step2,
     spot: ".milestone-col",
+  },
+  {
+    template: Template.composerTutorial_step3,
+    spot: "#add_milestone",
+  },
+  {
+    template: Template.composerTutorial_step4,
+    spot: ".milestone_editor .panel",
+  },
+  {
+    template: Template.composerTutorial_step5,
+    spot: ".milestone_editor .table",
   }
 ];
