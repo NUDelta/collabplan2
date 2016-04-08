@@ -17,8 +17,6 @@ Template['LearnerHome'].helpers({
             		key:'isComplete', 
             		label: 'Status',
             		fn: function (value) { 
-            			// if (value)  {return 'Ready'}
-            			// else 		{return 'Pending'}; 
             			return value ? 'Ready' : 'Pending'
             		}
 
@@ -27,11 +25,17 @@ Template['LearnerHome'].helpers({
             		key:'createdAt', 
             		label: 'Submit Date',
             		fn: function (value) {
-            			console.log(value)
             			return moment(value).calendar()
             		}
             	},
-            	{ key:'createdAt', label: 'Progress' }
+            	{ 
+            		key: 'modifiedAt',
+            		label: 'Last Modified',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	}
+            	
             ]
         };
     }
