@@ -12,7 +12,10 @@ Template['LearnerHome'].helpers({
             rowsPerPage: 10,
             showFilter: true,
             fields: [
-            	{ key:'name', label: 'Name' },
+            	{ 
+            		key:'name', 
+            		label: 'Name'
+            	},
             	{ 
             		key:'isComplete', 
             		label: 'Status',
@@ -42,4 +45,12 @@ Template['LearnerHome'].helpers({
 });
 
 Template['LearnerHome'].events({
+  'click .reactive-table tbody tr': function (event) {
+    console.log("It worked");
+    var post = this;
+    Session.set('post', post);
+    console.log(this);
+
+    Router.go('action_plans.show', {_id: this._id})
+  }
 });
