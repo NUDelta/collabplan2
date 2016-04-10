@@ -51,7 +51,12 @@ Schema.ActionPlansSchema = new SimpleSchema({
         this.unset();
       }
     },
+  },
+  modifiedAt: {
+    type: Date,
+    optional: true
   }
+
 });
 
 ActionPlans.attachSchema(Schema.ActionPlansSchema);
@@ -68,6 +73,13 @@ if (Meteor.isServer) {
     },
     remove : function () {
       return true;
-    }
+    },
+    
   });
 }
+
+ActionPlans.before.update(function (userId, doc, fieldNames, modifier, options) {
+    modifier.$set = modifier.$set || {};
+    modifier.$set.modifiedAt = Date.now();
+    });
+
