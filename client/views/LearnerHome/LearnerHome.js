@@ -1,16 +1,10 @@
 Template['LearnerHome'].helpers({
-	user_pending_action_plans: function () {
-        return ActionPlans.find({isComplete: false, requester_id: Meteor.userId()}, {sort: { name: 1 }})
-    },
-    user_complete_action_plans: function () {
-        return ActionPlans.find({isComplete: true, requester_id: Meteor.userId()}, {sort: { name: 1 }})
-    },
-
     settings: function () {
         return {
-            collection: ActionPlans,
+            collection: ActionPlans.find({requester_id: Meteor.userId()}),
             rowsPerPage: 10,
             showFilter: true,
+            showNavigationRowsPerPage: false,
             fields: [
             	{ 
             		key:'name', 
@@ -19,6 +13,8 @@ Template['LearnerHome'].helpers({
             	{ 
             		key:'isComplete', 
             		label: 'Status',
+            		sortOrder: 0,
+            		sortDirection: -1,
             		fn: function (value) { 
             			return value ? 'Ready' : 'Pending'
             		}
@@ -46,7 +42,6 @@ Template['LearnerHome'].helpers({
 
 Template['LearnerHome'].events({
   'click .reactive-table tbody tr': function (event) {
-    console.log("It worked");
     var post = this;
     Session.set('post', post);
     console.log(this);
