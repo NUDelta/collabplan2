@@ -10,7 +10,7 @@ Template['actionPlanCompose'].helpers({
     return Meteor.users.findOne({_id: this.requester_id});
   },
   last_save: function(){
-    var last_save = new Date(Session.get('last_save'));
+    var last_save = new Date(Session.get('last_save') || this.modifiedAt);
     return moment(last_save).format('MM/DD/YY, h:mm:ss a');
   }
 });
@@ -18,6 +18,22 @@ Template['actionPlanCompose'].helpers({
 Template['actionPlanCompose'].events({
   'click #request_info_btn': function(){
     Modal.show('requestInfoModal', this)
+  },
+  'click #ap_submit': function(events){
+    event.preventDefault();
+    if (!confirm('Are you sure you want to submit? You cannot edit the action plan after submission.'))
+      return;
+
+    var actionPlan = {
+      _id: this._id,
+      isComplete: true
+    };
+
+    Meteor.call('action_plan_edit', actionPlan, function (err) {
+      if (!err) {
+        Router.go('action_plans.show', {_id: this._id})
+      }
+    });
   }
 });
 
