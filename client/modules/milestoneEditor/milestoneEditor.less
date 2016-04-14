@@ -14,3 +14,39 @@
 		display: inline-block;
 	}
 }
+
+.autocomplete-wrapper {
+	display: block;
+}
+
+.autocomplete {
+	position: relative;
+  	display: inline-block;
+  	width: 100%;
+}
+
+.autocomplete-content {
+	display: none;
+	width: 100%;
+	background-color: #fff;
+  	position: absolute;
+  	border: 1px solid #ccc;
+  	border-radius: 0 0 4px 4px;
+  	z-index: 100;
+
+  	.autocomplete-option {
+  		display: block;
+  		cursor: pointer;
+  		padding: 10px 10px;
+
+  		.autocomplete-motivation {
+  			display: none;
+  		}
+  	}
+
+  	.autocomplete-option:hover {
+  		opacity: 0.75;
+  	}
+
+}
+

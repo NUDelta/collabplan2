@@ -102,5 +102,8 @@ Meteor.methods({
             $pull: { subtask_ids: st_id }
         });
         console.log('deleted ' + st_id);
+    },
+    milestone_find_with_tags: function(tags) {
+        return Milestones.find({ tags: { $in: tags }}).fetch();
     }
 });
