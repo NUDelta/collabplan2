@@ -1,7 +1,41 @@
+Schema = {};
+Schema.information = new SimpleSchema({
+    name: {
+        type: String
+    },
+    description: {
+        type: String
+    }
+});
+Schema.confirm = new SimpleSchema({
+    name: {
+        type: String
+    },
+    description: {
+        type: String
+    }
+});
+
 Template['actionPlanRequestForm'].helpers({
     user: function(){
         return Meteor.user();
     }
+
+    steps: function() {
+        return [{
+          id: 'information',
+          title: 'Information',
+          schema: Schema.information
+        },{
+          id: 'confirm',
+          title: 'Confirm',
+          schema: Schema.ActionPlansSchema,
+          onSubmit: function(data, wizard) {
+            // submit logic
+          }
+        }]
+    }
+
 });
 
 Template['actionPlanRequestForm'].events({

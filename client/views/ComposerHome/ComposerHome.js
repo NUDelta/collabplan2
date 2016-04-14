@@ -1,11 +1,151 @@
 Template['ComposerHome'].helpers({
-	other_pending_action_plans: function () {
-        return ActionPlans.find({isComplete: false, requester_id: {$not: Meteor.userId()}, author_id: { $exists: false }}, {sort: { name: 1 }})
+    isFilter: function(filter){
+      return Session.get('filter') === filter;
     },
-    user_working_on_action_plans: function () {
-        return ActionPlans.find({isComplete: false, requester_id: {$not: Meteor.userId()}, author_id: Meteor.userId()}, {sort: { name: 1 }})
+
+    settings_current: function () {
+        return {
+            collection: ActionPlans.find({isComplete: false, author_id: Meteor.userId()}),
+            rowsPerPage: 10,
+            showFilter: true,
+            showNavigationRowsPerPage: false,
+            fields: [
+            	{ 
+            		key:'name', 
+            		label: 'Name'
+            	},
+            	{ 
+            		key:'isComplete', 
+            		label: 'Status',
+            		sortOrder: 0,
+            		sortDirection: -1,
+            		fn: function (value) { 
+            			return value ? 'Ready' : 'Pending'
+            		}
+
+            	},
+            	{ 
+            		key:'createdAt', 
+            		label: 'Submit Date',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	},
+            	{ 
+            		key: 'modifiedAt',
+            		label: 'Last Modified',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	}
+            	
+            ]
+        };
+    },
+
+    settings_potential: function () {
+        return {
+            collection: ActionPlans.find({isComplete: false, author_id: null}),
+            rowsPerPage: 10,
+            showFilter: true,
+            showNavigationRowsPerPage: false,
+            fields: [
+            	{ 
+            		key:'name', 
+            		label: 'Name'
+            	},
+            	{ 
+            		key:'isComplete', 
+            		label: 'Status',
+            		sortOrder: 0,
+            		sortDirection: -1,
+            		fn: function (value) { 
+            			return value ? 'Ready' : 'Pending'
+            		}
+
+            	},
+            	{ 
+            		key:'createdAt', 
+            		label: 'Submit Date',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	},
+            	{ 
+            		key: 'modifiedAt',
+            		label: 'Last Modified',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	}
+            	
+            ]
+        };
+    },
+
+    settings_completed: function () {
+        return {
+            collection: ActionPlans.find({isComplete: true, author_id: Meteor.userId()}),
+            rowsPerPage: 10,
+            showFilter: true,
+            showNavigationRowsPerPage: false,
+            fields: [
+            	{ 
+            		key:'name', 
+            		label: 'Name'
+            	},
+            	{ 
+            		key:'isComplete', 
+            		label: 'Status',
+            		sortOrder: 0,
+            		sortDirection: -1,
+            		fn: function (value) { 
+            			return value ? 'Ready' : 'Pending'
+            		}
+
+            	},
+            	{ 
+            		key:'createdAt', 
+            		label: 'Submit Date',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	},
+            	{ 
+            		key: 'modifiedAt',
+            		label: 'Last Modified',
+            		fn: function (value) {
+            			return moment(value).calendar()
+            		}
+            	}
+            	
+            ]
+        };
     }
 });
 
 Template['ComposerHome'].events({
+	'click .reactive-table tbody tr': function (event) {
+    var post = this;
+    Session.set('post', post);
+    console.log(this);
+
+    Router.go('action_plans.show', {_id: this._id});
+    
+  },
+
+  'click .current': function (event) {
+  	Session.set('filter', 'current');
+  },
+  'click .potential': function (event) {
+  	Session.set('filter', 'potential');
+  },
+  'click .completed': function (event) {
+  	Session.set('filter', 'completed');
+  }
+
+});
+
+Template['ComposerHome'].onRendered(function () {
+	Session.set('filter', 'current');
 });

@@ -25,13 +25,13 @@
                     </div>
 
                     <div class="form-group">
-                        <p>4. What affordances does your app have? What should users be able to do with it?</p>
+                        <p>4. Which functions does your app have? What should users be able to do with it?</p>
                         <textarea class="form-control" id="affordances" placeholder="Ability to search for friends and trending topics, view images in an imageviewer, change profile picture"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <p>5. What is the bare minimum functionality you want out of your app? What is your reach goal?</p>
-                        <textarea class="form-control" id="min_functionality" placeholder="A user can recieve and send tweets vs. a user can send tweets globally"></textarea>
+                        <p>5. What is the bare minimum functionality you want out of your app?</p>
+                        <textarea class="form-control" id="min_functionality" placeholder="A user can recieve and send basic tweets"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -57,5 +57,7 @@
               </form>
           </div>
       </div>
+
+        {{> wizard id="actionPlanRequestForm" steps=steps}}
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template name="ComposerHome">
     <div class="container">
-        {{#if currentUser}}
+        <!-- {{#if currentUser}}
     	<div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
@@ -33,6 +33,23 @@
         </div>
         {{else}}
         <h1>Please log in</h1>
-        {{/if}}
+        {{/if}} -->
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default current">Current</button>
+          <button type="button" class="btn btn-default potential">Potential</button>
+          <button type="button" class="btn btn-default completed">Completed</button>
+        </div>
+        <div>
+           {{#if isFilter 'current'}} {{> reactiveTable settings=settings_current}} {{/if}}
+        </div>
+
+        <div>
+            {{#if isFilter 'potential'}} {{> reactiveTable settings=settings_potential}} {{/if}}
+        </div>
+
+        <div>
+            {{#if isFilter 'completed'}} {{> reactiveTable settings=settings_completed}} {{/if}}
+        </div>
+
     </div>
 </template>
