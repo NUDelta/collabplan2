@@ -5,7 +5,11 @@ Template['milestoneEditor'].helpers({
 });
 
 Template['milestoneEditor'].events({
+    'focus .update_milestone': function (event) {
+        $('.autocomplete-content').show();
+    },
     'blur .update_milestone': function (event) {
+        // $('.autocomplete-content').empty().hide();
         updateMilestone(event);
     },
     'blur .update_substask': function (event) {
@@ -42,6 +46,35 @@ Template['milestoneEditor'].events({
           }
         });
     },
+    'keyup #title': function (event) {
+      if (event.keyCode !== 32)
+        return;
+
+      var milestoneSelector = $(event.target).parent().parent();
+      var id = $('#_id', milestoneSelector).val();
+      var tags = getTags($(event.target).val());
+      Meteor.call('milestone_find_with_tags', tags, function (err, res) {
+        if (!err) {
+          for (var i = 0; i < res.length; ++i) {
+            if (res[i]._id === id)
+              continue;
+
+            var str = '<div class="autocomplete-option">' + res[i].title + '</div>';
+            $('.autocomplete-content').append(str);
+          }
+        } else {
+          console.log(err);
+        }
+      });
+    }
+});
+
+Template['milestoneEditor'].onRendered(function () {
+  // add listener for dynamic elements
+  $('.autocomplete').on('click', '.autocomplete-option', function() {
+    $('#title').val($(event.target).text());
+    $('.autocomplete-content').empty().hide();
+  })
 });
 
 function updateMilestone(event) {
