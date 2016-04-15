@@ -28,6 +28,17 @@ Template['milestoneList'].events({
         Session.set('last_save', Date.now())
       }
     });
+  },
+  'click .tile_x': function (event) {
+    event.preventDefault();
+
+    var ap = Template.currentData();
+
+    Meteor.call('milestone_delete', this._id, ap._id, function (err, res) {
+      if (!err) {
+        Session.set('last_save', Date.now())
+      }
+    });
   }
 });
 
