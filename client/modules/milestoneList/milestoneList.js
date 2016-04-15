@@ -23,9 +23,24 @@ Template['milestoneList'].events({
     var milestone_title = event.target.milestone_title.value;
     Meteor.call('milestone_new', {title: milestone_title, motivation: "", subtask_ids: []}, this._id, function (err, res) {
       if (!err) {
-        Session.set('selected_milestone_id', res)
+        Session.set('selected_milestone_id', res);
         event.target.milestone_title.value = "";
         Session.set('last_save', Date.now())
+      }
+    });
+  },
+  'click .tile_x': function (event) {
+    event.preventDefault();
+
+    var ap = Template.currentData();
+    var deleting_selected = this._id === Session.get('selected_milestone_id');
+
+    Meteor.call('milestone_delete', this._id, ap._id, function (err, res) {
+      if (!err) {
+        Session.set('last_save', Date.now());
+        if (deleting_selected){
+          Session.set('selected_milestone_id', ap.milestone_ids[res]);
+        }
       }
     });
   }

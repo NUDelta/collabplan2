@@ -89,9 +89,12 @@ Meteor.methods({
     },
     milestone_delete: function(id, actionPlanId) {
         // TODO: corresponding milestones and subtasks should be deleted as well
+        var ap = ActionPlans.findOne({ _id: actionPlanId });
+        var ms_indx = ap.milestone_ids.indexOf(id);
     	ActionPlans.update({ _id: actionPlanId }, {
     		$pull: { milestone_ids: id }
     	});
+        return ms_indx - 1;
     },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });
