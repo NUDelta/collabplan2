@@ -12,5 +12,10 @@ Meteor.App = {
 TAGS = {
 	"mongodb": true,
 	"html": true,
-	"javascript": true
+	"javascript": true,
+	"node.js": true,
+	"meteor": true,
+	"css": true,
+	"git": true,
+	"github": true
 }

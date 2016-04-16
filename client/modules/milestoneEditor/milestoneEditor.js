@@ -58,10 +58,16 @@ Template['milestoneEditor'].events({
 Template['milestoneEditor'].onRendered(function () {
   // add listener for dynamic elements
   $('.autocomplete').on('mousedown', '.autocomplete-option', function() {
-    $('#title').val($('.autocomplete-title', event.target).text());
-    $('#motivation').val($('.autocomplete-motivation', event.target).text());
+    var autocompleteOption = $(event.target);
+
+    // if text is clicked instead of div
+    if ($(event.target).hasClass('autocomplete-title'))
+      autocompleteOption = autocompleteOption.parent();
+
+    $('#title').val($('.autocomplete-title', autocompleteOption).text());
+    $('#motivation').val($('.autocomplete-motivation', autocompleteOption).text());
     updateMilestone(event);
-  })
+  });
 });
 
 function updateMilestone(event) {
@@ -96,8 +102,6 @@ function updateSubtask(event) {
 }
 
 function updateAutocompleteOptions(event) {
-  $('.autocomplete-content').empty();
-
   var title = $.trim($('#title').val());
   var tags = getTags($(event.target).val());
   var dedupeSet = {}; // set used to prevent duplicates in autocomplete
@@ -117,6 +121,8 @@ function updateAutocompleteOptions(event) {
       console.log(err);
     }
   });
+
+  $('.autocomplete-content').empty();
 }
 
 function getTags(str) {
