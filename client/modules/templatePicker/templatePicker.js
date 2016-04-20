@@ -32,4 +32,8 @@ Template['templatePicker'].helpers({
 });
 
 Template['templatePicker'].events({
+    'click .select_template': function(e) {
+        var template = this;
+        
+    }
 });
