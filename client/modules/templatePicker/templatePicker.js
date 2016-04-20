@@ -34,6 +34,7 @@ Template['templatePicker'].helpers({
 Template['templatePicker'].events({
     'click .select_template': function(e) {
         var template = this;
-        
+        var ap = Template.currentData();
+        Meteor.call('action_plan_select_template', template, ap._id);
     }
 });

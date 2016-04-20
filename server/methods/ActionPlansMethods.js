@@ -42,36 +42,27 @@ Meteor.methods({
         }});
     },
     milestone_new: function(data, actionPlanId) {
-    	var id = Milestones.insert({
-    		title: data.title,
-            motivation: data.motivation,
-            subtask_ids: []
-    	});
-
-    	ActionPlans.update(actionPlanId, { $push: {
-    		milestone_ids: id
-    	}});
-
-    	return id;
+    	return milestone_new(data.actionPlanId);
     },
     subtask_new: function(data) {
-    	var id = Subtasks.insert({
-    		description: data.description,
-    		links: data.links,
-    		milestone_ids: []
-    	});
-
-    	Milestones.update(data.milestone_id, { $push: {
-    		subtask_ids: id
-    	}});
-
-    	return id;
+    	return subtasks_new(data);
     },
     action_plan_edit: function(data) {
         ActionPlans.update(data._id, { $set: {
         	author_id: this.userId,
         	isComplete: data.isComplete
         }});
+    },
+    action_plan_select_template: function(template, ap_id){
+        for (var i = 0; i < template.milestone_ids.length; i++) {
+            var ms = template.milestone_ids[i];
+            var ms_id = milestone_new(ms,ap_id);
+            for (var i = 0; i < ms.subtask_ids.length; i++) {
+                var st = ms.subtask_ids[i];
+                st.milestone_id = ms_id;
+                subtasks_new(st);
+            }
+        }
     },
     milestone_edit: function(data) {
     	Milestones.update(data._id, { $set: {
@@ -110,3 +101,31 @@ Meteor.methods({
         return Milestones.find({ tags: { $in: tags }}).fetch();
     }
 });
+
+function milestone_new(data, actionPlanId) {
+    var id = Milestones.insert({
+        title: data.title,
+        motivation: data.motivation,
+        subtask_ids: []
+    });
+
+    ActionPlans.update(actionPlanId, { $push: {
+        milestone_ids: id
+    }});
+
+    return id;
+}
+
+function subtasks_new(data) {
+    var id = Subtasks.insert({
+        description: data.description,
+        links: data.links,
+        milestone_ids: []
+    });
+
+    Milestones.update(data.milestone_id, { $push: {
+        subtask_ids: id
+    }});
+
+    return id;
+}
