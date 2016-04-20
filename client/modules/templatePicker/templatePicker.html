@@ -1,0 +1,20 @@
+<template name="templatePicker">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {{#each templates}}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading_{{@index}}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{@index}}" aria-expanded="true" aria-controls="collapseOne">
+                    Collapsible Group Item #1
+                         </a>
+                    </h4>
+                </div>
+                <div id="collapse_{{@index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{@index}}">
+                    <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, 
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</template>
