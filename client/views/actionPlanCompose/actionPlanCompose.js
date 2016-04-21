@@ -19,6 +19,9 @@ Template['actionPlanCompose'].events({
   'click #request_info_btn': function(){
     Modal.show('requestInfoModal', this)
   },
+  'click #ap_templates': function(){
+    Modal.show('templatePicker', this)
+  },
   'click #ap_submit': function(events){
     event.preventDefault();
     if (!confirm('Are you sure you want to submit? You cannot edit the action plan after submission.'))
