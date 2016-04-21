@@ -1,6 +1,6 @@
 Router.route('/', function () {
   // this.render('home');
-  Router.go('action_plans');
+  Router.go('learner_home');
   SEO.set({ title: 'Home -' + Meteor.App.NAME });
 });
 

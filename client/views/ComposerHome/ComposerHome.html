@@ -40,15 +40,15 @@
           <button type="button" class="btn btn-default completed">Completed</button>
         </div>
         <div>
-           {{#if isFilter 'current'}} {{> reactiveTable settings=settings_current}} {{/if}}
+           {{#if isFilter 'current'}} <h3>Current Action Plans</h3>{{> reactiveTable settings=settings_current}} {{/if}}
         </div>
 
         <div>
-            {{#if isFilter 'potential'}} {{> reactiveTable settings=settings_potential}} {{/if}}
+            {{#if isFilter 'potential'}} <h3>Potential Action Plans</h3>{{> reactiveTable settings=settings_potential}} {{/if}}
         </div>
 
         <div>
-            {{#if isFilter 'completed'}} {{> reactiveTable settings=settings_completed}} {{/if}}
+            {{#if isFilter 'completed'}} <h3>Completed Action Plans</h3>{{> reactiveTable settings=settings_completed}} {{/if}}
         </div>
 
     </div>
