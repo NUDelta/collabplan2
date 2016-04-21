@@ -57,8 +57,8 @@ Meteor.methods({
         for (var i = 0; i < template.milestone_ids.length; i++) {
             var ms = template.milestone_ids[i];
             var ms_id = milestone_new(ms,ap_id);
-            for (var i = 0; i < ms.subtask_ids.length; i++) {
-                var st = ms.subtask_ids[i];
+            for (var j = 0; j < ms.subtask_ids.length; j++) {
+                var st = ms.subtask_ids[j];
                 st.milestone_id = ms_id;
                 subtasks_new(st);
             }
