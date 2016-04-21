@@ -11,7 +11,7 @@ Template['milestoneEditor'].events({
     },
     'blur .update_milestone': function (event) {
         $('.autocomplete-content').hide();
-        updateMilestone(event);
+        updateMilestone();
     },
     'blur .update_substask': function (event) {
         updateSubtask(event);
@@ -48,6 +48,15 @@ Template['milestoneEditor'].events({
         });
     },
     'keyup #title': function (event) {
+      if (event.keyCode === 40 && $('.autocomplete-option').length)
+        handleDownArrow();
+
+      if (event.keyCode === 38 && $('.autocomplete-option').length)
+        handleUpArrow();
+
+      if (event.keyCode === 13 && $('.autocomplete-option').length) 
+        selectAutocompleteOption()
+
       if (event.keyCode !== 32)
         return;
 
@@ -66,11 +75,12 @@ Template['milestoneEditor'].onRendered(function () {
 
     $('#title').val($('.autocomplete-title', autocompleteOption).text());
     $('#motivation').val($('.autocomplete-motivation', autocompleteOption).text());
-    updateMilestone(event);
+    updateMilestone();
   });
 });
 
-function updateMilestone(event) {
+function updateMilestone() {
+  $('.autocomplete-selected').removeClass('autocomplete-selected');
   var milestoneSelector = $('.milestone_editor');
   var milestone = {
     _id: $('#_id', milestoneSelector).val(),
@@ -133,4 +143,43 @@ function getTags(str) {
       tags.push(e);
   });
   return tags;
+}
+
+function handleDownArrow() {
+  $('.autocomplete-content').show();
+  // if last option is selected, do nothing
+  if ($('.autocomplete-option').last().hasClass('autocomplete-selected'))
+      return;
+
+  var current = $('.autocomplete-selected');
+  if (current.length) {
+    current.next().addClass('autocomplete-selected');
+    current.removeClass('autocomplete-selected');
+  } else {
+    $('.autocomplete-option').first().addClass('autocomplete-selected');
+  }
+}
+
+function handleUpArrow() {
+  // if first option is selected, do nothing
+  if ($('.autocomplete-option').first().hasClass('autocomplete-selected'))
+      return;
+
+  var current = $('.autocomplete-selected');
+  if (current.length) {
+    current.prev().addClass('autocomplete-selected');
+    current.removeClass('autocomplete-selected');
+  }
+}
+
+function selectAutocompleteOption() {
+  var current = $('.autocomplete-selected');
+  if (current.length) {
+    $('#title').val($('.autocomplete-title', current).text());
+    $('#motivation').val($('.autocomplete-motivation', current).text());
+    updateMilestone();
+    $('.autocomplete-content').hide();
+  } else {
+    return;
+  } 
 }

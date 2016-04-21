@@ -98,7 +98,15 @@ Meteor.methods({
         console.log('deleted ' + st_id);
     },
     milestone_find_with_tags: function(tags) {
-        return Milestones.find({ tags: { $in: tags }}).fetch();
+        var res = Milestones.find({ tags: { $in: tags }}).fetch();
+
+        for (var i = 0; i < res.length; ++i) {
+            var matches = _.union(tags, res[i].tags).length;
+            res[i]['matches'] = matches;
+        }
+
+        res = _.sortBy(res, 'matches');
+        return res;
     }
 });
 
