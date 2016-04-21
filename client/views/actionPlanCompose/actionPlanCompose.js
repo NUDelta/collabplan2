@@ -41,6 +41,10 @@ Template['actionPlanCompose'].events({
   }
 });
 
+Template['actionPlanCompose'].onRendered(function(){
+  Session.set('selected_milestone_id', null);
+})
+
 
 function updateMilestoneIds(ap_id) {
   var milestoneIds = [];
