@@ -42,7 +42,7 @@ Meteor.methods({
         }});
     },
     milestone_new: function(data, actionPlanId) {
-    	return milestone_new(data.actionPlanId);
+    	return milestone_new(data, actionPlanId);
     },
     subtask_new: function(data) {
     	return subtasks_new(data);
