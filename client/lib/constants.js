@@ -17,5 +17,6 @@ TAGS = {
 	"meteor": true,
 	"css": true,
 	"git": true,
-	"github": true
+	"github": true,
+	"bitbucket": true
 }

@@ -8,17 +8,17 @@
                 </div>
 
                 <div class="modal-body">
-                    <p><strong>Description:</strong> {{action_plan.description}}</p>
+                    <p><strong>Description:</strong> {{this.description}}</p>
 
-                    <p><strong>Milestones:</strong> {{action_plan.build_milestones}}</p>
+                    <p><strong>Milestones:</strong> {{this.build_milestones}}</p>
 
-                    <p><strong>Steps:</strong> {{action_plan.steps}}</p>
+                    <p><strong>Steps:</strong> {{this.steps}}</p>
 
-                    <p><strong>Affordances:</strong> {{action_plan.affordances}}</p>
+                    <p><strong>Affordances:</strong> {{this.affordances}}</p>
 
-                    <p><strong>Min and max functionality:</strong> {{action_plan.min_functionality}}</p>
+                    <p><strong>Min and max functionality:</strong> {{this.min_functionality}}</p>
 
-                    <p><strong>Reference work:</strong> {{action_plan.reference_work}}</p>
+                    <p><strong>Reference work:</strong> {{this.reference_work}}</p>
 
                     <p><strong>Learner's Prior Knowledge:</strong> 
                         <ul>
@@ -29,7 +29,7 @@
                     </p>
                     <p><strong>Learner's Requested Frameworks:</strong> 
                         <ul>
-                            {{#each action_plan.requested_skills}}
+                            {{#each this.requested_skills}}
                                 <li>{{this}}</li>
                             {{/each}}
                         </ul>
