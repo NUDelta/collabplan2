@@ -17,7 +17,10 @@ Template['actionPlanCompose'].helpers({
 
 Template['actionPlanCompose'].events({
   'click #request_info_btn': function(){
-    Modal.show('requestInfoModal', this)
+    console.log(this)
+    Modal.show('requestInfoModal', function(){
+      return ActionPlans.findOne({_id: this._id});
+    });
   },
   'click #ap_templates': function(){
     Modal.show('templatePicker', this)
