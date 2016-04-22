@@ -54,15 +54,42 @@ Meteor.methods({
         }});
     },
     action_plan_select_template: function(template, ap_id){
+
+        var ms_ids = [];
+
         for (var i = 0; i < template.milestone_ids.length; i++) {
             var ms = template.milestone_ids[i];
-            var ms_id = milestone_new(ms,ap_id);
+
+            var ms_id = Milestones.insert({
+                title: ms.title,
+                motivation: ms.motivation,
+                subtask_ids: []
+            });
+
+            ms_ids.push(ms_id);
+
+            var st_ids = [];
+
             for (var j = 0; j < ms.subtask_ids.length; j++) {
                 var st = ms.subtask_ids[j];
-                st.milestone_id = ms_id;
-                subtasks_new(st);
+                
+                var st_id = Subtasks.insert({
+                    description: st.description,
+                    links: st.links,
+                    milestone_ids: []
+                });
+
+                st_ids.push(st_id);
             }
+
+            Milestones.update(ms_id, { $push: {
+                subtask_ids: { $each: st_ids }
+            }});
         }
+
+        ActionPlans.update(ap_id, { $push: {
+            milestone_ids: { $each: ms_ids }
+        }});
     },
     milestone_edit: function(data) {
     	Milestones.update(data._id, { $set: {
