@@ -16,10 +16,10 @@ Template['actionPlanCompose'].helpers({
 });
 
 Template['actionPlanCompose'].events({
-  'click #request_info_btn': function(){
-    console.log(this);
-    Modal.show('requestInfoModal', this)
-  },
+  // 'click #request_info_btn': function(){
+  //   console.log(this);
+  //   Modal.show('requestInfoModal', this)
+  // },
   'click #ap_templates': function(){
     Modal.show('templatePicker', this)
   },
