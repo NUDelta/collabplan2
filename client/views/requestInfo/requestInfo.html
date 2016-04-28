@@ -19,7 +19,7 @@
             <div class="col-md-6">
                     <p><strong>Learner's Prior Knowledge:</strong> 
                     <ul>
-                        {{#each request_user.profile.skills}}
+                        {{#each request_user_skills this.requester_id}}
                             <li>{{this.name}} ({{level_scale_desc this.level}})</li>
                         {{/each}}
                     </ul>
