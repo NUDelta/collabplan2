@@ -68,6 +68,7 @@ Template['milestoneEditor'].onRendered(function () {
   // add listener for dynamic elements
   $('.autocomplete').on('mousedown', '.autocomplete-option', function() {
     var autocompleteOption = $(event.target);
+    var milestoneSelector = $('.milestone_editor');
 
     // if text is clicked instead of div
     if ($(event.target).hasClass('autocomplete-title'))
@@ -75,6 +76,7 @@ Template['milestoneEditor'].onRendered(function () {
 
     $('#title').val($('.autocomplete-title', autocompleteOption).text());
     $('#motivation').val($('.autocomplete-motivation', autocompleteOption).text());
+    autofillSubtasks($('.autocomplete-id', autocompleteOption).text(), $('#_id', milestoneSelector).val());
     updateMilestone();
   });
 });
@@ -111,6 +113,14 @@ function updateSubtask(event) {
   });
 }
 
+function autofillSubtasks(src, target) {
+  Meteor.call('autofill_subtasks', src, target, function (err) {
+    if (!err) {
+      Session.set('last_save', Date.now())
+    }
+  });
+}
+
 function updateAutocompleteOptions(event) {
   var title = $.trim($('#title').val());
   var tags = getTags($(event.target).val());
@@ -122,7 +132,8 @@ function updateAutocompleteOptions(event) {
           continue;
 
         var str = '<div class="autocomplete-option"><span class="autocomplete-title">' + res[i].title + 
-        '</span><span class="autocomplete-motivation">' + res[i].motivation + '</span></div>';
+        '</span><span class="autocomplete-motivation">' + res[i].motivation + '</span>' +
+        '<span class="autocomplete-id">' + res[i]._id + '</span></div>';
         $('.autocomplete-content').append(str);
 
         dedupeSet[res[i].title] = true;
@@ -174,9 +185,11 @@ function handleUpArrow() {
 
 function selectAutocompleteOption() {
   var current = $('.autocomplete-selected');
+  var milestoneSelector = $('.milestone_editor');
   if (current.length) {
     $('#title').val($('.autocomplete-title', current).text());
     $('#motivation').val($('.autocomplete-motivation', current).text());
+    autofillSubtasks($('.autocomplete-id', current).text(), $('#_id', milestoneSelector).val());
     updateMilestone();
     $('.autocomplete-content').hide();
   } else {
