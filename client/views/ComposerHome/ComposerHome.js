@@ -5,7 +5,7 @@ Template['ComposerHome'].helpers({
 
     settings_current: function () {
         return {
-            collection: ActionPlans.find({isComplete: false, author_id: Meteor.userId()}),
+            collection: ActionPlans.find({isComplete: false, author_ids: { $in: [Meteor.userId()] }}),
             noDataTmpl: Template.noDataExpertCurrent,
             rowsPerPage: 10,
             showFilter: true,
@@ -87,7 +87,7 @@ Template['ComposerHome'].helpers({
 
     settings_completed: function () {
         return {
-            collection: ActionPlans.find({isComplete: true, author_id: Meteor.userId()}),
+            collection: ActionPlans.find({isComplete: true, author_ids: { $in: [Meteor.userId()] }}),
             noDataTmpl: Template.noDataExpertCompleted,
             rowsPerPage: 10,
             showFilter: true,
@@ -132,6 +132,12 @@ Template['ComposerHome'].events({
     var post = this;
     Session.set('post', post);
     console.log(this);
+
+    Meteor.call('action_plan_add_author', this._id, Meteor.userId(), function (err) {
+        if (err) {
+          console.log(err);
+        }
+    });
 
     Router.go('action_plans.show', {_id: this._id});
     

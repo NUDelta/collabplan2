@@ -29,6 +29,10 @@ Schema.ActionPlansSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  author_ids: {
+    type: [String],
+    optional: true
+  },
   requester_id: {
     type: String
   },
