@@ -134,6 +134,13 @@ Meteor.methods({
 
         res = _.sortBy(res, 'matches');
         return res;
+    },
+    autofill_subtasks: function(src, target) {
+        var subtasks = Milestones.findOne({ _id: src }).subtask_ids;
+
+        Milestones.update(target, { $set: {
+            subtask_ids: subtasks
+        }});
     }
 });
 
