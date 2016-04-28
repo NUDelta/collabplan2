@@ -1,0 +1,37 @@
+<template name="requestInfo">
+    <div class="contianer">
+        <h4>Learner's request: <button class="btn pull-right" data-toggle="collapse" data-target="#request_info" aria-expanded="false" aria-controls="request_info">Hide</button></h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="modal-title">{{this.name}}</h4>
+                <p><strong>Project Description:</strong> {{this.description}}</p>
+
+                <p><strong>Current Plan:</strong> {{this.build_milestones}}</p>
+
+                <p><strong>User Flow:</strong> {{this.steps}}</p>
+
+                <p><strong>Features:</strong> {{this.affordances}}</p>
+
+                <p><strong>Key functionality:</strong> {{this.min_functionality}}</p>
+
+                <p><strong>Reference work:</strong> {{this.reference_work}}</p>
+            </div>
+            <div class="col-md-6">
+                    <p><strong>Learner's Prior Knowledge:</strong> 
+                    <ul>
+                        {{#each request_user.profile.skills}}
+                            <li>{{this.name}} ({{level_scale_desc this.level}})</li>
+                        {{/each}}
+                    </ul>
+                </p>
+                <p><strong>What the learner wants to use:</strong> 
+                    <ul>
+                        {{#each this.requested_skills}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</template>

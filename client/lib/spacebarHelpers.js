@@ -30,6 +30,9 @@ Template.registerHelper('plusOne', function (num) {
   return num + 1;
 });
 
+Template.registerHelper('level_scale_desc', function (num) {
+  return LEVEL_SCALE[num-1];
+});
 
 Template.registerHelper('truncate', function (str, len) {
   if (str.length > len) {
