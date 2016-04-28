@@ -1,5 +1,11 @@
 Meteor.methods({
     action_plan_new: function(data) {
+        var ms_id = Milestones.insert({
+            title: "",
+            motivation: "",
+            subtask_ids: []
+        });
+
         var id = ActionPlans.insert({
             name: data.name,
             description: data.description,
@@ -11,7 +17,7 @@ Meteor.methods({
             requested_skills: data.requested_skills,
             requester_id: this.userId,
             isComplete: false,
-            milestone_ids: []
+            milestone_ids: [ms_id]
         })        
     },
     action_plan_set_boilerplate: function(ap_id,ms_id) {
