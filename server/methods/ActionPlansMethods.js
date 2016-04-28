@@ -136,10 +136,24 @@ Meteor.methods({
         return res;
     },
     autofill_subtasks: function(src, target) {
-        var subtasks = Milestones.findOne({ _id: src }).subtask_ids;
+        var old_ids = Milestones.findOne({ _id: src }).subtask_ids;
+        var subtasks = Subtasks.find({ _id: { $in: old_ids } }).fetch();
+        var subtask_ids = [];
+
+        for (var i = 0; i < subtasks.length; ++i) {
+            var subtask = subtasks[i];
+            
+            var id = Subtasks.insert({
+                description: subtask.description,
+                links: subtask.links,
+                milestone_ids: []
+            });
+
+            subtask_ids.push(id);
+        }
 
         Milestones.update(target, { $set: {
-            subtask_ids: subtasks
+            subtask_ids: subtask_ids
         }});
     }
 });
