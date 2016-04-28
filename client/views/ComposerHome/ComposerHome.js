@@ -6,6 +6,7 @@ Template['ComposerHome'].helpers({
     settings_current: function () {
         return {
             collection: ActionPlans.find({isComplete: false, author_id: Meteor.userId()}),
+            noDataTmpl: Template.noDataExpertCurrent,
             rowsPerPage: 10,
             showFilter: true,
             showNavigationRowsPerPage: false,
@@ -46,6 +47,7 @@ Template['ComposerHome'].helpers({
     settings_potential: function () {
         return {
             collection: ActionPlans.find({isComplete: false, author_id: null}),
+            noDataTmpl: Template.noDataExpertPotential,
             rowsPerPage: 10,
             showFilter: true,
             showNavigationRowsPerPage: false,
@@ -86,6 +88,7 @@ Template['ComposerHome'].helpers({
     settings_completed: function () {
         return {
             collection: ActionPlans.find({isComplete: true, author_id: Meteor.userId()}),
+            noDataTmpl: Template.noDataExpertCompleted,
             rowsPerPage: 10,
             showFilter: true,
             showNavigationRowsPerPage: false,

@@ -2,6 +2,7 @@ Template['LearnerHome'].helpers({
     settings: function () {
         return {
             collection: ActionPlans.find({requester_id: Meteor.userId()}),
+            noDataTmpl: Template.noDataLearner,
             rowsPerPage: 10,
             showFilter: true,
             showNavigationRowsPerPage: false,
