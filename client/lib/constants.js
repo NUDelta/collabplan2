@@ -18,7 +18,9 @@ TAGS = {
 	"css": true,
 	"git": true,
 	"github": true,
-	"bitbucket": true
+	"bitbucket": true,
+	"template": true,
+	"view": true
 }
 
 LEVEL_SCALE = [
