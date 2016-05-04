@@ -1,4 +1,4 @@
-<template name="milestoneList">
+<template name="recipeMilestoneList">
 	<div class="col-md-3 well milestone-col">
 	    <h3 class="outline">Outline:</h3>
         <div class="milestone_list">
@@ -10,6 +10,13 @@
 				    		<a class="tile_x"><span class="glyphicon glyphicon-remove"></span></a>
 					      	<h4>{{plus_one @index}}. {{title}}</h4>
 					      	<span class="_id hidden">{{_id}}</span>
+					      	<ol>
+								{{#each subtask_ids}}
+									{{#with get_subtasks this}}
+					      				<li>{{description}}</li>
+					      			{{/with}}
+					    		{{/each}}
+					      	</ol>
 			  			</div>
 				  	</div>
 				</div>

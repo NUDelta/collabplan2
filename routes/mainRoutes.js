@@ -48,7 +48,7 @@ Router.route('/action_plans/new', {
 Router.route('/action_plans/:_id', {
   name: 'action_plans.show',
   waitOn: function(){
-    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users')];
+    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users'),Meteor.subscribe('Recipes')];
   },
   action: function () {
     var ap = ActionPlans.findOne({_id: this.params._id});
@@ -62,6 +62,26 @@ Router.route('/action_plans/:_id', {
       this.render('actionPlanCompose');
       SEO.set({ title: 'actionPlanCompose- ' + Meteor.App.NAME });
     }
+  }
+});
+
+Router.route('/recipes/new', {
+  name: 'recipes.new',
+  action: function () {
+    this.render('recipeNew');
+    SEO.set({ title: 'New recipes - ' + Meteor.App.NAME });
+  }
+});
+
+Router.route('/recipes/:_id', {
+  name: 'recipes.show',
+  waitOn: function(){
+    return [Meteor.subscribe('Recipes'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users')];
+  },
+  action: function () {
+    var recipe = Recipes.findOne({_id: this.params._id});
+    this.render('recipeCompose');
+    SEO.set({ title: 'recipe- ' + Meteor.App.NAME });
   }
 });
 
