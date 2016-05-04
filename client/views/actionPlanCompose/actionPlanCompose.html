@@ -1,39 +1,45 @@
 <template name="actionPlanCompose">
     {{#with action_plan}}
-    <div class="container-fluid">
-        <div class="collapse in" id="request_info">
-            {{> requestInfo}}
+        {{#if this.milestone_ids}}
+        <div class="container-fluid">
+            <div class="collapse in" id="request_info">
+                {{> requestInfo}}
+            </div>
         </div>
-    </div>
-    <nav class="navbar navbar-default composer_toolbar">
+        <nav class="navbar navbar-default composer_toolbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <button id="request_info_btn" type="button" class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#request_info" aria-expanded="false" aria-controls="request_info">Learner's Request</button>
+                        <button id="ap_templates" type="button" class="btn btn-default navbar-btn">Templates</button>
+                        <button type="button" class="btn btn-default navbar-btn">Help</button>
+                        <p class="navbar-text">Last Saved: {{last_save}}</p>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <button id="ap_submit" type="button" class="btn btn-default navbar-btn">Submit</button>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid composer_body">
+            <div class="row full_height">
+                {{> milestoneList this}}
+                
+                {{> milestoneEditor selected_milestone}}
+            </div>
+        </div>
+        {{else}}
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <button id="request_info_btn" type="button" class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#request_info" aria-expanded="false" aria-controls="request_info">Learner's Request</button>
-                    <button id="ap_templates" type="button" class="btn btn-default navbar-btn">Templates</button>
-                    <button type="button" class="btn btn-default navbar-btn">Help</button>
-                    <p class="navbar-text">Last Saved: {{last_save}}</p>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <button id="ap_submit" type="button" class="btn btn-default navbar-btn">Submit</button>
-                </ul>
-            </div>
+            {{> recipePicker this}}
         </div>
-    </nav>
-    <div class="container-fluid composer_body">
-        <div class="row full_height">
-            {{> milestoneList this}}
-            
-            {{> milestoneEditor selected_milestone}}
-        </div>
-    </div>
+        {{/if}}
     {{/with}}
 </template>

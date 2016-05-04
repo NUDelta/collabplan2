@@ -48,7 +48,7 @@ Router.route('/action_plans/new', {
 Router.route('/action_plans/:_id', {
   name: 'action_plans.show',
   waitOn: function(){
-    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users')];
+    return [Meteor.subscribe('ActionPlans'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users'),Meteor.subscribe('Recipes')];
   },
   action: function () {
     var ap = ActionPlans.findOne({_id: this.params._id});

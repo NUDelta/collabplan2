@@ -1,0 +1,72 @@
+<template name="recipePicker">
+    <div id="recipe-picker" class="row">
+    <div class="col-md-4">
+    	<h4>Learner's request:</h4>
+        <h4>{{this.name}}</h4>
+        <p><strong>Project Description:</strong> {{this.description}}</p>
+
+        <p><strong>Current Plan:</strong> {{this.build_milestones}}</p>
+
+        <p><strong>User Flow:</strong> {{this.steps}}</p>
+
+        <p><strong>Features:</strong> {{this.affordances}}</p>
+
+        <p><strong>Key functionality:</strong> {{this.min_functionality}}</p>
+
+        <p><strong>Reference work:</strong> {{this.reference_work}}</p>
+        <p><strong>Learner's Prior Knowledge:</strong> 
+	        <ul>
+	            {{#each request_user_skills this.requester_id}}
+	                <li>{{this.name}} ({{level_scale_desc this.level}})</li>
+	            {{/each}}
+	        </ul>
+	    </p>
+	    <p><strong>What the learner wants to use:</strong> 
+	        <ul>
+	            {{#each this.requested_skills}}
+	                <li>{{this}}</li>
+	            {{/each}}
+	        </ul>
+	    </p>
+    </div>
+    <div class="col-md-8">
+    	<div class="row">
+	    	<div class="col-md-12">
+		        <h3 id="recipe-header">Choose a recipe</h3>
+		        <p>Pick the recipe that most closely matches the learner's request. This recipe will provide generic milestones and subtasks as a starting point.</p>
+	        </div>
+	        {{#each recipes}}
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left">{{name}}</h3>
+                        <button class="btn btn-default pull-right select-recipe">Select</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{description}}</p>
+                        <div class="milestone-tags">
+                        {{#each tags}}
+                            <span class="badge">{{this}}</span>
+                        {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        	{{/each}}
+        <!-- <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left">Skip</h3>
+                    <button id="select_skip" class="btn btn-default pull-right">Select</button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <p>Write your own boiler plate!</p>
+                </div>
+            </div>
+        </div> -->
+        </div>
+    </div>
+    </div>
+</template>
