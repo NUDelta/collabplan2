@@ -1,11 +1,5 @@
 Meteor.methods({
     action_plan_new: function(data) {
-        var ms_id = Milestones.insert({
-            title: "",
-            motivation: "",
-            subtask_ids: []
-        });
-
         var id = ActionPlans.insert({
             name: data.name,
             description: data.description,
@@ -17,24 +11,26 @@ Meteor.methods({
             requested_skills: data.requested_skills,
             requester_id: this.userId,
             isComplete: false,
-            milestone_ids: [ms_id]
+            milestone_ids: []
         })        
     },
-    action_plan_set_boilerplate: function(ap_id,ms_id) {
-        ActionPlans.update(
-            {_id: ap_id},
-            {
-                $push: {
-                    milestone_ids: {
-                        $each: [ms_id],
-                        $position: 0
-                    }
-                },
-                $set: {
-                    author_id: this.userId
-                }
-            }
-        );
+    action_plan_recipe: function(ap_id ,ms_ids) {
+        var milestones = Milestones.find({ _id: { $in: ms_ids } }).fetch();
+        var newIds = [];
+
+        for (var i = 0; i < milestones.length; ++i) {
+            var ms = milestones[i];
+            
+            var id = Milestones.insert({
+                title: ms.title,
+                motivation: ms.motivation,
+                subtask_ids: []
+            });
+
+            newIds.push(id);
+        }
+
+        ActionPlans.update( {_id: ap_id}, { $set: { milestone_ids: newIds } });
     },
     action_plan_reorder_milestones: function(actionPlanId, milestoneIds) {
     	ActionPlans.update({ _id: actionPlanId }, { $set: {
@@ -165,6 +161,45 @@ Meteor.methods({
 
         Milestones.update(target, { $set: {
             subtask_ids: subtask_ids
+        }});
+    },
+    recipe_new: function(data) {
+        var id = Recipes.insert({
+            name: data.name,
+            description: data.description,
+            milestone_ids: []
+        });
+
+        return id;     
+    },
+    recipe_edit: function() {
+
+    },
+    recipe_add_milestone: function(data, recipeId) {
+        var id = Milestones.insert({
+            title: data.title,
+            motivation: data.motivation,
+            subtask_ids: []
+        });
+
+        Recipes.update(recipeId, { $push: {
+            milestone_ids: id
+        }});
+
+        return id;
+    },
+    recipe_delete_milestone: function(id, recipeId) {
+        // TODO: corresponding milestones and subtasks should be deleted as well
+        var r = Recipes.findOne({ _id: recipeId });
+        var ms_indx = r.milestone_ids.indexOf(id);
+        Recipes.update({ _id: recipeId }, {
+            $pull: { milestone_ids: id }
+        });
+        return ms_indx - 1;
+    },
+    recipe_reorder_milestones: function(recipeId, milestoneIds) {
+        Recipes.update({ _id: recipeId }, { $set: {
+            milestone_ids: milestoneIds
         }});
     }
 });

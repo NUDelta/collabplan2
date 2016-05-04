@@ -1,0 +1,45 @@
+@import '../../stylesheets/variables.less';
+@import '../../stylesheets/helpers.less';
+@import '../../stylesheets/lib/elements.less';
+
+
+.outline {
+	color:white
+}
+
+.milestone-col {
+    background-color:#37474F;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.bottom_tool_bar {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    background-color: gray;
+    width: 100%;
+    margin-left: -19px;
+}
+
+.milestone_list {
+    height: 90%;
+    overflow: scroll;
+}
+
+.milestone_tile {
+    cursor: pointer;
+
+    &.selected {
+        border: 5px solid red;
+    }
+}
+
+.tile_x {
+    position: absolute;
+    right: 0;
+    display: none;
+}
+.milestone_tile:hover .tile_x {
+    display: block;
+}
