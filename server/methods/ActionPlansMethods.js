@@ -1,5 +1,11 @@
 Meteor.methods({
     action_plan_new: function(data) {
+        var ms_id = Milestones.insert({
+            title: "",
+            motivation: "",
+            subtask_ids: []
+        });
+
         var id = ActionPlans.insert({
             name: data.name,
             description: data.description,
@@ -11,7 +17,7 @@ Meteor.methods({
             requested_skills: data.requested_skills,
             requester_id: this.userId,
             isComplete: false,
-            milestone_ids: []
+            milestone_ids: [ms_id]
         })        
     },
     action_plan_set_boilerplate: function(ap_id,ms_id) {
@@ -41,6 +47,11 @@ Meteor.methods({
             milestone_ids: []
         }});
     },
+    action_plan_add_author: function(actionPlanId, authorId) {
+        ActionPlans.update(actionPlanId, { $addToSet: {
+            author_ids: authorId
+        }});
+    },
     milestone_new: function(data, actionPlanId) {
     	return milestone_new(data, actionPlanId);
     },
@@ -54,15 +65,42 @@ Meteor.methods({
         }});
     },
     action_plan_select_template: function(template, ap_id){
+
+        var ms_ids = [];
+
         for (var i = 0; i < template.milestone_ids.length; i++) {
             var ms = template.milestone_ids[i];
-            var ms_id = milestone_new(ms,ap_id);
+
+            var ms_id = Milestones.insert({
+                title: ms.title,
+                motivation: ms.motivation,
+                subtask_ids: []
+            });
+
+            ms_ids.push(ms_id);
+
+            var st_ids = [];
+
             for (var j = 0; j < ms.subtask_ids.length; j++) {
                 var st = ms.subtask_ids[j];
-                st.milestone_id = ms_id;
-                subtasks_new(st);
+                
+                var st_id = Subtasks.insert({
+                    description: st.description,
+                    links: st.links,
+                    milestone_ids: []
+                });
+
+                st_ids.push(st_id);
             }
+
+            Milestones.update(ms_id, { $push: {
+                subtask_ids: { $each: st_ids }
+            }});
         }
+
+        ActionPlans.update(ap_id, { $push: {
+            milestone_ids: { $each: ms_ids }
+        }});
     },
     milestone_edit: function(data) {
     	Milestones.update(data._id, { $set: {
@@ -107,6 +145,27 @@ Meteor.methods({
 
         res = _.sortBy(res, 'matches');
         return res;
+    },
+    autofill_subtasks: function(src, target) {
+        var old_ids = Milestones.findOne({ _id: src }).subtask_ids;
+        var subtasks = Subtasks.find({ _id: { $in: old_ids } }).fetch();
+        var subtask_ids = [];
+
+        for (var i = 0; i < subtasks.length; ++i) {
+            var subtask = subtasks[i];
+            
+            var id = Subtasks.insert({
+                description: subtask.description,
+                links: subtask.links,
+                milestone_ids: []
+            });
+
+            subtask_ids.push(id);
+        }
+
+        Milestones.update(target, { $set: {
+            subtask_ids: subtask_ids
+        }});
     }
 });
 

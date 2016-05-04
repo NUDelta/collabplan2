@@ -18,5 +18,15 @@ TAGS = {
 	"css": true,
 	"git": true,
 	"github": true,
-	"bitbucket": true
+	"bitbucket": true,
+	"template": true,
+	"view": true
 }
+
+LEVEL_SCALE = [
+    "I've done a tutorial",
+    "I've done a couple tutorials",
+    "I've built a project with it",
+    "I've built multiple projects with it",
+    "I'm an expert"
+]
