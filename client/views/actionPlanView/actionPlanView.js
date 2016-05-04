@@ -36,6 +36,7 @@ Template['actionPlanView'].events({
 
 Template['actionPlanView'].onRendered(function(){
     Session.set('progress', 0);
+    var ap_id = Router.current().params._id;
     Meteor.call('user_progress_on_action_plan', ap_id, function(err,result){
         Session.set('progress',result)
     });

@@ -1,18 +1,62 @@
 user_admin:
   email: admin@test.com
   username: admin
-  password: supersecret
+  password: testtest
   profile:
     first_name: Bob
     last_name: Smith
-    skills: []
+    skills: 
+    - level: 4
+      name: html
+    - level: 4
+      name: css
+    - level: 3
+      name: js
+    - level: 3
+      name: Meteor
+    - level: 3
+      name: mongodb
+    - level: 1
+      name: node
     action_plan_ids: []
-user_test:
-  email: test@test.com
-  username: test
+user_test1:
+  email: test1@test.com
+  username: test1
   password: testtest
   profile:
     first_name: Jill
     last_name: Phil
-    skills: []
+    skills: 
+    - level: 4
+      name: html
+    - level: 4
+      name: css
+    - level: 3
+      name: js
+    - level: 3
+      name: Meteor
+    - level: 3
+      name: mongodb
+    - level: 1
+      name: node
+    action_plan_ids: []
+user_test2:
+  email: test2@test.com
+  username: test2
+  password: testtest
+  profile:
+    first_name: Sam
+    last_name: Cam
+    - level: 4
+      name: html
+    - level: 4
+      name: css
+    - level: 3
+      name: js
+    - level: 3
+      name: Meteor
+    - level: 3
+      name: mongodb
+    - level: 1
+      name: node
     action_plan_ids: []
