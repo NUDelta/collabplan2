@@ -11,7 +11,8 @@ Schema.RecipesSchema = new SimpleSchema({
     type: [String]
   },
   tags: {
-    type: [String]
+    type: [String],
+    optional: true
   },
   parent_id: {
     type: String,

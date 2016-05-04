@@ -65,6 +65,26 @@ Router.route('/action_plans/:_id', {
   }
 });
 
+Router.route('/recipes/new', {
+  name: 'recipes.new',
+  action: function () {
+    this.render('recipeNew');
+    SEO.set({ title: 'New recipes - ' + Meteor.App.NAME });
+  }
+});
+
+Router.route('/recipes/:_id', {
+  name: 'recipes.show',
+  waitOn: function(){
+    return [Meteor.subscribe('Recipes'),Meteor.subscribe('Milestones'),Meteor.subscribe('Subtasks'),Meteor.subscribe('Users')];
+  },
+  action: function () {
+    var recipe = Recipes.findOne({_id: this.params._id});
+    this.render('recipeCompose');
+    SEO.set({ title: 'recipe- ' + Meteor.App.NAME });
+  }
+});
+
 Router.route('/user/edit', {
   name: 'user.edit',
   action: function () {

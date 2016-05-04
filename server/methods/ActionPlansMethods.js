@@ -162,6 +162,45 @@ Meteor.methods({
         Milestones.update(target, { $set: {
             subtask_ids: subtask_ids
         }});
+    },
+    recipe_new: function(data) {
+        var id = Recipes.insert({
+            name: data.name,
+            description: data.description,
+            milestone_ids: []
+        });
+
+        return id;     
+    },
+    recipe_edit: function() {
+
+    },
+    recipe_add_milestone: function(data, recipeId) {
+        var id = Milestones.insert({
+            title: data.title,
+            motivation: data.motivation,
+            subtask_ids: []
+        });
+
+        Recipes.update(recipeId, { $push: {
+            milestone_ids: id
+        }});
+
+        return id;
+    },
+    recipe_delete_milestone: function(id, recipeId) {
+        // TODO: corresponding milestones and subtasks should be deleted as well
+        var r = Recipes.findOne({ _id: recipeId });
+        var ms_indx = r.milestone_ids.indexOf(id);
+        Recipes.update({ _id: recipeId }, {
+            $pull: { milestone_ids: id }
+        });
+        return ms_indx - 1;
+    },
+    recipe_reorder_milestones: function(recipeId, milestoneIds) {
+        Recipes.update({ _id: recipeId }, { $set: {
+            milestone_ids: milestoneIds
+        }});
     }
 });
 
