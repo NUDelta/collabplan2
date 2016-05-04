@@ -21,7 +21,6 @@ function loadActionPlans(fixtures, milestone_ids) {
         ap.milestone_ids = loadMilestones(ap.milestone_ids);
       
         var ap1_id = ActionPlans.insert(fixtures[i]);
-        console.log(ap);
         output.push(ap1_id);
     }
   }
@@ -33,7 +32,7 @@ function loadMilestones(fixtures) {
   var output = [];
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Milestones.findOne({title : fixtures[i].title}) === 'object';
+    var fixtureAlreadyExists = false;//typeof Milestones.findOne({title : fixtures[i].title}) === 'object';
 
     if (!fixtureAlreadyExists) {
       var ms = fixtures[i];
@@ -50,7 +49,7 @@ function loadSubtasks(fixtures) {
   var output = [];
 
   for (i = 0; i < fixtures.length; i+= 1) {
-    var fixtureAlreadyExists = typeof Subtasks.findOne({description : fixtures[i].description}) === 'object';
+    var fixtureAlreadyExists =  false; //typeof Subtasks.findOne({description : fixtures[i].description}) === 'object';
 
     if (!fixtureAlreadyExists) {
       var st = fixtures[i]
@@ -63,6 +62,7 @@ function loadSubtasks(fixtures) {
 
 Meteor.startup(function () {
   var users = YAML.eval(Assets.getText('users.yml'));
+  console.log(users);
 
   for (key in users) if (users.hasOwnProperty(key)) {
     loadUser(users[key]);
