@@ -9,7 +9,6 @@ Template['recipePicker'].helpers({
 
 Template['recipePicker'].events({
 	'click .select-recipe': function(e){
-		console.log('clicked');
         var ap = Session.get('current_ap')
         Meteor.call('action_plan_recipe', ap._id, this.milestone_ids);
     }
