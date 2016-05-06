@@ -23,7 +23,7 @@ Meteor.methods({
             var subtaskIds = [];
 
             for (var j = 0; j < ms.subtask_ids.length; ++j) {
-                var current = ms.subtask_ids[i];
+                var current = ms.subtask_ids[j];
                 var st = Subtasks.findOne({ _id: current });
                 var newSubtaskId = Subtasks.insert({
                     description: st.description,
