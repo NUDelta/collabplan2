@@ -20,11 +20,24 @@ Meteor.methods({
 
         for (var i = 0; i < milestones.length; ++i) {
             var ms = milestones[i];
+            var subtaskIds = [];
+
+            for (var j = 0; j < ms.subtask_ids.length; ++j) {
+                var current = ms.subtask_ids[i];
+                var st = Subtasks.findOne({ _id: current });
+                var newSubtaskId = Subtasks.insert({
+                    description: st.description,
+                    links: st.links,
+                    milestone_ids: st.milestone_ids
+                });
+
+                subtaskIds.push(newSubtaskId);
+            } 
             
             var id = Milestones.insert({
                 title: ms.title,
                 motivation: ms.motivation,
-                subtask_ids: []
+                subtask_ids: subtaskIds
             });
 
             newIds.push(id);

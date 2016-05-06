@@ -35,25 +35,62 @@
 		        <h3 id="recipe-header">Choose a recipe</h3>
 		        <p>Pick the recipe that most closely matches the learner's request. This recipe will provide generic milestones and subtasks as a starting point.</p>
 	        </div>
-	        {{#each recipes}}
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title pull-left">{{name}}</h3>
-                        <button class="btn btn-default pull-right select-recipe">Select</button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{description}}</p>
-                        <div class="milestone-tags">
-                        {{#each tags}}
-                            <span class="badge">{{this}}</span>
-                        {{/each}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        	{{/each}}
+	        <div class="col-md-12">
+	        	<div id="recipe-preview">
+        		{{#with selected_recipe}}
+					<div class="panel panel-default">
+	                    <div class="panel-heading">
+	                        <h3 class="panel-title pull-left">{{name}}</h3>
+	                        <button id="cancel-recipe" class="btn btn-danger pull-right">Cancel</button>
+	                        <button id="confirm-recipe" class="btn btn-default pull-right">Confirm</button>
+	                        <div class="clearfix"></div>
+	                    </div>
+	                    <div class="panel-body">
+	                        <p>{{description}}</p>
+	                        {{#each milestone_ids}}
+								{{#with get_milestone this}}
+									<div class="panel panel-default milestone_tile">
+									  	<div class="panel-body">
+									    	<div class="col-md-12">
+										      	<h4>{{plus_one @index}}. {{title}}</h4>
+										      	<ol>
+													{{#each subtask_ids}}
+														{{#with get_subtasks this}}
+										      				<li>{{description}}</li>
+										      			{{/with}}
+										    		{{/each}}
+										      	</ol>
+								  			</div>
+									  	</div>
+									</div>
+								{{/with}}
+	                        {{/each}}
+	                    </div>
+	                </div>
+        		{{/with}}
+	        	</div>
+	        </div>
+	        <div id="recipe-list">
+		        {{#each recipes}}
+	            <div class="col-md-6">
+	                <div class="panel panel-default">
+	                    <div class="panel-heading">
+	                        <h3 class="panel-title pull-left">{{name}}</h3>
+	                        <button class="btn btn-default pull-right select-recipe">Select</button>
+	                        <div class="clearfix"></div>
+	                    </div>
+	                    <div class="panel-body">
+	                        <p>{{description}}</p>
+	                        <div class="milestone-tags">
+	                        {{#each tags}}
+	                            <span class="badge">{{this}}</span>
+	                        {{/each}}
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        	{{/each}}
+        	</div>
         <!-- <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">

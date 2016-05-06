@@ -4,14 +4,38 @@ Template['recipePicker'].helpers({
     },
     request_user_skills: function (user_id) {
         return Meteor.users.findOne({_id: user_id}).profile.skills;
+    },
+    selected_recipe: function() {
+    	return Session.get('selected_recipe');
+    },
+    recipe_milestones: function() {
+    	return Session.get('selected_recipe');
+    },
+    get_milestone: function (id) {
+		return Milestones.findOne({_id: id});
+	},
+	get_subtasks: function (id) {
+		return Subtasks.findOne({_id: id});
+	},
+    plus_one: function(num) {
+    	return num+1;
     }
 });
 
 Template['recipePicker'].events({
 	'click .select-recipe': function(e){
-		console.log('clicked');
+		Session.set('selected_recipe', this);
+		$('#recipe-preview').show();
+		$('#recipe-list').hide();
+    },
+    'click #confirm-recipe': function(e){
+    	var recipe = Session.get('selected_recipe');
         var ap = Session.get('current_ap')
-        Meteor.call('action_plan_recipe', ap._id, this.milestone_ids);
+        Meteor.call('action_plan_recipe', ap._id, recipe.milestone_ids);
+    },
+    'click #cancel-recipe': function(e){
+		$('#recipe-preview').hide();
+		$('#recipe-list').show();
     }
 });
 
