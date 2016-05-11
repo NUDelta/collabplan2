@@ -31,18 +31,21 @@ Template['milestoneList'].events({
   },
   'click .tile_x': function (event) {
     event.preventDefault();
+    var r = confirm("Are you sure you want to delete this milestone");
+    if (r == true) {
 
-    var ap = Template.currentData();
-    var deleting_selected = this._id === Session.get('selected_milestone_id');
+      var ap = Template.currentData();
+      var deleting_selected = this._id === Session.get('selected_milestone_id');
 
-    Meteor.call('milestone_delete', this._id, ap._id, function (err, res) {
-      if (!err) {
-        Session.set('last_save', Date.now());
-        if (deleting_selected){
-          Session.set('selected_milestone_id', ap.milestone_ids[res]);
+      Meteor.call('milestone_delete', this._id, ap._id, function (err, res) {
+        if (!err) {
+          Session.set('last_save', Date.now());
+          if (deleting_selected){
+            Session.set('selected_milestone_id', ap.milestone_ids[res]);
+          }
         }
-      }
-    });
+      });
+    }
   }
 });
 
