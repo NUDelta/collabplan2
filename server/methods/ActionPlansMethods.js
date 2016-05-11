@@ -134,6 +134,11 @@ Meteor.methods({
     	});
         return ms_indx - 1;
     },
+    milestone_reorder_subtasks: function(milestone_id, subtask_ids) {
+        Milestones.update({ _id: milestone_id }, { $set: {
+            subtask_ids: subtask_ids
+        }});
+    },
     subtask_delete: function(id) {
     	Subtasks.remove({ _id: id });
     },

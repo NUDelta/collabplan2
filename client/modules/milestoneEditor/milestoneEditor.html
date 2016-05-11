@@ -29,14 +29,15 @@
                         <th></th> 
                     </tr> 
                 </thead>
-                <tbody>
+                <tbody id="subtask_list">
                     {{#each subtask_ids}}
                         {{#with get_subtasks this}}
-                            <tr>
-                                <th>{{plusOne @index}}<input id="_id" value="{{_id}}" hidden></th>
+                            <tr class="st_row" data-id="{{_id}}">
+                                <th>{{plusOne @index}}</th>
                                 <td><textarea class="form-control update_substask" id="description" placeholder="Subtask description">{{description}}</textarea></td>
                                 <td><input type="text" class="form-control update_substask" id="links" value="{{links}}" placeholder=" Subtask Link(optional): Place links to resources that will be useful references in completing the subtasks."></td>
-                                <td><button type="button" class="btn btn-danger delete-subtask"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                                <td class="st_remove"><button type="button" class="btn btn-danger delete-subtask"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                                <td class="st_handle"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></td>
                             </tr>
                         {{/with}}
                     {{/each}}
