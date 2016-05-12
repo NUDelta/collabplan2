@@ -7,7 +7,6 @@ Template['milestoneEditor'].helpers({
 Template['milestoneEditor'].events({
     'focus .update_milestone': function (event) {
         updateAutocompleteOptions(event);
-        $('.autocomplete-content').show();
     },
     'blur .update_milestone': function (event) {
         $('.autocomplete-content').hide();
