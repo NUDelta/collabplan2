@@ -91,17 +91,18 @@ Template['milestoneEditor'].onRendered(function () {
     updateMilestone();
   });
 
-  var ms_id = this.data._id;
   Sortable.create($('#subtask_list').get()[0], { 
     handle: ".st_handle",
     onUpdate: function (event) {
-      updateSubtasksIds(ms_id);
+      updateSubtasksIds();
     }
   });
 
 });
 
-function updateSubtasksIds(ms_id) {
+function updateSubtasksIds() {
+  var milestoneSelector = $('.milestone_editor');
+  var ms_id = $('#_id', milestoneSelector).val();
   var subtasksIds = [];
 
   $('.st_row').each(function() {
