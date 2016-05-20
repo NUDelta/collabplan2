@@ -7,14 +7,25 @@ Template['milestoneEditor'].helpers({
 Template['milestoneEditor'].events({
     'focus .update_milestone': function (event) {
         updateAutocompleteOptions(event);
-        $('.autocomplete-content').show();
     },
     'blur .update_milestone': function (event) {
         $('.autocomplete-content').hide();
         updateMilestone();
     },
     'blur .update_substask': function (event) {
-        updateSubtask(event);
+        var subtaskSelector = $(event.target).parent()[0];
+        
+        var subtask = {
+          _id: this._id,
+          description: $('#description', subtaskSelector).val(),
+          links: [$('#links', subtaskSelector).val()]
+        }
+
+        Meteor.call('subtask_edit', subtask, function (err) {
+          if (!err) {
+            Session.set('last_save', Date.now())
+          }
+        });
     },
     'click .add-subtask': function (event) {
         event.preventDefault();
@@ -79,7 +90,31 @@ Template['milestoneEditor'].onRendered(function () {
     autofillSubtasks($('.autocomplete-id', autocompleteOption).text(), $('#_id', milestoneSelector).val());
     updateMilestone();
   });
+
+  Sortable.create($('#subtask_list').get()[0], { 
+    handle: ".st_handle",
+    onUpdate: function (event) {
+      updateSubtasksIds();
+    }
+  });
+
 });
+
+function updateSubtasksIds() {
+  var milestoneSelector = $('.milestone_editor');
+  var ms_id = $('#_id', milestoneSelector).val();
+  var subtasksIds = [];
+
+  $('.st_row').each(function() {
+    subtasksIds.push($(this).data('id'));
+  });
+
+  Meteor.call('milestone_reorder_subtasks', ms_id, subtasksIds, function (err) {
+    if (!err) {
+      Session.set('last_save', Date.now())
+    }
+  });
+}
 
 function updateMilestone() {
   $('.autocomplete-selected').removeClass('autocomplete-selected');
@@ -92,21 +127,6 @@ function updateMilestone() {
   }
 
   Meteor.call('milestone_edit', milestone, function (err) {
-    if (!err) {
-      Session.set('last_save', Date.now())
-    }
-  });
-}
-
-function updateSubtask(event) {
-  var subtaskSelector = $(event.target).parent().parent();
-  var subtask = {
-    _id: $('#_id', subtaskSelector).val(),
-    description: $('#description', subtaskSelector).val(),
-    links: [$('#links', subtaskSelector).val()]
-  }
-
-  Meteor.call('subtask_edit', subtask, function (err) {
     if (!err) {
       Session.set('last_save', Date.now())
     }
