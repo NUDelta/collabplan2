@@ -44,8 +44,18 @@ Template['milestonePicker'].onRendered(function () {
     sort: true,
     filter: '.disabled',
     handle: '.ms_row',
-    onAdd: function(){
+    onUpdate: function(){
         updateMilestoneIds(ap_id)
+    },
+    onAdd:function(e){
+        var id = e.item.dataset.id;
+        Meteor.call('duplicate_milestone', id, function(err,new_id){
+            if(!err) {
+                e.item.dataset.id = new_id;
+                updateMilestoneIds(ap_id)
+                $(e.item).remove();
+            }
+        })
     }
   });
 
