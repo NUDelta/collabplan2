@@ -54,4 +54,9 @@ if (Meteor.isServer) {
     },
     
   });
+
+  Recipes._ensureIndex({
+    "name": "text",
+    "description": "text",
+  });
 }

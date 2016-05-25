@@ -1,0 +1,33 @@
+<template name="milestonePicker">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                    <input id="ms_search" type="text" name="keyword" class="form-control" placeholder="action plan titles, features, etc">
+                </div>
+                {{#each results}}
+                    <ul class="list-group ap_panel" data-id="{{_id}}">
+                        <li class="list-group-item disabled">{{name}}</li>
+                        {{#each milestone_ids}}
+                            {{#with get_milestone this}}
+                            <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}</li>
+                            {{/with}}
+                        {{/each}}
+                    </ul>
+                {{/each}}
+            </div>
+            <div class="col-md-6">
+                <ul id="current_ap" class="list-group">
+                    <li class="list-group-item disabled">{{name}}</li>
+                    {{#each milestone_ids}}
+                        {{#with get_milestone this}}
+                        <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}</li>
+                        {{/with}}
+                    {{/each}}
+                    <li class="list-group-item">blank</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
