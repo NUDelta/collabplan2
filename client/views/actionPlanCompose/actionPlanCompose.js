@@ -12,6 +12,9 @@ Template['actionPlanCompose'].helpers({
   last_save: function(){
     var last_save = new Date(Session.get('last_save') || this.modifiedAt);
     return moment(last_save).format('MM/DD/YY, h:mm:ss a');
+  },
+  start_mode: function(){
+    return Session.get('start_mode') || 'msp'
   }
 });
 

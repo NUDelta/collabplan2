@@ -2,17 +2,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Search</span>
-                    <input id="ms_search" type="text" class="form-control" placeholder="action plan titles, features, etc">
+                    <input id="ms_search" type="text" name="keyword" class="form-control" placeholder="action plan titles, features, etc">
                 </div>
                 <ul class="list-group">
                     {{#each results}}
-                        <li class="list-group-item">{{this}}</li>
+                        <li class="list-group-item">{{this.name}}</li>
                     {{/each}}
                 </ul>
+            </div>
+            <div class="col-md-6">
+                
             </div>
         </div>
     </div>
