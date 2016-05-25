@@ -58,8 +58,6 @@ var ap_and_rep_search_from_milestones = function(keyword) {
         return doc._id;
     }));
 
-    console.log(ms_ids);
-
     return ActionPlans.find(
             { milestone_ids: { $in: ms_ids }  }
         ).fetch()
