@@ -31,6 +31,7 @@ Schema.MilestonesSchema = new SimpleSchema({
   }
 });
 
+
 Milestones.attachSchema(Schema.MilestonesSchema);
 
 // Collection2 already does schema checking
@@ -46,5 +47,10 @@ if (Meteor.isServer) {
     remove : function () {
       return true;
     }
+  });
+
+  Milestones._ensureIndex({
+    "title": "text",
+    "motivation": "text",
   });
 }

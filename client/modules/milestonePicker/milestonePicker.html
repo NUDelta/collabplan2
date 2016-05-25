@@ -1,0 +1,19 @@
+<template name="milestonePicker">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Search</span>
+                    <input id="ms_search" type="text" class="form-control" placeholder="action plan titles, features, etc">
+                </div>
+                <ul class="list-group">
+                    {{#each results}}
+                        <li class="list-group-item">{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

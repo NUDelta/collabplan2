@@ -80,6 +80,12 @@ if (Meteor.isServer) {
     },
     
   });
+
+  ActionPlans._ensureIndex({
+    "name": "text",
+    "description": "text",
+    "affordances": "text"
+  });
 }
 
 ActionPlans.before.update(function (userId, doc, fieldNames, modifier, options) {
