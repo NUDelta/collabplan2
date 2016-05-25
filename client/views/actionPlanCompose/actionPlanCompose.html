@@ -1,45 +1,67 @@
 <template name="actionPlanCompose">
     {{#with action_plan}}
-        {{#if this.milestone_ids}}
-        <div class="container-fluid">
-            <div class="collapse in" id="request_info">
-                {{> requestInfo}}
-            </div>
-        </div>
-        <nav class="navbar navbar-default composer_toolbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <button id="request_info_btn" type="button" class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#request_info" aria-expanded="false" aria-controls="request_info">Learner's Request</button>
-                        <button id="ap_templates" type="button" class="btn btn-default navbar-btn">Templates</button>
-                        <button type="button" class="btn btn-default navbar-btn">Help</button>
-                        <p class="navbar-text">Last Saved: {{last_save}}</p>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <button id="ap_submit" type="button" class="btn btn-default navbar-btn">Submit</button>
-                    </ul>
+        {{#if equals mode 'composer'}}
+            <div class="container-fluid">
+                <div class="collapse in" id="request_info">
+                    {{> requestInfo}}
                 </div>
             </div>
-        </nav>
-        <div class="container-fluid composer_body">
-            <div class="row full_height">
-                {{> milestoneList this}}
-                
-                {{> milestoneEditor selected_milestone}}
+            <nav class="navbar navbar-default composer_toolbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <button id="request_info_btn" type="button" class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#request_info" aria-expanded="false" aria-controls="request_info">Learner's Request</button>
+                            <button id="ap_templates" type="button" class="btn btn-default navbar-btn">Templates</button>
+                            <button type="button" class="btn btn-default navbar-btn">Help</button>
+                            <p class="navbar-text">Last Saved: {{last_save}}</p>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <button type="button" class="btn btn-default mode_toggle" data-val="recipes">Recipes</button>
+                            <button type="button" class="btn btn-default mode_toggle" data-val="msp">Milestone Picker</button>
+                            <button type="button" class="btn btn-default mode_toggle active" data-val="composer">Composer</button>
+                            <button id="ap_submit" type="button" class="btn btn-default navbar-btn">Submit</button>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid composer_body">
+                <div class="row full_height">
+                    {{> milestoneList this}}
+                    
+                    {{> milestoneEditor selected_milestone}}
+                </div>
             </div>
-        </div>
-        {{else}}
-        <div class="container">
-            {{> recipePicker this}}
-        </div>
         {{/if}}
+
+        {{#if equals mode 'recipes'}}
+            <div class="container">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default mode_toggle active" data-val="recipes">Recipes</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="msp">Milestone Picker</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="composer">Composer</button>
+                </div>
+                {{> recipePicker this}}
+            </div>
+        {{/if}}
+            
+        {{#if equals mode 'msp'}}
+            <div class="container">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default mode_toggle" data-val="recipes">Recipes</button>
+                  <button type="button" class="btn btn-default mode_toggle active" data-val="msp">Milestone Picker</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="composer">Composer</button>
+                </div>
+                {{> milestonePicker}}
+            </div>
+        {{/if}}
+
     {{/with}}
 </template>

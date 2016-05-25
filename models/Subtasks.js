@@ -26,6 +26,8 @@ Schema.SubtasksSchema = new SimpleSchema({
   }
 });
 
+
+
 Subtasks.attachSchema(Schema.SubtasksSchema);
 
 // Collection2 already does schema checking
@@ -41,5 +43,9 @@ if (Meteor.isServer) {
     remove : function () {
       return true;
     }
+  });
+
+  Subtasks._ensureIndex({
+    "description": "text",
   });
 }

@@ -55,3 +55,7 @@ Template.registerHelper('truncate', function (str, len) {
   }
   return str;
 });
+
+Template.registerHelper('equals', function (a, b) {
+  return a === b;
+});
