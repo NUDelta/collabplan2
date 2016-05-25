@@ -13,8 +13,8 @@ Template['actionPlanCompose'].helpers({
     var last_save = new Date(Session.get('last_save') || this.modifiedAt);
     return moment(last_save).format('MM/DD/YY, h:mm:ss a');
   },
-  start_mode: function(){
-    return Session.get('start_mode') || 'msp'
+  mode: function(){
+    return Session.get('mode') || 'recipes';
   }
 });
 
@@ -41,6 +41,10 @@ Template['actionPlanCompose'].events({
         Router.go('action_plans.show', {_id: this._id})
       }
     });
+  },
+  'click .mode_toggle': function(event){
+    var mode = event.target.dataset.val;
+    Session.set('mode',mode);
   }
 });
 

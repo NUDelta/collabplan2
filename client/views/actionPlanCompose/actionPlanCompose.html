@@ -1,6 +1,6 @@
 <template name="actionPlanCompose">
     {{#with action_plan}}
-        {{#if this.milestone_ids}}
+        {{#if equals mode 'composer'}}
             <div class="container-fluid">
                 <div class="collapse in" id="request_info">
                     {{> requestInfo}}
@@ -24,6 +24,9 @@
                             <p class="navbar-text">Last Saved: {{last_save}}</p>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <button type="button" class="btn btn-default mode_toggle" data-val="recipes">Recipes</button>
+                            <button type="button" class="btn btn-default mode_toggle" data-val="msp">Milestone Picker</button>
+                            <button type="button" class="btn btn-default mode_toggle active" data-val="composer">Composer</button>
                             <button id="ap_submit" type="button" class="btn btn-default navbar-btn">Submit</button>
                         </ul>
                     </div>
@@ -36,14 +39,29 @@
                     {{> milestoneEditor selected_milestone}}
                 </div>
             </div>
-        {{else}}
-        <div class="container">
-            {{#if equals start_mode 'recipes'}}
-                {{> recipePicker this}}
-            {{else}}
-                {{> milestonePicker}}
-            {{/if}}
-        </div>
         {{/if}}
+
+        {{#if equals mode 'recipes'}}
+            <div class="container">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default mode_toggle active" data-val="recipes">Recipes</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="msp">Milestone Picker</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="composer">Composer</button>
+                </div>
+                {{> recipePicker this}}
+            </div>
+        {{/if}}
+            
+        {{#if equals mode 'msp'}}
+            <div class="container">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default mode_toggle" data-val="recipes">Recipes</button>
+                  <button type="button" class="btn btn-default mode_toggle active" data-val="msp">Milestone Picker</button>
+                  <button type="button" class="btn btn-default mode_toggle" data-val="composer">Composer</button>
+                </div>
+                {{> milestonePicker}}
+            </div>
+        {{/if}}
+
     {{/with}}
 </template>
