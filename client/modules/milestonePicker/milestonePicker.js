@@ -8,6 +8,27 @@ Template['milestonePicker'].helpers({
 });
 
 Template['milestonePicker'].events({
+    'click #ap_submit': function(events){
+    event.preventDefault();
+    if (!confirm('Are you sure you want to submit? You cannot edit the action plan after submission.'))
+      return;
+
+    var actionPlan = {
+      _id: this._id,
+      isComplete: true
+    };
+
+    Meteor.call('action_plan_edit', actionPlan, function (err) {
+      if (!err) {
+        Router.go('action_plans.show', {_id: this._id})
+      }
+    });
+  },
+  'click .mode_toggle': function(event){
+    var mode = event.target.dataset.val;
+    Session.set('mode',mode);
+  },
+
     'keyup #ms_search': function(e) {
         var target = e.target;
 
