@@ -14,6 +14,7 @@ Template['milestonePicker'].events({
         Meteor.call('ap_and_rep_search', target.value || '', function(err,res){
             if(!err) {
                 Session.set('search_results', res);
+                make_aps_draggable();
             }
         })
     } 
@@ -22,6 +23,35 @@ Template['milestonePicker'].events({
 Template['milestonePicker'].onRendered(function () {
     var ap_id = this.data._id;
     
+    
+    make_aps_draggable();
+
+    Sortable.create($('#current_ap').get()[0], { 
+        group: {
+            name: 'current_ap',
+            put: ['search_results']
+        },
+        sort: true,
+        filter: '.disabled',
+        handle: '.ms_row',
+        onUpdate: function(){
+            updateMilestoneIds(ap_id)
+        },
+        onAdd:function(e){
+            var id = e.item.dataset.id;
+            Meteor.call('duplicate_milestone', id, function(err,new_id){
+                if(!err) {
+                    e.item.dataset.id = new_id;
+                    updateMilestoneIds(ap_id)
+                    $(e.item).remove();
+                }
+            })
+        }
+    });
+
+});
+
+function make_aps_draggable(){
     $('.ap_panel').get().forEach(function($this){
         Sortable.create($this, { 
             group: {
@@ -34,32 +64,7 @@ Template['milestonePicker'].onRendered(function () {
             handle: '.list-group-item'
         });
     })
-  
-
-  Sortable.create($('#current_ap').get()[0], { 
-    group: {
-        name: 'current_ap',
-        put: ['search_results']
-    },
-    sort: true,
-    filter: '.disabled',
-    handle: '.ms_row',
-    onUpdate: function(){
-        updateMilestoneIds(ap_id)
-    },
-    onAdd:function(e){
-        var id = e.item.dataset.id;
-        Meteor.call('duplicate_milestone', id, function(err,new_id){
-            if(!err) {
-                e.item.dataset.id = new_id;
-                updateMilestoneIds(ap_id)
-                $(e.item).remove();
-            }
-        })
-    }
-  });
-
-});
+}
 
 function updateMilestoneIds(ap_id) {
   var milestoneIds = [];
