@@ -17,7 +17,7 @@ Template['actionPlanView'].helpers({
         var progress = Meteor.user().profile.progress[ap_id] || [];
         return progress.indexOf(id) !== -1;
     },
-    precent_complete: function(){
+    percent_complete: function(){
         return Session.get('progress');
     }
 
