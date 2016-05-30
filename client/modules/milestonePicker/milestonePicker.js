@@ -1,6 +1,6 @@
 Template['milestonePicker'].helpers({
     results: function() {
-        return Session.get('search_results') || ActionPlans.find({}).fetch();
+        return Session.get('search_results');
     },
     get_milestone: function (id) {
         return Milestones.findOne({_id: id});
