@@ -38,6 +38,9 @@ Template['recipePicker'].events({
     'click #cancel-recipe': function(e){
 		$('#recipe-preview').hide();
 		$('#recipe-list').show();
+    },
+    'click #skip-recipe': function(e){
+        Session.set('mode', 'msp');
     }
 });
 
