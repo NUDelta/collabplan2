@@ -9,14 +9,18 @@
                 <h4>Search Results </h4>
                 <p>Drag milestones into the plan you are creating.</p>
                 {{#each results}}
+                    {{#if milestone_ids.length}}
                     <ul class="list-group ap_panel" data-id="{{_id}}">
                         <li class="list-group-item disabled">{{name}}</li>
                         {{#each milestone_ids}}
                             {{#with get_milestone this}}
-                            <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}</li>
+                            {{#if title}}
+                            <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
+                            {{/if}}
                             {{/with}}
                         {{/each}}
                     </ul>
+                    {{/if}}
                 {{/each}}
             </div>
             <div class="col-md-6">
@@ -25,7 +29,7 @@
                     <li class="list-group-item disabled">{{name}}</li>
                     {{#each milestone_ids}}
                         {{#with get_milestone this}}
-                        <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}</li>
+                        <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
                         {{/with}}
                     {{/each}}
                 </ul>
