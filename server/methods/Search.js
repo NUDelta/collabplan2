@@ -53,10 +53,13 @@ var milestone_search_from_subtasks = function(keyword) {
 }
 
 var ap_and_rep_search_from_milestones = function(keyword) {
+    if (keyword.length < 1) return [];
     var ms_ids = convert_cursor_to_id(collection_text_search(Milestones,keyword));
-    ms_ids = ms_ids.concat(milestone_search_from_subtasks(keyword).map(function(doc){
-        return doc._id;
-    }));
+    
+    // Search milestones by subtask content
+    // ms_ids = ms_ids.concat(milestone_search_from_subtasks(keyword).map(function(doc){
+    //     return doc._id;
+    // }));
 
     return ActionPlans.find(
             { milestone_ids: { $in: ms_ids }  }

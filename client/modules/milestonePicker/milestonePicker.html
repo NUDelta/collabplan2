@@ -6,10 +6,8 @@
                     <span class="input-group-addon search" id="basic-addon1">Search</span>
                     <input id="ms_search" type="text" name="keyword" class="form-control" placeholder="action plan titles, features, etc">
                 </div>
-                {{#if results}}
                 <h4>Search Results </h4>
-                <p>Drag milestones into the plan you are creating.</p>
-                {{/if}}
+                <p>This is a list of action plans with milestones matching your search. Drag milestones into the plan you are creating.</p>
                 {{#each results}}
                     {{#if milestone_ids.length}}
                     <ul class="list-group ap_panel" data-id="{{_id}}">
@@ -17,7 +15,7 @@
                         {{#each milestone_ids}}
                             {{#with get_milestone this}}
                             {{#if title}}
-                            <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
+                            <li class="list-group-item ms_row {{#if milestoneHasKeyword this}}highlight{{/if}} " data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
                             {{/if}}
                             {{/with}}
                         {{/each}}
