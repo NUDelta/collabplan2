@@ -5,6 +5,9 @@ Template['milestonePicker'].helpers({
     get_milestone: function (id) {
         return Milestones.findOne({_id: id});
     },
+    get_subtask: function (id) {
+        return Subtasks.findOne({_id: id});
+    }
 });
 
 Template['milestonePicker'].events({
@@ -27,6 +30,9 @@ Template['milestonePicker'].events({
   'click .mode_toggle': function(event){
     var mode = event.target.dataset.val;
     Session.set('mode',mode);
+  },
+  'click .subtask_number': function(event){
+    $(event.target).next().toggle();
   },
 
     'keyup #ms_search': function(e) {

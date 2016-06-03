@@ -17,7 +17,17 @@
                         {{#each milestone_ids}}
                             {{#with get_milestone this}}
                             {{#if title}}
-                            <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
+                            <li class="list-group-item ms_row" data-id="{{_id}}">
+                                {{title}}
+                                <span class="badge subtask_number">{{subtask_ids.length}}</span>
+                                <ol class="subtask_list">
+                                {{#each subtask_ids}}
+                                    {{#with get_subtask this}}
+                                    <li>{{description}}</li>
+                                    {{/with}}
+                                {{/each}}
+                                </ol>
+                            </li>
                             {{/if}}
                             {{/with}}
                         {{/each}}
@@ -31,7 +41,17 @@
                     <li class="list-group-item disabled">{{name}}</li>
                     {{#each milestone_ids}}
                         {{#with get_milestone this}}
-                        <li class="list-group-item ms_row" data-id="{{_id}}">{{title}}<span class="badge">{{subtask_ids.length}}</span></li>
+                        <li class="list-group-item ms_row" data-id="{{_id}}">
+                            {{title}}
+                            <span class="badge">{{subtask_ids.length}}</span>
+                            <ol class="subtask_list">
+                                {{#each subtask_ids}}
+                                    {{#with get_subtask this}}
+                                    <li>{{description}}</li>
+                                    {{/with}}
+                                {{/each}}
+                                </ol>
+                            </li>
                         {{/with}}
                     {{/each}}
                 </ul>
