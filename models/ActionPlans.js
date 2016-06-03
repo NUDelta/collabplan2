@@ -84,7 +84,7 @@ if (Meteor.isServer) {
   ActionPlans._ensureIndex({
     "name": "text",
     "description": "text",
-    "affordances": "text"
+    "affordances": "text",
   });
 }
 

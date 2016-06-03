@@ -7,6 +7,10 @@ Template['milestonePicker'].helpers({
     },
     get_subtask: function (id) {
         return Subtasks.findOne({_id: id});
+    },
+    milestoneHasKeyword: function(ms) {
+        var keyword = Session.get('keyword');
+        return (new RegExp(keyword,'i')).test(ms.title) || (new RegExp(keyword)).test(ms.motivation);
     }
 });
 
@@ -37,7 +41,7 @@ Template['milestonePicker'].events({
 
     'keyup #ms_search': function(e) {
         var target = e.target;
-
+        Session.set('keyword',target.value );
         Meteor.call('ap_and_rep_search', target.value || '', function(err,res){
             if(!err) {
                 Session.set('search_results', res);
