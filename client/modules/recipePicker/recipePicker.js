@@ -34,6 +34,7 @@ Template['recipePicker'].events({
         if (ap.milestone_ids.length > 0)
             confirm("This will delete your progress and replace it with this recipe. Are you sure that you want to continue?")
         Meteor.call('action_plan_recipe', ap._id, recipe.milestone_ids);
+        Session.set('mode', 'msp');
     },
     'click #cancel-recipe': function(e){
 		$('#recipe-preview').hide();
