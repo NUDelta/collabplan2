@@ -23,9 +23,6 @@ Template['actionPlanCompose'].events({
   //   console.log(this);
   //   Modal.show('requestInfoModal', this)
   // },
-  'click #ap_templates': function(){
-    Modal.show('templatePicker', this)
-  },
   'click #ap_submit': function(events){
     console.log(this);
     event.preventDefault();
@@ -46,7 +43,19 @@ Template['actionPlanCompose'].events({
   'click .mode_toggle': function(event){
     var mode = event.target.dataset.val;
     Session.set('mode',mode);
-  }
+  },
+  'click #reset': function(event){
+    if (!confirm('Are you sure you want to reset? This will delete all milestones and subtasks.'))
+      return;
+
+    var id = Router.current().params._id;
+
+    Meteor.call('action_plan_reset', id, function (err) {
+      if (!err) {
+        Session.set('mode', 'recipes');
+      }
+    });
+  },
 });
 
 Template['actionPlanCompose'].onRendered(function(){
